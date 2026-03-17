@@ -1249,6 +1249,11 @@
     min-width: 2.929em;
     padding-bottom: 0;
 }
+@media(max-width: 600px){
+    .pm-menu-search__actions-block .pm-btn--secondary .pm-btn-text{
+        transform: translateY(0.5px);
+    }
+}
 
 @media(max-width: 960px){
     .search-open .pm-header__wrapper{
