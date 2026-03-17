@@ -1596,8 +1596,10 @@
                 // если клик именно по оверлею (не по форме внутри)
                 if (e.target === feedbackPopup) {
                     feedbackPopup.classList.remove('active');
-                    feedbackPopup.classList.remove('success');
-                    form.reset();
+                    setTimeout(() => {
+                        feedbackPopup.classList.remove('success');
+                        form.reset();
+                    }, 500);
                 }
             });
         });
