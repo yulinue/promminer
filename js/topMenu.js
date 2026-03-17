@@ -71,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileMenuTitle.innerText = item.innerText;
             mobileMenuSubtitle.classList.add('active');
             mobileMenuCategoryList.classList.add('active');
+            mobileMenuContainer.classList.add('mobile-category-open');
             isCategoryListActive = true;
 
             const activeCategory = document.querySelector(`.pm-catalog-category[data-category="${id}"]`);
@@ -111,6 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
         searchResults.classList.remove('active');
         searchInput.value = '';
         mobileMenuContainer.classList.remove('mobile-catalog-open');
+        mobileMenuContainer.classList.remove('mobile-category-open');
         mobileMenuTitle.innerText = 'Меню';
         catalogPopup.classList.remove('mobile-popup-open');
     }
@@ -145,6 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileMenuContainer.classList.remove('mobile-catalog-open');
         mobileMenuSubtitle.classList.remove('active');
         mobileMenuCategoryList.classList.remove('active');
+        mobileMenuContainer.classList.remove('mobile-category-open');
         resetMenu();
     }
 
@@ -190,6 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(isCategoryListActive){
             mobileMenuCategoryList.classList.remove('active');
             mobileMenuSubtitle.classList.remove('active');
+            mobileMenuContainer.classList.remove('mobile-category-open');
             mobileMenuTitle.innerText = 'Каталог'
             isCategoryListActive = false;
         } else {
