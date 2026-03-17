@@ -14,10 +14,13 @@
 
     --bg-statis-white-subtle: rgba(255, 255, 255, 0.24);
 
+    --bg-sentiment-accent: rgba(112, 134, 252, 1);
     --bg-sentiment-accent-subtle: rgba(112, 134, 252, 0.12);
+    --bg-sentiment-negative-subtle: rgba(239, 68, 68, 0.16);
 
     --border-static-white-subtle: rgba(255, 255, 255, 0.16);
     --border-base-neutral: rgba(107, 114, 128, 0.16);
+    --border-sentiment-negative: rgba(239, 68, 68, 1);
 
     --content-base-primary: rgba(17, 24, 39, 1);
     --content-base-secondary: rgba(115, 115, 115, 1);
@@ -331,6 +334,14 @@ body.lock{
     }
 }
 
+.pm-required{
+    color: var(--content-sentiment-negative);
+}
+
+.pm-underline{
+    text-decoration: underline;
+}
+
 /* ========================
    LINKS
 ======================== */
@@ -339,6 +350,294 @@ body.lock{
     text-decoration: none;
 }
 
+/* ========================
+   INPUTS
+======================== */
+.pm-input__container{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    gap: 8px;
+    -ms-flex-item-align: stretch;
+    -ms-grid-row-align: stretch;
+    align-self: stretch;
+}
+
+.pm-input-wrapper{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    height: var(--base-size-2xl);
+    padding: 0 var(--spacing-12);
+    -ms-flex-item-align: stretch;
+    -ms-grid-row-align: stretch;
+    align-self: stretch;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: var(--control-neutral-primary);
+    position: relative;
+    -webkit-transition: .3s ease;
+    -o-transition: .3s ease;
+    transition: .3s ease;
+}
+@media(any-hover: hover){
+    .pm-input-wrapper:hover{
+        background: var(--control-neutral-primary-hover);
+    }
+}
+
+.pm-input-wrapper.pm-input-wrapper--phone{
+    padding: 4px 12px 4px 4px;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    gap: 12px;
+}
+
+.pm-input__container.error .pm-input-wrapper{
+    background: var(--bg-sentiment-negative-subtle);
+}
+
+.pm-input__error{
+    color: var(--content-sentiment-negative);
+    /* Body/S/Medium */
+    font-size: var(--body-s-fs);
+    font-weight: 500;
+    line-height: var(--body-s-lh);
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    -webkit-transition: .2s ease;
+    -o-transition: .2s ease;
+    transition: .2s ease;
+}
+
+.pm-input__container.error .pm-input__error{
+    opacity: 1;
+    position: unset;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.pm-input::-webkit-input-placeholder {
+    color: var(--content-base-secondary);
+    /* Body/M/Semi Bold */
+    font-size: var(--body-m-fs);
+    font-weight: 600;
+    line-height: var(--body-m-lh);
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.pm-input::-moz-placeholder {
+    color: var(--content-base-secondary);
+    /* Body/M/Semi Bold */
+    font-size: var(--body-m-fs);
+    font-weight: 600;
+    line-height: var(--body-m-lh);
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.pm-input:-ms-input-placeholder {
+    color: var(--content-base-secondary);
+    /* Body/M/Semi Bold */
+    font-size: var(--body-m-fs);
+    font-weight: 600;
+    line-height: var(--body-m-lh);
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.pm-input::-ms-input-placeholder {
+    color: var(--content-base-secondary);
+    /* Body/M/Semi Bold */
+    font-size: var(--body-m-fs);
+    font-weight: 600;
+    line-height: var(--body-m-lh);
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.pm-input-label,
+.pm-input::placeholder {
+    color: var(--content-base-secondary);
+    /* Body/M/Semi Bold */
+    font-size: var(--body-m-fs);
+    font-weight: 600;
+    line-height: var(--body-m-lh);
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.pm-input-wrapper.active .pm-input-label{
+    font-size: var(--caption-m-fs);
+    font-weight: 500;
+    line-height: var(--caption-m-lh);
+}
+
+.pm-input-wrapper.active .pm-input-label .pm-required{
+    color: inherit;
+}
+
+.pm-input{
+    font-family: 'Gilroy', sans-serif;
+    color: var(--content-base-primary);
+    /* Body/M/Medium */
+    font-size: var(--body-m-fs);
+    font-weight: 500;
+    line-height: var(--body-m-lh);
+    border: none;
+    background: none;
+
+    position: absolute;
+    top: 50%;
+    left: var(--spacing-12);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    opacity: 0;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+}
+
+.pm-input-wrapper.active .pm-input,
+.pm-input-wrapper--phone .pm-input {
+    position: unset;
+    opacity: 1;
+    -webkit-transform: none;
+    -ms-transform: none;
+    transform: none;
+}
+
+.pm-input__phone-code{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 49px;
+    height: auto;
+    padding: 9px 22px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-item-align: stretch;
+    -ms-grid-row-align: stretch;
+    align-self: stretch;
+    border-radius: var(--radius-s);
+    background: var(--control-neutral-secondary);
+
+    color: var(--content-base-primary);
+    text-align: center;
+    /* Body/M/Medium */
+    font-size: var(--body-m-fs);
+    font-weight: 500;
+    line-height: var(--body-m-lh);
+}
+
+.pm-checkbox{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: absolute;
+}
+
+.pm-checkbox-label-container{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 24px;
+    height: 24px;
+    padding: 3px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.pm-checkbox-label{
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    border: 1px solid var(--border-base-neutral);
+    background: var(--control-neutral-primary);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-transition: .15s ease;
+    -o-transition: .15s ease;
+    transition: .15s ease;
+}
+
+.pm-input__container.error .pm-checkbox-label{
+    border-color: var(--border-sentiment-negative);
+}
+
+.pm-checkbox-label svg{
+    opacity: 0;
+    -webkit-transition: .15s ease;
+    -o-transition: .15s ease;
+    transition: .15s ease;
+}
+
+.pm-checkbox:checked + .pm-checkbox-label-container .pm-checkbox-label {
+    background: var(--control-primary);
+    border-color: var(--control-primary);
+}
+
+.pm-checkbox:checked + .pm-checkbox-label-container .pm-checkbox-label svg {
+    opacity: 1;
+}
+
+.pm-checkbox-text{
+    color: var(--content-base-primary);
+    /* Body/S/Medium */
+    font-size: var(--body-s-fs);
+    font-weight: 500;
+    line-height: var(--body-s-lh);
+}
+@media(max-width: 355px){
+    .pm-checkbox-text{
+        font-size: 13px;
+    }
+}
+
+.pm-checkbox-text a{
+    color: inherit;
+    font-size: inherit;
+}
 /* ========================
    BUTTONS
 ======================== */
@@ -368,6 +667,7 @@ body.lock{
     -o-transition: .3s ease;
     transition: .3s ease;
     cursor: pointer;
+    border: none;
 
     /* Body/L/Semi Bolt */
     font-size: var(--body-m-fs);
