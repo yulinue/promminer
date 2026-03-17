@@ -308,7 +308,7 @@
    MODALS Модалки
 ======================== */
 .pm-popup-overlay{
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100dvh;
     background: rgba(0, 0, 0, 0.48);
@@ -1247,6 +1247,7 @@
 
 .pm-menu-search__actions-block .pm-btn--secondary .pm-btn-text{
     min-width: 2.929em;
+    padding-bottom: 0;
 }
 
 @media(max-width: 960px){
