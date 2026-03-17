@@ -240,6 +240,13 @@
     -ms-flex: 1 0 0px;
     flex: 1 0 0;
 }
+@media(max-width: 960px){
+    .pm-header__contacts{
+        -webkit-box-align: start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+    }
+}
 
 .pm-phone-btn{
     letter-spacing: 0.45%;
@@ -1738,10 +1745,14 @@
     }
 
     .pm-menu-search__input-container{
-        -webkit-transform: translateX(100%);
-        -ms-transform: translateX(100%);
-        transform: translateX(100%);
+        /*-webkit-transform: translateX(100%);*/
+        /*-ms-transform: translateX(100%);*/
+        /*transform: translateX(100%);*/
         max-width: 100%;
+        width: calc(100% - var(--container-padding) * 2);
+        left: var(--container-padding);
+        right: auto;
+        transform: none;
     }
 
     .pm-menu-search__input-container.active{
