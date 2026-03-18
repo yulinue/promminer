@@ -1453,10 +1453,838 @@
             </div>
         </section>
 
-        <!--секция добавлена для демонстрации шапки при скролле, при добавлении последующий блоков - удалить -->
-        <section class="pm-section"></section>
+        <section class="pm-section popular-section">
+            <div class="pm-container">
+                <div class="pm-popular__wrapper">
+                    <div class="pm-popular__header">
+                        <div class="pm-section__headline-container">
+                            <div class="pm-badge">
+                                <div class="pm-badge__rectangle"></div>
+                                <div class="pm-badge-text">Каталог</div>
+                            </div>
+                            <h2 class="pm-section-title">Популярные категории</h2>
+                            <div class="pm-popular__tab-list" role="tablist">
+                                <button class="pm-tab-item active" role="tab" data-tab="1" aria-selected="true">ASIC-майнеры</button>
+                                <button class="pm-tab-item" role="tab" data-tab="2" aria-selected="false">Контейнеры для майнинга</button>
+                                <button class="pm-tab-item" role="tab" data-tab="3" aria-selected="false">Газопоршневые установки</button>
+                                <button class="pm-tab-item" role="tab" data-tab="4" aria-selected="false">Готовый бизнес</button>
+                                <button class="pm-tab-item" role="tab" data-tab="5" aria-selected="false">Дата-центры на ГПУ</button>
+                            </div>
+                        </div>
+
+                        <a href="#" class="pm-btn pm-btn--primary" data-da=".pm-popular__wrapper,1140,last">
+                            <span class="pm-btn-text">Весь каталог</span>
+                            <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9 6.75C8.58579 6.75 8.25 6.41421 8.25 6C8.25 5.58579 8.58579 5.25 9 5.25H18C18.4142 5.25 18.75 5.58579 18.75 6V15C18.75 15.4142 18.4142 15.75 18 15.75C17.5858 15.75 17.25 15.4142 17.25 15V7.81066L6.53033 18.5303C6.23744 18.8232 5.76256 18.8232 5.46967 18.5303C5.17678 18.2374 5.17678 17.7626 5.46967 17.4697L16.1893 6.75H9Z" fill="white"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="swiper pm-popular-slider active" data-tab-content="1">
+                        <div class="swiper-wrapper">
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 128 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/doge.svg" alt="" class="pm-popular__card-badge">
+                                        <img src="img/popularBlock/ltc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 256 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер JASMINER X16-P 5800</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 512 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер BM-KS Max 10.5 TH/s</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 128 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/doge.svg" alt="" class="pm-popular__card-badge">
+                                        <img src="img/popularBlock/ltc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 256 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер JASMINER X16-P 5800</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 128 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 128 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="pm-popular__navigation-container">
+                            <div class="pm-popular__nav-btn pm-popular__prev-btn swiper-button-prev pm-btn--neutral">
+                                <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5303 5.46967C10.8232 5.76256 10.8232 6.23744 10.5303 6.53033L5.81066 11.25H20C20.4142 11.25 20.75 11.5858 20.75 12C20.75 12.4142 20.4142 12.75 20 12.75H5.81066L10.5303 17.4697C10.8232 17.7626 10.8232 18.2374 10.5303 18.5303C10.2374 18.8232 9.76256 18.8232 9.46967 18.5303L3.46967 12.5303C3.17678 12.2374 3.17678 11.7626 3.46967 11.4697L9.46967 5.46967C9.76256 5.17678 10.2374 5.17678 10.5303 5.46967Z" fill="black"/>
+                                </svg>
+                            </div>
+                            <div class="swiper-pagination pm-popular-pagination"></div>
+                            <div class="pm-popular__nav-btn pm-popular__next-btn swiper-button-next pm-btn--neutral">
+                                <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M13.4697 5.46967C13.7626 5.17678 14.2374 5.17678 14.5303 5.46967L20.5303 11.4697C20.8232 11.7626 20.8232 12.2374 20.5303 12.5303L14.5303 18.5303C14.2374 18.8232 13.7626 18.8232 13.4697 18.5303C13.1768 18.2374 13.1768 17.7626 13.4697 17.4697L18.1893 12.75H4C3.58579 12.75 3.25 12.4142 3.25 12C3.25 11.5858 3.58579 11.25 4 11.25H18.1893L13.4697 6.53033C13.1768 6.23744 13.1768 5.76256 13.4697 5.46967Z" fill="black"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper pm-popular-slider" data-tab-content="2">
+                        <div class="swiper-wrapper">
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/doge.svg" alt="" class="pm-popular__card-badge">
+                                        <img src="img/popularBlock/ltc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 256 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер JASMINER X16-P 5800</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 128 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 512 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер BM-KS Max 10.5 TH/s</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 128 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/doge.svg" alt="" class="pm-popular__card-badge">
+                                        <img src="img/popularBlock/ltc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 256 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер JASMINER X16-P 5800</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 128 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="pm-popular__navigation-container">
+                            <div class="pm-popular__nav-btn pm-popular__prev-btn swiper-button-prev pm-btn--neutral">
+                                <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5303 5.46967C10.8232 5.76256 10.8232 6.23744 10.5303 6.53033L5.81066 11.25H20C20.4142 11.25 20.75 11.5858 20.75 12C20.75 12.4142 20.4142 12.75 20 12.75H5.81066L10.5303 17.4697C10.8232 17.7626 10.8232 18.2374 10.5303 18.5303C10.2374 18.8232 9.76256 18.8232 9.46967 18.5303L3.46967 12.5303C3.17678 12.2374 3.17678 11.7626 3.46967 11.4697L9.46967 5.46967C9.76256 5.17678 10.2374 5.17678 10.5303 5.46967Z" fill="black"/>
+                                </svg>
+                            </div>
+                            <div class="swiper-pagination pm-popular-pagination"></div>
+                            <div class="pm-popular__nav-btn pm-popular__next-btn swiper-button-next pm-btn--neutral">
+                                <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M13.4697 5.46967C13.7626 5.17678 14.2374 5.17678 14.5303 5.46967L20.5303 11.4697C20.8232 11.7626 20.8232 12.2374 20.5303 12.5303L14.5303 18.5303C14.2374 18.8232 13.7626 18.8232 13.4697 18.5303C13.1768 18.2374 13.1768 17.7626 13.4697 17.4697L18.1893 12.75H4C3.58579 12.75 3.25 12.4142 3.25 12C3.25 11.5858 3.58579 11.25 4 11.25H18.1893L13.4697 6.53033C13.1768 6.23744 13.1768 5.76256 13.4697 5.46967Z" fill="black"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper pm-popular-slider" data-tab-content="3">
+                        <div class="swiper-wrapper">
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 512 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер BM-KS Max 10.5 TH/s</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 128 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/doge.svg" alt="" class="pm-popular__card-badge">
+                                        <img src="img/popularBlock/ltc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 256 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер JASMINER X16-P 5800</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 128 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/doge.svg" alt="" class="pm-popular__card-badge">
+                                        <img src="img/popularBlock/ltc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 256 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер JASMINER X16-P 5800</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 128 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="pm-popular__navigation-container">
+                            <div class="pm-popular__nav-btn pm-popular__prev-btn swiper-button-prev pm-btn--neutral">
+                                <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5303 5.46967C10.8232 5.76256 10.8232 6.23744 10.5303 6.53033L5.81066 11.25H20C20.4142 11.25 20.75 11.5858 20.75 12C20.75 12.4142 20.4142 12.75 20 12.75H5.81066L10.5303 17.4697C10.8232 17.7626 10.8232 18.2374 10.5303 18.5303C10.2374 18.8232 9.76256 18.8232 9.46967 18.5303L3.46967 12.5303C3.17678 12.2374 3.17678 11.7626 3.46967 11.4697L9.46967 5.46967C9.76256 5.17678 10.2374 5.17678 10.5303 5.46967Z" fill="black"/>
+                                </svg>
+                            </div>
+                            <div class="swiper-pagination pm-popular-pagination"></div>
+                            <div class="pm-popular__nav-btn pm-popular__next-btn swiper-button-next pm-btn--neutral">
+                                <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M13.4697 5.46967C13.7626 5.17678 14.2374 5.17678 14.5303 5.46967L20.5303 11.4697C20.8232 11.7626 20.8232 12.2374 20.5303 12.5303L14.5303 18.5303C14.2374 18.8232 13.7626 18.8232 13.4697 18.5303C13.1768 18.2374 13.1768 17.7626 13.4697 17.4697L18.1893 12.75H4C3.58579 12.75 3.25 12.4142 3.25 12C3.25 11.5858 3.58579 11.25 4 11.25H18.1893L13.4697 6.53033C13.1768 6.23744 13.1768 5.76256 13.4697 5.46967Z" fill="black"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper pm-popular-slider" data-tab-content="4">
+                        <div class="swiper-wrapper">
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 512 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер BM-KS Max 10.5 TH/s</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 128 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 128 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/doge.svg" alt="" class="pm-popular__card-badge">
+                                        <img src="img/popularBlock/ltc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 256 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер JASMINER X16-P 5800</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/doge.svg" alt="" class="pm-popular__card-badge">
+                                        <img src="img/popularBlock/ltc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 256 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер JASMINER X16-P 5800</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 128 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="pm-popular__navigation-container">
+                            <div class="pm-popular__nav-btn pm-popular__prev-btn swiper-button-prev pm-btn--neutral">
+                                <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5303 5.46967C10.8232 5.76256 10.8232 6.23744 10.5303 6.53033L5.81066 11.25H20C20.4142 11.25 20.75 11.5858 20.75 12C20.75 12.4142 20.4142 12.75 20 12.75H5.81066L10.5303 17.4697C10.8232 17.7626 10.8232 18.2374 10.5303 18.5303C10.2374 18.8232 9.76256 18.8232 9.46967 18.5303L3.46967 12.5303C3.17678 12.2374 3.17678 11.7626 3.46967 11.4697L9.46967 5.46967C9.76256 5.17678 10.2374 5.17678 10.5303 5.46967Z" fill="black"/>
+                                </svg>
+                            </div>
+                            <div class="swiper-pagination pm-popular-pagination"></div>
+                            <div class="pm-popular__nav-btn pm-popular__next-btn swiper-button-next pm-btn--neutral">
+                                <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M13.4697 5.46967C13.7626 5.17678 14.2374 5.17678 14.5303 5.46967L20.5303 11.4697C20.8232 11.7626 20.8232 12.2374 20.5303 12.5303L14.5303 18.5303C14.2374 18.8232 13.7626 18.8232 13.4697 18.5303C13.1768 18.2374 13.1768 17.7626 13.4697 17.4697L18.1893 12.75H4C3.58579 12.75 3.25 12.4142 3.25 12C3.25 11.5858 3.58579 11.25 4 11.25H18.1893L13.4697 6.53033C13.1768 6.23744 13.1768 5.76256 13.4697 5.46967Z" fill="black"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper pm-popular-slider" data-tab-content="5">
+                        <div class="swiper-wrapper">
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/doge.svg" alt="" class="pm-popular__card-badge">
+                                        <img src="img/popularBlock/ltc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 256 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер JASMINER X16-P 5800</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 128 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 128 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/doge.svg" alt="" class="pm-popular__card-badge">
+                                        <img src="img/popularBlock/ltc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 256 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер JASMINER X16-P 5800</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 512 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер BM-KS Max 10.5 TH/s</div>
+                                </div>
+                            </a>
+                            <a href="#" class="swiper-slide pm-popular__card">
+                                <div class="pm-popular__card-top swiper">
+                                    <div class="pm-card-images">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                                        <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                                        <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                                    </div>
+                                    <div class="pm-popular__card-badges">
+                                        <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                                    </div>
+                                    <div class="pm-card-dots"></div>
+                                </div>
+
+                                <div class="pm-popular__card-text">
+                                    <div class="pm-popular__card-title">от 128 000 ₽</div>
+                                    <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="pm-popular__navigation-container">
+                            <div class="pm-popular__nav-btn pm-popular__prev-btn swiper-button-prev pm-btn--neutral">
+                                <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5303 5.46967C10.8232 5.76256 10.8232 6.23744 10.5303 6.53033L5.81066 11.25H20C20.4142 11.25 20.75 11.5858 20.75 12C20.75 12.4142 20.4142 12.75 20 12.75H5.81066L10.5303 17.4697C10.8232 17.7626 10.8232 18.2374 10.5303 18.5303C10.2374 18.8232 9.76256 18.8232 9.46967 18.5303L3.46967 12.5303C3.17678 12.2374 3.17678 11.7626 3.46967 11.4697L9.46967 5.46967C9.76256 5.17678 10.2374 5.17678 10.5303 5.46967Z" fill="black"/>
+                                </svg>
+                            </div>
+                            <div class="swiper-pagination pm-popular-pagination"></div>
+                            <div class="pm-popular__nav-btn pm-popular__next-btn swiper-button-next pm-btn--neutral">
+                                <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M13.4697 5.46967C13.7626 5.17678 14.2374 5.17678 14.5303 5.46967L20.5303 11.4697C20.8232 11.7626 20.8232 12.2374 20.5303 12.5303L14.5303 18.5303C14.2374 18.8232 13.7626 18.8232 13.4697 18.5303C13.1768 18.2374 13.1768 17.7626 13.4697 17.4697L18.1893 12.75H4C3.58579 12.75 3.25 12.4142 3.25 12C3.25 11.5858 3.58579 11.25 4 11.25H18.1893L13.4697 6.53033C13.1768 6.23744 13.1768 5.76256 13.4697 5.46967Z" fill="black"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
     <footer></footer>
+
+    <script>
+        const tabs = document.querySelectorAll('.pm-tab-item');
+        const contents = document.querySelectorAll('[data-tab-content]');
+
+        const popularSliders = document.querySelectorAll('.pm-popular-slider');
+        const swipers = [];
+
+        // инициализация свайперов
+        popularSliders.forEach(slider => {
+            const instance = new Swiper(slider, {
+                spaceBetween: 16,
+                slidesPerView: 'auto',
+
+                pagination: {
+                    el: slider.querySelector('.pm-popular-pagination'),
+                    clickable: true,
+                },
+
+                navigation: {
+                    nextEl: slider.querySelector('.pm-popular__next-btn'),
+                    prevEl: slider.querySelector('.pm-popular__prev-btn'),
+                },
+
+                breakpoints: {
+                    1025: {
+                        slidesPerView: 4
+                    },
+                    1681: {
+                        slidesPerView: 5
+                    }
+                },
+            });
+
+            swipers.push({
+                el: slider,
+                instance
+            });
+        });
+
+
+        // табы
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const id = tab.dataset.tab;
+
+                // активный таб
+                tabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+
+                tab.classList.add('active');
+                tab.setAttribute('aria-selected', 'true');
+
+                contents.forEach(c => c.classList.remove('active'));
+
+                const activeContent = document.querySelector(`[data-tab-content="${id}"]`);
+                activeContent.classList.add('active');
+
+                // обновление нужного swiper
+                const current = swipers.find(s => s.el === activeContent);
+                if (current) {
+                    current.instance.update();
+                }
+            });
+        });
+
+        document.querySelectorAll('.pm-card-images').forEach(container => {
+            const images = container.querySelectorAll('img');
+            const dotsContainer = container.parentElement.querySelector('.pm-card-dots');
+
+            images.forEach((_, i) => {
+                const dot = document.createElement('span');
+                if (i === 0) dot.classList.add('active');
+                dotsContainer.appendChild(dot);
+            });
+
+            const dots = dotsContainer.querySelectorAll('span');
+
+            container.addEventListener('mousemove', (e) => {
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const percent = x / rect.width;
+
+                const index = Math.min(
+                    Math.floor(percent * images.length),
+                    images.length - 1
+                );
+
+                images.forEach(img => img.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+
+                images[index].classList.add('active');
+                dots[index].classList.add('active');
+            });
+
+            container.addEventListener('mouseleave', () => {
+                images.forEach(img => img.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+
+                images[0].classList.add('active');
+                dots[0].classList.add('active');
+            });
+        });
+    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -1576,6 +2404,7 @@
             const feedbackPopup = document.getElementById('feedbackPopup');
             openFeedbackBtn.addEventListener('click', () => {
                 feedbackPopup.classList.add('active');
+                document.body.classList.add('lock');
             });
 
             const closeFeedbackBtns = document.querySelectorAll('.close-feedback-popup');
@@ -1584,6 +2413,7 @@
                     e.preventDefault();
 
                     feedbackPopup.classList.remove('active');
+                    document.body.classList.remove('lock');
 
                     setTimeout(() => {
                         feedbackPopup.classList.remove('success');
@@ -1598,6 +2428,7 @@
                     feedbackPopup.classList.remove('active');
                     setTimeout(() => {
                         feedbackPopup.classList.remove('success');
+                        document.body.classList.remove('lock');
                         form.reset();
                     }, 500);
                 }
