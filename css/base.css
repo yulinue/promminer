@@ -13,6 +13,7 @@
     --bg-base-secondary: rgba(255, 255, 255, 1);
 
     --bg-statis-white-subtle: rgba(255, 255, 255, 0.24);
+    --bg-statis-black-subtle: rgba(26, 26, 26, 0.16);
 
     --bg-sentiment-accent: rgba(112, 134, 252, 1);
     --bg-sentiment-accent-subtle: rgba(112, 134, 252, 0.12);
@@ -20,6 +21,7 @@
 
     --border-static-white-subtle: rgba(255, 255, 255, 0.16);
     --border-base-neutral: rgba(107, 114, 128, 0.16);
+    --border-base-neutral-hover: rgba(82, 82, 82, 0.32);
     --border-sentiment-negative: rgba(239, 68, 68, 1);
 
     --content-base-primary: rgba(17, 24, 39, 1);
@@ -47,6 +49,7 @@
     --container-padding: 60px;
 
     --spacing-60: 60px;
+    --spacing-48: 48px;
     --spacing-40: 40px;
     --spacing-32: 32px;
     --spacing-24: 24px;
@@ -102,6 +105,10 @@
     /*Typography/Headline/H2/*/
     --h2-fs: 40px;
     --h2-lh: 48px;
+
+    /*Typography/Headline/H3/*/
+    --h3-fs: 32px;
+    --h3-lh: 38px;
 
     /*Typography/Headline/H4/*/
     --h4-fs: 24px;
