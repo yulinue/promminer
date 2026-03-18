@@ -2181,109 +2181,111 @@
     <footer></footer>
 
     <script>
-        const tabs = document.querySelectorAll('.pm-tab-item');
-        const contents = document.querySelectorAll('[data-tab-content]');
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.pm-tab-item');
+            const contents = document.querySelectorAll('[data-tab-content]');
 
-        const popularSliders = document.querySelectorAll('.pm-popular-slider');
-        const swipers = [];
+            const popularSliders = document.querySelectorAll('.pm-popular-slider');
+            const swipers = [];
 
-        // инициализация свайперов
-        popularSliders.forEach(slider => {
-            const instance = new Swiper(slider, {
-                spaceBetween: 16,
-                slidesPerView: 'auto',
+            // инициализация свайперов
+            popularSliders.forEach(slider => {
+                const instance = new Swiper(slider, {
+                    spaceBetween: 16,
+                    slidesPerView: 'auto',
 
-                pagination: {
-                    el: slider.querySelector('.pm-popular-pagination'),
-                    clickable: true,
-                },
-
-                navigation: {
-                    nextEl: slider.querySelector('.pm-popular__next-btn'),
-                    prevEl: slider.querySelector('.pm-popular__prev-btn'),
-                },
-
-                breakpoints: {
-                    1025: {
-                        slidesPerView: 4
+                    pagination: {
+                        el: slider.querySelector('.pm-popular-pagination'),
+                        clickable: true,
                     },
-                    1681: {
-                        slidesPerView: 5
-                    }
-                },
-            });
 
-            swipers.push({
-                el: slider,
-                instance
-            });
-        });
+                    navigation: {
+                        nextEl: slider.querySelector('.pm-popular__next-btn'),
+                        prevEl: slider.querySelector('.pm-popular__prev-btn'),
+                    },
 
-
-        // табы
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const id = tab.dataset.tab;
-
-                // активный таб
-                tabs.forEach(t => {
-                    t.classList.remove('active');
-                    t.setAttribute('aria-selected', 'false');
+                    breakpoints: {
+                        1025: {
+                            slidesPerView: 4
+                        },
+                        1681: {
+                            slidesPerView: 5
+                        }
+                    },
                 });
 
-                tab.classList.add('active');
-                tab.setAttribute('aria-selected', 'true');
-
-                contents.forEach(c => c.classList.remove('active'));
-
-                const activeContent = document.querySelector(`[data-tab-content="${id}"]`);
-                activeContent.classList.add('active');
-
-                // обновление нужного swiper
-                const current = swipers.find(s => s.el === activeContent);
-                if (current) {
-                    current.instance.update();
-                }
-            });
-        });
-
-        document.querySelectorAll('.pm-card-images').forEach(container => {
-            const images = container.querySelectorAll('img');
-            const dotsContainer = container.parentElement.querySelector('.pm-card-dots');
-
-            images.forEach((_, i) => {
-                const dot = document.createElement('span');
-                if (i === 0) dot.classList.add('active');
-                dotsContainer.appendChild(dot);
+                swipers.push({
+                    el: slider,
+                    instance
+                });
             });
 
-            const dots = dotsContainer.querySelectorAll('span');
 
-            container.addEventListener('mousemove', (e) => {
-                const rect = container.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const percent = x / rect.width;
+            // табы
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const id = tab.dataset.tab;
 
-                const index = Math.min(
-                    Math.floor(percent * images.length),
-                    images.length - 1
-                );
+                    // активный таб
+                    tabs.forEach(t => {
+                        t.classList.remove('active');
+                        t.setAttribute('aria-selected', 'false');
+                    });
 
-                images.forEach(img => img.classList.remove('active'));
-                dots.forEach(dot => dot.classList.remove('active'));
+                    tab.classList.add('active');
+                    tab.setAttribute('aria-selected', 'true');
 
-                images[index].classList.add('active');
-                dots[index].classList.add('active');
+                    contents.forEach(c => c.classList.remove('active'));
+
+                    const activeContent = document.querySelector(`[data-tab-content="${id}"]`);
+                    activeContent.classList.add('active');
+
+                    // обновление нужного swiper
+                    const current = swipers.find(s => s.el === activeContent);
+                    if (current) {
+                        current.instance.update();
+                    }
+                });
             });
 
-            container.addEventListener('mouseleave', () => {
-                images.forEach(img => img.classList.remove('active'));
-                dots.forEach(dot => dot.classList.remove('active'));
+            document.querySelectorAll('.pm-card-images').forEach(container => {
+                const images = container.querySelectorAll('img');
+                const dotsContainer = container.parentElement.querySelector('.pm-card-dots');
 
-                images[0].classList.add('active');
-                dots[0].classList.add('active');
+                images.forEach((_, i) => {
+                    const dot = document.createElement('span');
+                    if (i === 0) dot.classList.add('active');
+                    dotsContainer.appendChild(dot);
+                });
+
+                const dots = dotsContainer.querySelectorAll('span');
+
+                container.addEventListener('mousemove', (e) => {
+                    const rect = container.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const percent = x / rect.width;
+
+                    const index = Math.min(
+                        Math.floor(percent * images.length),
+                        images.length - 1
+                    );
+
+                    images.forEach(img => img.classList.remove('active'));
+                    dots.forEach(dot => dot.classList.remove('active'));
+
+                    images[index].classList.add('active');
+                    dots[index].classList.add('active');
+                });
+
+                container.addEventListener('mouseleave', () => {
+                    images.forEach(img => img.classList.remove('active'));
+                    dots.forEach(dot => dot.classList.remove('active'));
+
+                    images[0].classList.add('active');
+                    dots[0].classList.add('active');
+                });
             });
-        });
+        })
     </script>
 
     <script>
