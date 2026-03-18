@@ -2862,7 +2862,6 @@
                         circle.style.strokeDashoffset = 0;
                     });
 
-                    // 👇 observer НА КОНТЕЙНЕР, а не на каждый слайд
                     const observer = new IntersectionObserver(entries => {
                         entries.forEach(entry => {
                             if (entry.isIntersecting) {
@@ -2872,8 +2871,6 @@
                                     control.querySelector('.pm-video-control--play').classList.add('hidden');
                                     control.querySelector('.pm-video-control--pause').classList.remove('hidden');
                                 }
-                            } else {
-                                video.pause();
                             }
                         });
                     }, { threshold: 0.5 });
@@ -2882,62 +2879,6 @@
                 }
 
             });
-
-            // const videoSlides = document.querySelectorAll('.benefit-slide');
-            //
-            // videoSlides.forEach(slide => {
-            //     const video = slide.querySelector('video');
-            //     const control = slide.querySelector('.pm-video-control');
-            //     const circle = control.querySelector('circle');
-            //     const radius = circle.r.baseVal.value;
-            //     const circumference = 2 * Math.PI * radius;
-            //
-            //     circle.style.strokeDasharray = circumference;
-            //     circle.style.strokeDashoffset = 0; // изначально полностью заполнен
-            //
-            //     // функция для обновления прогресса
-            //     function updateProgress() {
-            //         const percent = video.currentTime / video.duration;
-            //         circle.style.strokeDashoffset = circumference * percent; // линия исчезает по мере прогресса
-            //         if (!video.paused && !video.ended) requestAnimationFrame(updateProgress);
-            //     }
-            //
-            //     // клик по кнопке
-            //     control.addEventListener('click', () => {
-            //         if (video.paused || video.ended) {
-            //             video.play();
-            //             updateProgress();
-            //             control.querySelector('.pm-video-control--play').classList.add('hidden');
-            //             control.querySelector('.pm-video-control--pause').classList.remove('hidden');
-            //         } else {
-            //             video.pause();
-            //             control.querySelector('.pm-video-control--play').classList.remove('hidden');
-            //             control.querySelector('.pm-video-control--pause').classList.add('hidden');
-            //         }
-            //     });
-            //
-            //     video.addEventListener('ended', () => {
-            //         control.querySelector('.pm-video-control--play').classList.remove('hidden');
-            //         control.querySelector('.pm-video-control--pause').classList.add('hidden');
-            //         circle.style.strokeDashoffset = 0; // сброс прогресса
-            //     });
-            //
-            //     // IntersectionObserver для автозапуска видео при появлении
-            //     const observer = new IntersectionObserver(entries => {
-            //         entries.forEach(entry => {
-            //             if (entry.isIntersecting) {
-            //                 if (video.paused && !video.ended) {
-            //                     video.play();
-            //                     updateProgress();
-            //                     control.querySelector('.pm-video-control--play').classList.add('hidden');
-            //                     control.querySelector('.pm-video-control--pause').classList.remove('hidden');
-            //                 }
-            //             }
-            //         });
-            //     }, { threshold: 0.5 }); // половина блока в зоне видимости
-            //
-            //     observer.observe(slide);
-            // });
         });
     </script>
 
