@@ -1512,6 +1512,7 @@
     padding: var(--spacing-48) 4px;
     border-radius: 24px;
     background: var(--bg-base-primary);
+    overflow: hidden;
 }
 .pm-benefit-container--reverse{
     background: var(--bg-base-secondary);
