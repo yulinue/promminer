@@ -2284,6 +2284,52 @@
                 dots[0].classList.add('active');
             });
         });
+
+        const isMobile = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
+        if (isMobile) {
+            const galleries = document.querySelectorAll('.pm-card-images');
+
+            galleries.forEach(gallery => {
+                const images = gallery.querySelectorAll('.pm-popular__card-image');
+
+                let startX = 0;
+                let endX = 0;
+                let current = 0;
+                let isSwiping = false;
+
+                const threshold = 30;
+
+                gallery.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    isSwiping = false;
+                });
+
+                gallery.addEventListener('touchmove', (e) => {
+                    endX = e.touches[0].clientX;
+
+                    if (Math.abs(startX - endX) > threshold) {
+                        isSwiping = true;
+                    }
+                });
+
+                gallery.addEventListener('touchend', (e) => {
+                    if (!isSwiping) return;
+
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    if (startX > endX) {
+                        current = (current + 1) % images.length;
+                    } else {
+                        current = (current - 1 + images.length) % images.length;
+                    }
+
+                    images.forEach(img => img.classList.remove('active'));
+                    images[current].classList.add('active');
+                });
+            });
+        }
     </script>
 
     <script>
