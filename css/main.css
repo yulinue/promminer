@@ -2003,16 +2003,9 @@
 }
 
 @media(max-width: 760px){
-    /*.pm-benefit__stats-list--reverse .pm-benefit__stat-line{*/
-    /*    min-width: unset;*/
-    /*}*/
-
     .pm-benefit__stats-list--reverse.pm-benefit__stats-list{
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        max-width: 100%;
+        display: -ms-grid;
+        display: grid;
     }
 }
 @media(max-width: 600px){
