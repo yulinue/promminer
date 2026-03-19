@@ -68,6 +68,13 @@
     width: 100%;
     height: 100%;
 }
+.pm-logo-img--color,
+.pm-header--fixed .pm-logo-img--default{
+    display: none;
+}
+.pm-header--fixed .pm-logo-img--color{
+    display: unset;
+}
 @media(min-width: 1441px){
     .pm-btn.pm-btn--secondary#openCatalog .pm-btn-icon .pm-btn-icon--hidden-path{
         display: none;
@@ -477,6 +484,11 @@
     -o-transition: .2s ease;
     transition: .2s ease;
     position: absolute;
+}
+@media(max-width: 1521px){
+    .pm-menu-popup__container{
+        max-width: calc(100vw - var(--container-padding) * 2);
+    }
 }
 
 .pm-menu-popup__container.active{

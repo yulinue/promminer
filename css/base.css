@@ -708,7 +708,7 @@ body.lock{
     /* Body/M/Semi Bold */
     font-family: inherit;
     font-size: var(--body-m-fs);
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1.25;
 }
 .pm-btn--primary:active{

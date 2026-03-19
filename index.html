@@ -26,7 +26,8 @@
             <div class="pm-header__wrapper">
                 <div class="pm-header__left">
                     <a href="/" class="pm-header__logo">
-                        <img class="pm-logo-img" src="img/icons/logo.svg" alt="Логотип Promminer">
+                        <img class="pm-logo-img pm-logo-img--default" src="img/icons/logo.svg" alt="Логотип Promminer">
+                        <img class="pm-logo-img pm-logo-img--color" src="img/icons/logoColor.svg" alt="Логотип Promminer">
                     </a>
 
                     <button class="pm-btn pm-btn--secondary" id="openCatalog" data-da=".pm-header__contacts,960,last">
@@ -2983,9 +2984,427 @@
                 </div>
         </section>
 
+        <section class="pm-section projects-section">
+            <div class="pm-container">
+                <div class="pm-projects__wrapper">
+                    <div class="pm-popular__header">
+                        <div class="pm-section__headline-container">
+                            <div class="pm-badge">
+                                <div class="pm-badge__rectangle"></div>
+                                <div class="pm-badge-text">Проекты</div>
+                            </div>
+                            <h2 class="pm-section-title">География реализованных проектов</h2>
+                            <h3 class="pm-section-subtitle">Запуск и масштабирование объектов промышленного майнинга в разных регионах</h3>
+                        </div>
 
+                        <a href="#" class="pm-btn pm-btn--primary" data-da=".pm-projects__wrapper,735,last">
+                            <span class="pm-btn-text">Посмотреть проекты</span>
+                            <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9 6.75C8.58579 6.75 8.25 6.41421 8.25 6C8.25 5.58579 8.58579 5.25 9 5.25H18C18.4142 5.25 18.75 5.58579 18.75 6V15C18.75 15.4142 18.4142 15.75 18 15.75C17.5858 15.75 17.25 15.4142 17.25 15V7.81066L6.53033 18.5303C6.23744 18.8232 5.76256 18.8232 5.46967 18.5303C5.17678 18.2374 5.17678 17.7626 5.46967 17.4697L16.1893 6.75H9Z" fill="white"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="pm-projects__main-content">
+                        <ul class="pm-menu-nav__main-list">
+                            <li class="pm-menu-nav__main-item active" data-projectId="1">
+                                <div class="pm-menu-nav__main-link">
+                                    <div class="pm-menu-nav__text">Барнаул - 2024</div>
+                                    <img src="img/icons/promminer-badge.svg" alt="" class="pm-projects__badge">
+                                    <img src="img/icons/promminer-badge-white.svg" alt="" class="pm-projects__badge pm-projects__badge--white">
+                                </div>
+                                <div class="pm-menu-nav__active-line"></div>
+                            </li>
+                            <li class="pm-menu-nav__main-item" data-projectId="2">
+                                <div class="pm-menu-nav__main-link">
+                                    <div class="pm-menu-nav__text">Москва - 2021</div>
+                                    <img src="img/icons/promminer-badge.svg" alt="" class="pm-projects__badge">
+                                    <img src="img/icons/promminer-badge-white.svg" alt="" class="pm-projects__badge pm-projects__badge--white">
+                                </div>
+                                <div class="pm-menu-nav__active-line"></div>
+                            </li>
+                            <li class="pm-menu-nav__main-item" data-projectId="3">
+                                <div class="pm-menu-nav__main-link">
+                                    <div class="pm-menu-nav__text">Екатеринбург - 2025</div>
+                                    <img src="img/icons/promminer-badge.svg" alt="" class="pm-projects__badge">
+                                    <img src="img/icons/promminer-badge-white.svg" alt="" class="pm-projects__badge pm-projects__badge--white">
+                                </div>
+                                <div class="pm-menu-nav__active-line"></div>
+                            </li>
+                            <li class="pm-menu-nav__main-item" data-projectId="4">
+                                <div class="pm-menu-nav__main-link">
+                                    <div class="pm-menu-nav__text">Звенигород - 2022</div>
+                                    <img src="img/icons/promminer-badge.svg" alt="" class="pm-projects__badge">
+                                    <img src="img/icons/promminer-badge-white.svg" alt="" class="pm-projects__badge pm-projects__badge--white">
+                                </div>
+                                <div class="pm-menu-nav__active-line"></div>
+                            </li>
+                            <li class="pm-menu-nav__main-item" data-projectId="5">
+                                <div class="pm-menu-nav__main-link">
+                                    <div class="pm-menu-nav__text">Казань - 2022</div>
+                                    <img src="img/icons/promminer-badge.svg" alt="" class="pm-projects__badge">
+                                    <img src="img/icons/promminer-badge-white.svg" alt="" class="pm-projects__badge pm-projects__badge--white">
+                                </div>
+                                <div class="pm-menu-nav__active-line"></div>
+                            </li>
+                            <li class="pm-menu-nav__main-item" data-projectId="6">
+                                <div class="pm-menu-nav__main-link">
+                                    <div class="pm-menu-nav__text">Новосибирск - 2024</div>
+                                </div>
+                                <div class="pm-menu-nav__active-line"></div>
+                            </li>
+                            <li class="pm-menu-nav__main-item" data-projectId="7">
+                                <div class="pm-menu-nav__main-link">
+                                    <div class="pm-menu-nav__text">Калининград - 2023</div>
+                                </div>
+                                <div class="pm-menu-nav__active-line"></div>
+                            </li>
+                            <li class="pm-menu-nav__main-item" data-projectId="8">
+                                <div class="pm-menu-nav__main-link">
+                                    <div class="pm-menu-nav__text">Кировск - 2024</div>
+                                </div>
+                                <div class="pm-menu-nav__active-line"></div>
+                            </li>
+                            <li class="pm-menu-nav__main-item" data-projectId="9">
+                                <div class="pm-menu-nav__main-link">
+                                    <div class="pm-menu-nav__text">Краснодар - 2022</div>
+                                </div>
+                                <div class="pm-menu-nav__active-line"></div>
+                            </li>
+                            <li class="pm-menu-nav__main-item" data-projectId="10">
+                                <div class="pm-menu-nav__main-link">
+                                    <div class="pm-menu-nav__text">Москва - 2021</div>
+                                </div>
+                                <div class="pm-menu-nav__active-line"></div>
+                            </li>
+                        </ul>
+
+                        <div class="pm-projects__media-container">
+                            <div class="pm-project-content active" data-projectId="1" style="background-image: url('img/projectsBlock/projectImg.png')">
+                                <a href="#" class="pm-features__object-badge">
+                                    <div class="pm-features__object-name">Барнаул - 2024</div>
+                                    <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9 6.75C8.58579 6.75 8.25 6.41421 8.25 6C8.25 5.58579 8.58579 5.25 9 5.25L18 5.25C18.4142 5.25 18.75 5.58579 18.75 6V15C18.75 15.4142 18.4142 15.75 18 15.75C17.5858 15.75 17.25 15.4142 17.25 15V7.81066L6.53033 18.5303C6.23744 18.8232 5.76256 18.8232 5.46967 18.5303C5.17678 18.2374 5.17678 17.7626 5.46967 17.4697L16.1893 6.75L9 6.75Z" fill="black"/>
+                                    </svg>
+                                </a>
+                                <div class="pm-project__stats-list">
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">800 кВт</div>
+                                        <div class="pm-project__stat-name">Мощность</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">10 000</div>
+                                        <div class="pm-project__stat-name">Аппаратов</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">99%</div>
+                                        <div class="pm-project__stat-name">Uptime</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">24/7</div>
+                                        <div class="pm-project__stat-name">Мониторинг</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pm-project-content" data-projectId="2" style="background-image: url('img/features/object.png')">
+                                <a href="#" class="pm-features__object-badge">
+                                    <div class="pm-features__object-name">Москва - 2021</div>
+                                    <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9 6.75C8.58579 6.75 8.25 6.41421 8.25 6C8.25 5.58579 8.58579 5.25 9 5.25L18 5.25C18.4142 5.25 18.75 5.58579 18.75 6V15C18.75 15.4142 18.4142 15.75 18 15.75C17.5858 15.75 17.25 15.4142 17.25 15V7.81066L6.53033 18.5303C6.23744 18.8232 5.76256 18.8232 5.46967 18.5303C5.17678 18.2374 5.17678 17.7626 5.46967 17.4697L16.1893 6.75L9 6.75Z" fill="black"/>
+                                    </svg>
+                                </a>
+                                <div class="pm-project__stats-list">
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">800 кВт</div>
+                                        <div class="pm-project__stat-name">Мощность</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">10 000</div>
+                                        <div class="pm-project__stat-name">Аппаратов</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">99%</div>
+                                        <div class="pm-project__stat-name">Uptime</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">24/7</div>
+                                        <div class="pm-project__stat-name">Мониторинг</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pm-project-content" data-projectId="3" style="background-image: url('img/projectsBlock/projectImg.png')">
+                                <a href="#" class="pm-features__object-badge">
+                                    <div class="pm-features__object-name">Барнаул - 2024</div>
+                                    <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9 6.75C8.58579 6.75 8.25 6.41421 8.25 6C8.25 5.58579 8.58579 5.25 9 5.25L18 5.25C18.4142 5.25 18.75 5.58579 18.75 6V15C18.75 15.4142 18.4142 15.75 18 15.75C17.5858 15.75 17.25 15.4142 17.25 15V7.81066L6.53033 18.5303C6.23744 18.8232 5.76256 18.8232 5.46967 18.5303C5.17678 18.2374 5.17678 17.7626 5.46967 17.4697L16.1893 6.75L9 6.75Z" fill="black"/>
+                                    </svg>
+                                </a>
+                                <div class="pm-project__stats-list">
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">800 кВт</div>
+                                        <div class="pm-project__stat-name">Мощность</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">10 000</div>
+                                        <div class="pm-project__stat-name">Аппаратов</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">99%</div>
+                                        <div class="pm-project__stat-name">Uptime</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">24/7</div>
+                                        <div class="pm-project__stat-name">Мониторинг</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pm-project-content" data-projectId="4" style="background-image: url('img/projectsBlock/projectImg.png')">
+                                <a href="#" class="pm-features__object-badge">
+                                    <div class="pm-features__object-name">Барнаул - 2024</div>
+                                    <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9 6.75C8.58579 6.75 8.25 6.41421 8.25 6C8.25 5.58579 8.58579 5.25 9 5.25L18 5.25C18.4142 5.25 18.75 5.58579 18.75 6V15C18.75 15.4142 18.4142 15.75 18 15.75C17.5858 15.75 17.25 15.4142 17.25 15V7.81066L6.53033 18.5303C6.23744 18.8232 5.76256 18.8232 5.46967 18.5303C5.17678 18.2374 5.17678 17.7626 5.46967 17.4697L16.1893 6.75L9 6.75Z" fill="black"/>
+                                    </svg>
+                                </a>
+                                <div class="pm-project__stats-list">
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">800 кВт</div>
+                                        <div class="pm-project__stat-name">Мощность</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">10 000</div>
+                                        <div class="pm-project__stat-name">Аппаратов</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">99%</div>
+                                        <div class="pm-project__stat-name">Uptime</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">24/7</div>
+                                        <div class="pm-project__stat-name">Мониторинг</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pm-project-content" data-projectId="5" style="background-image: url('img/projectsBlock/projectImg.png')">
+                                <a href="#" class="pm-features__object-badge">
+                                    <div class="pm-features__object-name">Барнаул - 2024</div>
+                                    <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9 6.75C8.58579 6.75 8.25 6.41421 8.25 6C8.25 5.58579 8.58579 5.25 9 5.25L18 5.25C18.4142 5.25 18.75 5.58579 18.75 6V15C18.75 15.4142 18.4142 15.75 18 15.75C17.5858 15.75 17.25 15.4142 17.25 15V7.81066L6.53033 18.5303C6.23744 18.8232 5.76256 18.8232 5.46967 18.5303C5.17678 18.2374 5.17678 17.7626 5.46967 17.4697L16.1893 6.75L9 6.75Z" fill="black"/>
+                                    </svg>
+                                </a>
+                                <div class="pm-project__stats-list">
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">800 кВт</div>
+                                        <div class="pm-project__stat-name">Мощность</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">10 000</div>
+                                        <div class="pm-project__stat-name">Аппаратов</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">99%</div>
+                                        <div class="pm-project__stat-name">Uptime</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">24/7</div>
+                                        <div class="pm-project__stat-name">Мониторинг</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pm-project-content" data-projectId="6" style="background-image: url('img/projectsBlock/projectImg.png')">
+                                <a href="#" class="pm-features__object-badge">
+                                    <div class="pm-features__object-name">Барнаул - 2024</div>
+                                    <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9 6.75C8.58579 6.75 8.25 6.41421 8.25 6C8.25 5.58579 8.58579 5.25 9 5.25L18 5.25C18.4142 5.25 18.75 5.58579 18.75 6V15C18.75 15.4142 18.4142 15.75 18 15.75C17.5858 15.75 17.25 15.4142 17.25 15V7.81066L6.53033 18.5303C6.23744 18.8232 5.76256 18.8232 5.46967 18.5303C5.17678 18.2374 5.17678 17.7626 5.46967 17.4697L16.1893 6.75L9 6.75Z" fill="black"/>
+                                    </svg>
+                                </a>
+                                <div class="pm-project__stats-list">
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">800 кВт</div>
+                                        <div class="pm-project__stat-name">Мощность</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">10 000</div>
+                                        <div class="pm-project__stat-name">Аппаратов</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">99%</div>
+                                        <div class="pm-project__stat-name">Uptime</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">24/7</div>
+                                        <div class="pm-project__stat-name">Мониторинг</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pm-project-content" data-projectId="7" style="background-image: url('img/projectsBlock/projectImg.png')">
+                                <a href="#" class="pm-features__object-badge">
+                                    <div class="pm-features__object-name">Барнаул - 2024</div>
+                                    <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9 6.75C8.58579 6.75 8.25 6.41421 8.25 6C8.25 5.58579 8.58579 5.25 9 5.25L18 5.25C18.4142 5.25 18.75 5.58579 18.75 6V15C18.75 15.4142 18.4142 15.75 18 15.75C17.5858 15.75 17.25 15.4142 17.25 15V7.81066L6.53033 18.5303C6.23744 18.8232 5.76256 18.8232 5.46967 18.5303C5.17678 18.2374 5.17678 17.7626 5.46967 17.4697L16.1893 6.75L9 6.75Z" fill="black"/>
+                                    </svg>
+                                </a>
+                                <div class="pm-project__stats-list">
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">800 кВт</div>
+                                        <div class="pm-project__stat-name">Мощность</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">10 000</div>
+                                        <div class="pm-project__stat-name">Аппаратов</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">99%</div>
+                                        <div class="pm-project__stat-name">Uptime</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">24/7</div>
+                                        <div class="pm-project__stat-name">Мониторинг</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pm-project-content" data-projectId="8" style="background-image: url('img/projectsBlock/projectImg.png')">
+                                <a href="#" class="pm-features__object-badge">
+                                    <div class="pm-features__object-name">Барнаул - 2024</div>
+                                    <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9 6.75C8.58579 6.75 8.25 6.41421 8.25 6C8.25 5.58579 8.58579 5.25 9 5.25L18 5.25C18.4142 5.25 18.75 5.58579 18.75 6V15C18.75 15.4142 18.4142 15.75 18 15.75C17.5858 15.75 17.25 15.4142 17.25 15V7.81066L6.53033 18.5303C6.23744 18.8232 5.76256 18.8232 5.46967 18.5303C5.17678 18.2374 5.17678 17.7626 5.46967 17.4697L16.1893 6.75L9 6.75Z" fill="black"/>
+                                    </svg>
+                                </a>
+                                <div class="pm-project__stats-list">
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">800 кВт</div>
+                                        <div class="pm-project__stat-name">Мощность</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">10 000</div>
+                                        <div class="pm-project__stat-name">Аппаратов</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">99%</div>
+                                        <div class="pm-project__stat-name">Uptime</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">24/7</div>
+                                        <div class="pm-project__stat-name">Мониторинг</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pm-project-content" data-projectId="9" style="background-image: url('img/projectsBlock/projectImg.png')">
+                                <a href="#" class="pm-features__object-badge">
+                                    <div class="pm-features__object-name">Барнаул - 2024</div>
+                                    <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9 6.75C8.58579 6.75 8.25 6.41421 8.25 6C8.25 5.58579 8.58579 5.25 9 5.25L18 5.25C18.4142 5.25 18.75 5.58579 18.75 6V15C18.75 15.4142 18.4142 15.75 18 15.75C17.5858 15.75 17.25 15.4142 17.25 15V7.81066L6.53033 18.5303C6.23744 18.8232 5.76256 18.8232 5.46967 18.5303C5.17678 18.2374 5.17678 17.7626 5.46967 17.4697L16.1893 6.75L9 6.75Z" fill="black"/>
+                                    </svg>
+                                </a>
+                                <div class="pm-project__stats-list">
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">800 кВт</div>
+                                        <div class="pm-project__stat-name">Мощность</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">10 000</div>
+                                        <div class="pm-project__stat-name">Аппаратов</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">99%</div>
+                                        <div class="pm-project__stat-name">Uptime</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">24/7</div>
+                                        <div class="pm-project__stat-name">Мониторинг</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pm-project-content" data-projectId="10" style="background-image: url('img/projectsBlock/projectImg.png')">
+                                <a href="#" class="pm-features__object-badge">
+                                    <div class="pm-features__object-name">Барнаул - 2024</div>
+                                    <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9 6.75C8.58579 6.75 8.25 6.41421 8.25 6C8.25 5.58579 8.58579 5.25 9 5.25L18 5.25C18.4142 5.25 18.75 5.58579 18.75 6V15C18.75 15.4142 18.4142 15.75 18 15.75C17.5858 15.75 17.25 15.4142 17.25 15V7.81066L6.53033 18.5303C6.23744 18.8232 5.76256 18.8232 5.46967 18.5303C5.17678 18.2374 5.17678 17.7626 5.46967 17.4697L16.1893 6.75L9 6.75Z" fill="black"/>
+                                    </svg>
+                                </a>
+                                <div class="pm-project__stats-list">
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">800 кВт</div>
+                                        <div class="pm-project__stat-name">Мощность</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">10 000</div>
+                                        <div class="pm-project__stat-name">Аппаратов</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">99%</div>
+                                        <div class="pm-project__stat-name">Uptime</div>
+                                    </div>
+                                    <div class="pm-project__stat-divider"></div>
+                                    <div class="pm-project__stat-item">
+                                        <div class="pm-project__stat-value">24/7</div>
+                                        <div class="pm-project__stat-name">Мониторинг</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
     <footer></footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const projectContainer = document.querySelector('.pm-projects__main-content');
+
+            const projectNavItems = projectContainer.querySelectorAll('.pm-menu-nav__main-item');
+            const projectContents = projectContainer.querySelectorAll('.pm-project-content');
+
+            function setActive(item) {
+                const id = item.dataset.projectid;
+
+                // убираем активные
+                projectNavItems.forEach(el => el.classList.remove('active'));
+                projectContents.forEach(el => el.classList.remove('active'));
+
+                // ставим новые
+                item.classList.add('active');
+                projectContainer.querySelector(`.pm-project-content[data-projectid="${id}"]`)?.classList.add('active');
+            }
+
+            projectNavItems.forEach(item => {
+                item.addEventListener('mouseenter', () => setActive(item));
+                item.addEventListener('click', () => {
+                    setActive(item);
+                });
+            });
+        });
+    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
