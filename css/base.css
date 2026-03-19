@@ -835,15 +835,23 @@ body.lock{
    TABS
 ======================== */
 .pm-tab-item{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     height: clamp(var(--base-size-s), 3vw, var(--base-size-xl));
     padding: 0 var(--spacing-16);
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     gap: 8px;
     border-radius: var(--radius-full);
     background: var(--bg-base-primary);
     border: none;
+    min-width: -webkit-fit-content;
+    min-width: -moz-fit-content;
     min-width: fit-content;
 
     color: var(--content-base-primary);
@@ -851,6 +859,10 @@ body.lock{
     font-size: clamp(var(--caption-m-fs), 1vw ,var(--body-m-fs));
     font-weight: 600;
     line-height: 1.25;
+
+    -webkit-transition: .2s ease;
+
+    -o-transition: .2s ease;
 
     transition: .2s ease;
 }
