@@ -3874,7 +3874,13 @@
     height: auto;
     max-height: 100%;
 }
-
+@media(max-width: 600px)
+{
+    .pm-news-item--big{
+        height: 297px;
+        max-height: 297px;
+    }
+}
 .pm-news__text-block{
     display: -webkit-box;
     display: -ms-flexbox;
