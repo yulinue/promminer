@@ -3799,6 +3799,7 @@
     -webkit-box-direction: reverse;
     -ms-flex-direction: column-reverse;
     flex-direction: column-reverse;
+    justify-content: flex-end;
 }
 
 .pm-news__logo-list{
