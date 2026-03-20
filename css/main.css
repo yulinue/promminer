@@ -3867,7 +3867,7 @@
 }
 
 .pm-news-item--big{
-    height: 100%;
+    height: stretch;
 }
 
 .pm-news__text-block{
