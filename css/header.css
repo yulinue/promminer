@@ -19,6 +19,10 @@
 .lock .pm-header{
     width: calc(100% - var(--scrollbar-width));
 }
+.lock .pm-header.pm-header--fixed{
+    width: calc(100% + var(--scrollbar-width));
+    margin-left: calc(var(--scrollbar-width) * -1);
+}
 
 .pm-header__wrapper{
     display: -webkit-box;
@@ -488,6 +492,11 @@
 @media(max-width: 1521px){
     .pm-menu-popup__container{
         max-width: calc(100vw - var(--container-padding) * 2);
+    }
+}
+@media(max-width: 960px){
+    .pm-menu-popup__container#menu-catalog{
+        max-width: 100%;
     }
 }
 
