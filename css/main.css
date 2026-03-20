@@ -3776,7 +3776,7 @@
 }
 @media(max-width: 600px){
     .pm-news_main-content{
-        max-width: 297px;
+        max-height: 297px;
     }
 }
 
