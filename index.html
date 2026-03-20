@@ -4081,7 +4081,228 @@
             </div>
         </section>
     </main>
-    <footer></footer>
+    <footer class="pm-footer">
+        <div class="pm-footer__dec-part"></div>
+        <div class="pm-section footer-section">
+            <div class="pm-container">
+                <div class="pm-footer-wrapper">
+                    <div class="pm-footer__top-container">
+                        <div class="pm-footer-top__title-block">
+                            <h3 class="pm-footer-title">Заказать обратный звонок</h3>
+                            <h4 class="pm-footer-subtitle">Возникли вопросы? Оставьте заявку <br>и мы поможем в ближайшее время</h4>
+                        </div>
+
+                        <div class="pm-footer__form-container">
+                            <form class="pm-footer-feedback" id="footerForm" novalidate>
+                                <div class="pm-popup-feedback__content">
+                                    <div class="pm-popup-feedback__list">
+                                        <div class="pm-input__container">
+                                            <div class="pm-input-wrapper">
+                                                <label for="footerfirstName" class="pm-input-label">Ваше имя<span class="pm-required">*</span></label>
+                                                <input class="pm-input" type="text" name="firstName" id="footerfirstName" required autocomplete="on">
+                                            </div>
+
+                                            <div class="pm-input__error">Заполните это поле</div>
+                                        </div>
+
+                                        <div class="pm-input__container">
+                                            <div class="pm-input-wrapper pm-input-wrapper--phone">
+                                                <div class="pm-input__phone-code">+7</div>
+                                                <input class="pm-input" type="tel" name="tel" id="footertel" required autocomplete="tel-national" aria-label="Телефон" placeholder="(999) 999-99-99">
+                                            </div>
+                                            <div class="pm-input__error">Заполните это поле</div>
+                                        </div>
+
+                                        <div class="pm-input__container">
+                                            <div class="pm-input-wrapper">
+                                                <label for="footeremail" class="pm-input-label">Email</label>
+                                                <input class="pm-input" type="email" name="email" id="footerEmail" autocomplete="on">
+                                            </div>
+                                            <div class="pm-input__error">Заполните это поле</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="pm-input__container">
+                                        <div class="pm-popup-feedback__check-container">
+                                            <input type="checkbox" name="agreement" id="footerAgreement" class="pm-checkbox" required>
+                                            <label for="footerAgreement" class="pm-checkbox-label-container">
+                                        <span class="pm-checkbox-label">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none">
+                                              <path d="M3.57929 7C3.37919 7 3.18909 6.92187 3.04902 6.78514L0.217609 4.02128C-0.0725363 3.73805 -0.0725363 3.26927 0.217609 2.98605C0.507754 2.70283 0.987994 2.70283 1.27814 2.98605L3.57929 5.2323L8.72186 0.212417C9.01201 -0.0708057 9.49225 -0.0708057 9.78239 0.212417C10.0725 0.49564 10.0725 0.964422 9.78239 1.24765L4.10955 6.78514C3.96948 6.92187 3.77939 7 3.57929 7Z" fill="white"/>
+                                            </svg>
+                                        </span>
+                                            </label>
+
+                                            <div class="pm-checkbox-text">Я согласен на обработку <a href="#" target="_blank" class="pm-underline">персональных данных</a> и с <a href="#" target="_blank" class="pm-underline">политикой конфиденциальности</a></div>
+                                        </div>
+
+                                        <div class="pm-input__error">Заполните это поле</div>
+                                    </div>
+                                </div>
+
+                                <div class="pm-popup-feedback__btn-container">
+                                    <button type="submit" class="pm-btn pm-btn--primary">Отправить заявку</button>
+                                </div>
+                            </form>
+                            <div class="pm-popup-feedback__container" id="footerFeedbackSuccess">
+                                <div class="pm-popup-feedback__content">
+                                    <div class="pm-popup__success-icon-wrapper">
+                                        <svg class="pm-popup__success-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M29.3332 15.9998C29.3332 23.3636 23.3636 29.3332 15.9998 29.3332C8.63604 29.3332 2.6665 23.3636 2.6665 15.9998C2.6665 8.63604 8.63604 2.6665 15.9998 2.6665C23.3636 2.6665 29.3332 8.63604 29.3332 15.9998ZM21.3736 11.9594C21.7641 12.3499 21.7641 12.9831 21.3736 13.3736L14.7069 20.0403C14.3164 20.4308 13.6833 20.4308 13.2927 20.0403L10.6261 17.3736C10.2355 16.9831 10.2355 16.3499 10.6261 15.9594C11.0166 15.5689 11.6498 15.5689 12.0403 15.9594L13.9998 17.919L16.9796 14.9392L19.9594 11.9594C20.3499 11.5689 20.9831 11.5689 21.3736 11.9594Z" fill="white"/>
+                                        </svg>
+                                    </div>
+
+                                    <div class="pm-popup__success-title">Получили вашу заявку</div>
+                                    <div class="pm-popup__success-subtitle">Свяжемся с вами в ближайшее время!</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pm-footer__divider"></div>
+
+                    <div class="pm-footer__main-content">
+                        <div class="pm-footer__list-container">
+                            <nav class="pm-footer__main-nav" data-da=".pm-footer__right-container,1120,3">
+                                <div class="pm-footer-list pm-footer-list--main">
+                                    <div class="pm-footer-list-title__container">
+                                        <h5 class="pm-footer__list-title">Продукты</h5>
+                                        <svg class="pm-footer__list-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M8.24661 10.5564L12.5331 6.13612C12.8005 5.8603 12.6384 5.33301 12.2861 5.33301H3.71321C3.36093 5.33301 3.1988 5.8603 3.46627 6.13612L7.75274 10.5564C7.89483 10.703 8.10452 10.703 8.24661 10.5564Z" fill="rgba(163, 163, 163, 1)"/>
+                                        </svg>
+                                    </div>
+                                    <ul class="pm-footer-list pm-footer-list--small">
+                                        <li><a href="#" class="pm-footer__list-item">Майнинг под ключ</a></li>
+                                        <li><a href="#" class="pm-footer__list-item">Майнинг на газе</a></li>
+                                        <li><a href="#" class="pm-footer__list-item">Готовый бизнес</a></li>
+                                        <li><a href="#" class="pm-footer__list-item">Дата-центры Promminer</a></li>
+                                        <li><a href="#" class="pm-footer__list-item">Майнинг-пул</a></li>
+                                        <li><a href="#" class="pm-footer__list-item">Мониторинг</a></li>
+                                        <li><a href="#" class="pm-footer__list-item">Лизинг</a></li>
+                                        <li><a href="#" class="pm-footer__list-item">Сервисный центр</a></li>
+                                        <li><a href="#" class="pm-footer__list-item">Купля-продажа криптовалют</a></li>
+                                    </ul>
+                                </div>
+                                <div class="pm-footer-list pm-footer-list--main">
+                                    <div class="pm-footer-list-title__container">
+                                        <h5 class="pm-footer__list-title">Каталог</h5>
+                                        <svg class="pm-footer__list-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M8.24661 10.5564L12.5331 6.13612C12.8005 5.8603 12.6384 5.33301 12.2861 5.33301H3.71321C3.36093 5.33301 3.1988 5.8603 3.46627 6.13612L7.75274 10.5564C7.89483 10.703 8.10452 10.703 8.24661 10.5564Z" fill="rgba(163, 163, 163, 1)"/>
+                                        </svg>
+                                    </div>
+                                    <ul class="pm-footer-list pm-footer-list--small">
+                                        <li><a href="#" class="pm-footer__list-item">ASIC-майнеры</a></li>
+                                        <li><a href="#" class="pm-footer__list-item">Контейнеры для майнинга</a></li>
+                                        <li><a href="#" class="pm-footer__list-item">Газопоршневые установки</a></li>
+                                        <li><a href="#" class="pm-footer__list-item">Готовый бизнес</a></li>
+                                        <li><a href="#" class="pm-footer__list-item">Дата-центры на ГПУ</a></li>
+                                    </ul>
+                                    <a href="#" download="" class="pm-footer-price-btn" data-da=".pm-footer__right-container,1485,4">
+                                        <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M12.5535 16.5061C12.4114 16.6615 12.2106 16.75 12 16.75C11.7894 16.75 11.5886 16.6615 11.4465 16.5061L7.44648 12.1311C7.16698 11.8254 7.18822 11.351 7.49392 11.0715C7.79963 10.792 8.27402 10.8132 8.55352 11.1189L11.25 14.0682V3C11.25 2.58579 11.5858 2.25 12 2.25C12.4142 2.25 12.75 2.58579 12.75 3V14.0682L15.4465 11.1189C15.726 10.8132 16.2004 10.792 16.5061 11.0715C16.8118 11.351 16.833 11.8254 16.5535 12.1311L12.5535 16.5061Z" fill="#fff"/>
+                                            <path d="M3.75 15C3.75 14.5858 3.41422 14.25 3 14.25C2.58579 14.25 2.25 14.5858 2.25 15V15.0549C2.24998 16.4225 2.24996 17.5248 2.36652 18.3918C2.48754 19.2919 2.74643 20.0497 3.34835 20.6516C3.95027 21.2536 4.70814 21.5125 5.60825 21.6335C6.47522 21.75 7.57754 21.75 8.94513 21.75H15.0549C16.4225 21.75 17.5248 21.75 18.3918 21.6335C19.2919 21.5125 20.0497 21.2536 20.6517 20.6516C21.2536 20.0497 21.5125 19.2919 21.6335 18.3918C21.75 17.5248 21.75 16.4225 21.75 15.0549V15C21.75 14.5858 21.4142 14.25 21 14.25C20.5858 14.25 20.25 14.5858 20.25 15C20.25 16.4354 20.2484 17.4365 20.1469 18.1919C20.0482 18.9257 19.8678 19.3142 19.591 19.591C19.3142 19.8678 18.9257 20.0482 18.1919 20.1469C17.4365 20.2484 16.4354 20.25 15 20.25H9C7.56459 20.25 6.56347 20.2484 5.80812 20.1469C5.07435 20.0482 4.68577 19.8678 4.40901 19.591C4.13225 19.3142 3.9518 18.9257 3.85315 18.1919C3.75159 17.4365 3.75 16.4354 3.75 15Z" fill="#fff"/>
+                                        </svg>
+                                        <span class="pm-footer__price-text">
+                                            <span class="pm-footer__price-title">Прайс-лист </span>
+                                            <span class="pm-footer__price-subtitle">30.01.2026 | 12:55</span>
+                                        </span>
+                                    </a>
+                                </div>
+                                <div class="pm-footer-list pm-footer-list--main">
+                                    <div class="pm-footer-list-title__container">
+                                        <h5 class="pm-footer__list-title">Сервисы</h5>
+                                        <svg class="pm-footer__list-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M8.24661 10.5564L12.5331 6.13612C12.8005 5.8603 12.6384 5.33301 12.2861 5.33301H3.71321C3.36093 5.33301 3.1988 5.8603 3.46627 6.13612L7.75274 10.5564C7.89483 10.703 8.10452 10.703 8.24661 10.5564Z" fill="rgba(163, 163, 163, 1)"/>
+                                        </svg>
+                                    </div>
+                                    <ul class="pm-footer-list pm-footer-list--small">
+                                        <li><a href="#" class="pm-footer__list-item">Калькулятор доходности</a></li>
+                                        <li><a href="#" class="pm-footer__list-item">Налоговый калькулятор</a></li>
+                                        <li><a href="#" class="pm-footer__list-item">Калькулятор прибыльности асика</a></li>
+                                        <li><a href="#" class="pm-footer__list-item">Курсы криптовалют</a></li>
+                                        <li><a href="#" class="pm-footer__list-item">Конвертер хэшрейта</a></li>
+                                    </ul>
+                                </div>
+                                <div class="pm-footer-list pm-footer-list--main">
+                                    <div class="pm-footer-list-title__container">
+                                        <h5 class="pm-footer__list-title">О Promminer</h5>
+                                        <svg class="pm-footer__list-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M8.24661 10.5564L12.5331 6.13612C12.8005 5.8603 12.6384 5.33301 12.2861 5.33301H3.71321C3.36093 5.33301 3.1988 5.8603 3.46627 6.13612L7.75274 10.5564C7.89483 10.703 8.10452 10.703 8.24661 10.5564Z" fill="rgba(163, 163, 163, 1)"/>
+                                        </svg>
+                                    </div>
+                                    <ul class="pm-footer-list pm-footer-list--small">
+                                        <li><a href="#" class="pm-footer__list-item">О компании</a></li>
+                                        <li><a href="#" class="pm-footer__list-item">Проекты</a></li>
+                                        <li><a href="#" class="pm-footer__list-item">Контакты</a></li>
+                                        <li><a href="#" class="pm-footer__list-item">Оплата и доставка</a></li>
+                                        <li><a href="#" class="pm-footer__list-item">СМИ о нас</a></li>
+                                        <li><a href="#" class="pm-footer__list-item">Новости</a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+
+                            <div class="pm-footer__logo-list" data-da=".pm-footer__right-container,1485,last">
+                                <img src="img/footer/skolk.svg" alt="" class="pm-footer__logo-item">
+                                <img src="img/footer/pmef.png" alt="" class="pm-footer__logo-item">
+                                <img src="img/footer/rgo.png" alt="" class="pm-footer__logo-item">
+                                <img src="img/footer/apm.png" alt="" class="pm-footer__logo-item">
+                            </div>
+                        </div>
+
+                        <div class="pm-footer__right-container">
+                            <img src="img/footer/logo.svg" alt="" class="pm-footer__main-logo">
+
+                            <div class="pm-footer__contacts">
+                                <h5 class="pm-footer__list-title">Контакты</h5>
+                                <a href="tel:88003507285" class="pm-footer__contacts-link">8 (800) 350-72-85</a>
+                                <a href="mailto:info@promminer.ru" class="pm-footer__contacts-link">info@promminer.ru</a>
+                            </div>
+
+                            <div class="pm-footer__socials">
+                                <h5 class="pm-footer__list-title">Социальные сети</h5>
+                                <div class="pm-footer__social-list">
+                                    <a href=""><img src="img/footer/vk.svg" alt="" class="pm-btn-icon"></a>
+                                    <a href=""><img src="img/footer/yt.svg" alt="" class="pm-btn-icon"></a>
+                                    <a href=""><img src="img/footer/wa.svg" alt="" class="pm-btn-icon"></a>
+                                    <a href=""><img src="img/footer/max.svg" alt="" class="pm-btn-icon"></a>
+                                    <a href=""><img src="img/footer/tg.svg" alt="" class="pm-btn-icon"></a>
+                                    <a href=""><img src="img/footer/tiktok.svg" alt="" class="pm-btn-icon"></a>
+                                    <a href=""><img src="img/footer/dzen.svg" alt="" class="pm-btn-icon"></a>
+                                    <a href=""><img src="img/footer/rutube.svg" alt="" class="pm-btn-icon"></a>
+                                </div>
+                            </div>
+
+                            <div class="pm-footer__btn-container">
+                                <a href="" class="pm-footer__download-btn">
+                                    <img src="img/footer/android.svg" alt="" class="pm-footer__download-icon">
+                                    <span class="pm-footer__download-text">
+                                        <span class="pm-footer__download-subtitle">Загрузите на</span>
+                                        <span class="pm-footer__download-title">Android</span>
+                                    </span>
+                                </a>
+                                <a href="" class="pm-footer__download-btn">
+                                    <img src="img/footer/ios.svg" alt="" class="pm-footer__download-icon">
+                                    <span class="pm-footer__download-text">
+                                        <span class="pm-footer__download-subtitle">Загрузите на</span>
+                                        <span class="pm-footer__download-title">iOS</span>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pm-footer__divider"></div>
+
+                    <div class="pm-footer__copyright-container">
+                        <div class="pm-copyright-text">© Promminer Pool, 2026. Все права защищены. Не является публичной офертой</div>
+                        <div class="pm-footer__copyright-list">
+                            <a href="#" target="_blank" class="pm-copyright-text">Политика конфиденциальности</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <div class="pm-popup-overlay" id="reelsPopup">
         <div class="pm-reel-container">
@@ -4097,6 +4318,96 @@
         </div>
     </div>
 
+    <!-- футер-->
+    <script>
+        const footerLists = document.querySelectorAll('.pm-footer-list--main');
+        footerLists.forEach(list => {
+            list.addEventListener('click', () => {
+                if(list.classList.contains('active')){
+                    list.classList.remove('active');
+                } else {
+                    footerLists.forEach(list => {
+                        list.classList.remove('active');
+                    });
+                    list.classList.add('active');
+                }
+            });
+        })
+
+        const footerFormContainer = document.querySelector('.pm-footer__form-container');
+        const footerForm = document.querySelector('#footerForm');
+        const footerSuccess = document.querySelector('#footerFeedbackSuccess');
+
+        footerForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            let hasError = false;
+
+            const inputs = footerForm.querySelectorAll('.pm-input, .pm-checkbox');
+
+            inputs.forEach(input => {
+                const container = input.closest('.pm-input__container');
+                const errorEl = container.querySelector('.pm-input__error');
+
+                container.classList.remove('error');
+                errorEl.textContent = '';
+
+                if (input.type === 'checkbox') {
+                    if (!input.checked) {
+                        container.classList.add('error');
+                        errorEl.textContent = 'Заполните это поле';
+                        hasError = true;
+                    }
+                    return;
+                }
+
+                const value = input.value.trim();
+
+                if (input.required && !value) {
+                    container.classList.add('error');
+                    errorEl.textContent = 'Заполните это поле';
+                    hasError = true;
+                    return;
+                }
+
+                if (input.type === 'email' && value) {
+                    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+                    if (!emailValid) {
+                        container.classList.add('error');
+                        errorEl.textContent = 'Некорректный формат';
+                        hasError = true;
+                        return;
+                    }
+                }
+
+                if (input.type === 'tel' && value) {
+                    const digits = value.replace(/\D/g, '');
+                    if (digits.length !== 10) {
+                        container.classList.add('error');
+                        errorEl.textContent = 'Некорректный формат';
+                        hasError = true;
+                        return;
+                    }
+                }
+            });
+
+            if (!hasError) {
+                footerFormContainer.classList.add('success');
+                footerForm.reset();
+
+                setTimeout(() => {
+                    footerFormContainer.classList.remove('success');
+                }, 5000);
+            }
+        });
+
+        const footerPhoneInput = document.getElementById('footertel');
+        IMask(footerPhoneInput, {
+            mask: '(000) 000-00-00'
+        });
+    </script>
+
+    <!--  слайдер с рилсами  -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const reelsSlider = new Swiper('.pm-media-slider', {
