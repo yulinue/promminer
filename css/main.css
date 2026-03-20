@@ -787,12 +787,6 @@
         -ms-flex-direction: column-reverse;
         flex-direction: column-reverse;
         gap: 24px;
-        max-width: 344px;
-    }
-}
-@media(max-width: 600px){
-    .pm-features__main-content{
-        max-width: 297px;
     }
 }
 
@@ -3773,10 +3767,16 @@
 
         -ms-overflow-style: none;
         scrollbar-width: none;
+        max-height: 344px;
     }
 
     .pm-news__main-content::-webkit-scrollbar{
         display: none;
+    }
+}
+@media(max-width: 600px){
+    .pm-news_main-content{
+        max-width: 297px;
     }
 }
 
