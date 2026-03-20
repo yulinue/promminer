@@ -787,6 +787,12 @@
         -ms-flex-direction: column-reverse;
         flex-direction: column-reverse;
         gap: 24px;
+        max-width: 344px;
+    }
+}
+@media(max-width: 600px){
+    .pm-features__main-content{
+        max-width: 297px;
     }
 }
 
