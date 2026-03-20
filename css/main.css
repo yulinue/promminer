@@ -4718,9 +4718,9 @@
 
 .pm-media-slider.swiper{
     width: 100%;
-    height: -webkit-fill-available;
-    height: -moz-available;
-    height: stretch;
+    -ms-flex-item-align: stretch;
+    -ms-grid-row-align: stretch;
+    align-self: stretch;
     padding-right: calc((100vw - 1680px) / 2);
 }
 @media(max-width: 1800px){
@@ -4738,6 +4738,9 @@
         width: calc(100% + var(--container-padding) * 2);
         -ms-overflow-style: none;
         scrollbar-width: none;
+        height: -webkit-fit-content;
+        height: -moz-fit-content;
+        height: fit-content;
     }
 }
 
