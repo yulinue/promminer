@@ -3788,9 +3788,6 @@
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
     -webkit-box-align: start;
     -ms-flex-align: start;
     align-items: flex-start;
@@ -3873,7 +3870,8 @@
 }
 
 .pm-news-item--big{
-    height: stretch;
+    height: auto;
+    max-height: 100%;
 }
 
 .pm-news__text-block{
