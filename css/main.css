@@ -5539,6 +5539,13 @@
         height: 39px;
     }
 }
+@media(max-width: 615px){
+    .pm-footer__logo-list{
+        width: 100%;
+        height: auto;
+    }
+}
+
 
 .pm-footer__right-container{
     display: -webkit-box;
