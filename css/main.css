@@ -5396,6 +5396,7 @@
         grid-auto-flow: column;
         -ms-grid-rows: (auto)[5];
         grid-template-rows: repeat(5, auto);
+        gap: 16px;
     }
 }
 
