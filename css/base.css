@@ -867,16 +867,20 @@ input.pm-input:-webkit-autofill {
     font-weight: 600;
     line-height: 1.25;
 
-    -webkit-transition: .2s ease;
-
-    -o-transition: .2s ease;
-
-    transition: .2s ease;
+    -webkit-transition: .3s ease;
+    -o-transition: .3s ease;
+    transition: .3s ease;
 }
 
 .pm-tab-item.active{
     background: var(--bg-sentiment-accent);
     color: var(--static-white);
+}
+@media(any-hover: hover){
+    .pm-tab-item:hover{
+        background: var(--bg-sentiment-accent);
+        color: var(--static-white);
+    }
 }
 
 @media (max-width: 1280px) {
