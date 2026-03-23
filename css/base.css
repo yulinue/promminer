@@ -752,7 +752,15 @@ input.pm-input:-webkit-autofill {
     opacity: var(--active);
 }
 
+.pm-btn-icon--arrow{
+    transition: .3s ease;
+}
+
 @media(any-hover: hover){
+    .pm-btn:hover .pm-btn-icon--arrow{
+        transform: translateX(4px);
+    }
+
     .pm-btn--primary:hover{
         background: var(--control-primary-hover);
     }
@@ -763,6 +771,10 @@ input.pm-input:-webkit-autofill {
 
     .pm-btn--neutral:hover{
         background: var(--control-neutral-primary-hover);
+    }
+
+    .pm-btn--outline:hover{
+        border-color: var(--static-white);
     }
 }
 
@@ -878,8 +890,7 @@ input.pm-input:-webkit-autofill {
 }
 @media(any-hover: hover){
     .pm-tab-item:hover{
-        background: var(--bg-sentiment-accent);
-        color: var(--static-white);
+        background: var(--control-neutral-secondary-hover)
     }
 }
 

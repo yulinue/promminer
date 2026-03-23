@@ -218,7 +218,15 @@
     font-weight: 500;
     line-height: var(--body-m-lh, 20px);
     letter-spacing: 0.637%;
+
+    transition: .3s ease;
 }
+@media (any-hover: hover) {
+    .pm-header__link:hover{
+        color: var(--static-white-subtle);
+    }
+}
+
 
 .pm-header__search-button{
     border: none;
@@ -234,6 +242,14 @@
     height: 100%;
     max-width: 24px;
     max-height: 24px;
+}
+.pm-header__search-icon path{
+    transition: .3s ease;
+}
+@media (any-hover: hover) {
+    .pm-header__search-button:hover .pm-header__search-icon path{
+        fill: var(--static-white-subtle);
+    }
 }
 
 .pm-header__contacts{
@@ -378,6 +394,14 @@
         opacity: 1;
     }
     .pm-btn.pm-btn--outline.pm-header__social:hover .pm-social-icon__base{
+        opacity: 0;
+    }
+
+    .pm-footer__social-list a:hover .pm-social-icon__gradient{
+        opacity: 1;
+    }
+
+    .pm-footer__social-list a:hover .pm-social-icon__base{
         opacity: 0;
     }
 }
@@ -2477,9 +2501,9 @@
 .pm-header.pm-header--fixed .pm-btn--secondary{
     background: var(--content-sentiment-accent);
     color: var(--static-white);
-    -webkit-transition: color 0s;
-    -o-transition: color 0s;
-    transition: color 0s;
+    -webkit-transition: color 0s, .3s ease;
+    -o-transition: color 0s, .3s ease;
+    transition: color 0s, .3s ease;
 }
 
 @media (any-hover: hover) {
