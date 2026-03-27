@@ -40,6 +40,10 @@
                         <path class="pm-btn-icon--hidden-path" opacity="0.7" d="M3.25 12C3.25 11.5858 3.58579 11.25 4 11.25H15C15.4142 11.25 15.75 11.5858 15.75 12C15.75 12.4142 15.4142 12.75 15 12.75H4C3.58579 12.75 3.25 12.4142 3.25 12Z" fill="black"/>
                         <path class="pm-btn-icon--hidden-path" opacity="0.4" d="M3.25 17C3.25 16.5858 3.58579 16.25 4 16.25H9C9.41421 16.25 9.75 16.5858 9.75 17C9.75 17.4142 9.41421 17.75 9 17.75H4C3.58579 17.75 3.25 17.4142 3.25 17Z" fill="black"/>
                     </svg>
+                    <svg class="pm-btn-icon pm-catalog--close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M15.7123 16.7729L7.22699 8.28765C6.93708 7.99773 6.93708 7.5169 7.22699 7.22699C7.51691 6.93707 7.99774 6.93707 8.28765 7.22699L16.7729 15.7123C17.0628 16.0022 17.0628 16.483 16.7729 16.7729C16.483 17.0628 16.0022 17.0628 15.7123 16.7729Z" fill="black"/>
+                        <path d="M7.22706 16.773C6.93715 16.4831 6.93715 16.0023 7.22706 15.7124L15.7123 7.22711C16.0023 6.93719 16.4831 6.93719 16.773 7.22711C17.0629 7.51702 17.0629 7.99785 16.773 8.28777L8.28772 16.773C7.99781 17.063 7.51698 17.063 7.22706 16.773Z" fill="black"/>
+                    </svg>
                     <span class="pm-menu-line"></span>
                 </button>
             </div>
@@ -160,6 +164,44 @@
 
     <div class="pm-top-menu"></div>
 </header>
+<div class="pm-product-header">
+    <div class="pm-container">
+        <div class="pm-header__wrapper">
+            <div class="pm-product-header__left">
+                <div class="pm-product-header__img-container">
+                    <img src="img/catalogCard/headerImg.png" alt="" class="pm-product-header__img">
+                </div>
+                <div class="pm-product-header__text">
+                    <div class="pm-product-header__title">Asic майнер Bitmain Antminer S21 XP 270 TH/s</div>
+                    <div class="pm-product__status-wrapper">
+                        <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M10.1069 16.7735C9.84025 16.7735 9.58691 16.6668 9.40025 16.4801L5.62691 12.7068C5.24025 12.3201 5.24025 11.6801 5.62691 11.2935C6.01358 10.9068 6.65358 10.9068 7.04025 11.2935L10.1069 14.3601L16.9602 7.5068C17.3469 7.12013 17.9869 7.12013 18.3736 7.5068C18.7602 7.89346 18.7602 8.53346 18.3736 8.92013L10.8136 16.4801C10.6269 16.6668 10.3736 16.7735 10.1069 16.7735Z" fill="rgba(34, 197, 94, 1)"/>
+                        </svg>
+                        <span class="pm-product__status-name">В наличии</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pm-product-header__right">
+                <div class="pm-product__title-wrapper">
+                    <h2 class="pm-product__price-title">От 328 000 ₽</h2>
+                    <div class="pm-product__title-wrapper">
+                        <div class="pm-product__price-badge">-33%</div>
+                        <span class="pm-product__old-price">492 000 ₽</span>
+                    </div>
+                </div>
+                <div class="pm-product-header__btns-container">
+                    <button class="pm-btn pm-btn--primary js-open-popup" data-popup="orderPopup">
+                        <span class="pm-btn-text">Заказать</span>
+                    </button>
+                    <button class="pm-btn pm-btn--neutral js-open-popup" data-popup="leasingPopup">
+                        <span class="pm-btn-text">Купить в лизинг</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="pm-popup-overlay" id="catalogPopup">
     <div class="pm-menu-popup__container" id="menu-catalog">
         <div class="pm-catalog-menu-nav__container" data-da=".pm-menu-mobile__catalog-container, 960, first">
@@ -1247,12 +1289,17 @@
                         <div class="pm-product-slider-thumbs swiper">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide pm-product-thumb">
+                                    <img src="img/catalogCard/image1.png" alt="" class="pm-product__thumb-img">
+                                </div>
+                                <div class="swiper-slide pm-product-thumb">
                                     <div class="pm-thumb__video-icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                                             <path d="M10.7752 4.55822C12.9251 6.01968 14 6.75042 14 8.00022C14 9.25002 12.9251 9.98075 10.7752 11.4422C10.1817 11.8457 9.59312 12.2255 9.05222 12.542C8.57769 12.8197 8.04027 13.1069 7.48387 13.3889C5.33906 14.4758 4.26666 15.0192 3.30483 14.4176C2.343 13.8159 2.25559 12.5563 2.08076 10.0371C2.03132 9.32472 2 8.62632 2 8.00022C2 7.37412 2.03132 6.67572 2.08076 5.9633C2.25559 3.44414 2.343 2.18456 3.30483 1.58288C4.26666 0.981198 5.33906 1.52464 7.48387 2.61153C8.04027 2.89349 8.57769 3.18073 9.05222 3.45841C9.59312 3.77493 10.1817 4.15478 10.7752 4.55822Z" fill="white"/>
                                         </svg>
                                     </div>
-                                    <img src="img/catalogCard/image1.png" alt="" class="pm-product__thumb-img">
+                                    <video>
+                                        <source src="img/benefitsBlock/video1.mp4" type="video/mp4">
+                                    </video>
                                 </div>
                                 <div class="swiper-slide pm-product-thumb"><img src="img/catalogCard/image2.png" alt="" class="pm-product__thumb-img"></div>
                                 <div class="swiper-slide pm-product-thumb"><img src="img/catalogCard/image2.png" alt="" class="pm-product__thumb-img"></div>
@@ -1279,6 +1326,11 @@
                         <div class="pm-product-slider-main swiper">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide"><img src="img/catalogCard/image1.png" alt="" class="pm-product__main-img"></div>
+                                <div class="swiper-slide">
+                                    <video class="pm-product__main-video">
+                                        <source src="img/benefitsBlock/video1.mp4" type="video/mp4">
+                                    </video>
+                                </div>
                                 <div class="swiper-slide"><img src="img/catalogCard/image2.png" alt="" class="pm-product__main-img"></div>
                                 <div class="swiper-slide"><img src="img/catalogCard/image2.png" alt="" class="pm-product__main-img"></div>
                                 <div class="swiper-slide"><img src="img/catalogCard/image3.png" alt="" class="pm-product__main-img"></div>
@@ -1393,10 +1445,10 @@
 
                     <div class="pm-product__actions" data-da=".pm-product__stats-container,1140,last">
                         <div class="pm-product__actions-btns">
-                            <button class="pm-btn pm-btn--primary">
+                            <button class="pm-btn pm-btn--primary js-open-popup" data-popup="orderPopup">
                                 <span class="pm-btn-text">Заказать</span>
                             </button>
-                            <button class="pm-btn pm-btn--neutral">
+                            <button class="pm-btn pm-btn--neutral js-open-popup" data-popup="leasingPopup">
                                 <span class="pm-btn-text">Купить в лизинг</span>
                             </button>
                             <div class="pm-product__actions-tag" data-da=".pm-product__title-container,630,last">
@@ -1409,7 +1461,7 @@
                         </div>
 
                         <div class="pm-product__actions-benefits">
-                            <a href="#" class="pm-btn--link">
+                            <button class="pm-btn--link js-open-popup" data-popup="pricePopup">
                                 <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path opacity="0.5" d="M9.59236 3.20031C9.34886 3.40782 9.2271 3.51158 9.09706 3.59874C8.79896 3.79854 8.46417 3.93721 8.1121 4.00672C7.95851 4.03705 7.79903 4.04977 7.48008 4.07522L7.48007 4.07523C6.67869 4.13918 6.278 4.17115 5.94371 4.28923C5.17051 4.56233 4.56233 5.17051 4.28923 5.94371C4.17115 6.278 4.13918 6.67869 4.07523 7.48007L4.07522 7.48008C4.04977 7.79903 4.03705 7.95851 4.00672 8.1121C3.93721 8.46417 3.79854 8.79896 3.59874 9.09706C3.51158 9.2271 3.40781 9.34887 3.20028 9.59239L3.20027 9.5924C2.67883 10.2043 2.4181 10.5102 2.26522 10.8301C1.91159 11.57 1.91159 12.43 2.26522 13.1699C2.41811 13.4898 2.67883 13.7957 3.20027 14.4076L3.20031 14.4076C3.4078 14.6511 3.51159 14.7729 3.59874 14.9029C3.79854 15.201 3.93721 15.5358 4.00672 15.8879C4.03705 16.0415 4.04977 16.201 4.07522 16.5199L4.07523 16.5199C4.13918 17.3213 4.17115 17.722 4.28923 18.0563C4.56233 18.8295 5.17051 19.4377 5.94371 19.7108C6.27799 19.8288 6.67867 19.8608 7.48 19.9248L7.48008 19.9248C7.79903 19.9502 7.95851 19.963 8.1121 19.9933C8.46417 20.0628 8.79896 20.2015 9.09706 20.4013C9.22711 20.4884 9.34887 20.5922 9.5924 20.7997C10.2043 21.3212 10.5102 21.5819 10.8301 21.7348C11.57 22.0884 12.43 22.0884 13.1699 21.7348C13.4898 21.5819 13.7957 21.3212 14.4076 20.7997C14.6511 20.5922 14.7729 20.4884 14.9029 20.4013C15.201 20.2015 15.5358 20.0628 15.8879 19.9933C16.0415 19.963 16.201 19.9502 16.5199 19.9248L16.52 19.9248C17.3213 19.8608 17.722 19.8288 18.0563 19.7108C18.8295 19.4377 19.4377 18.8295 19.7108 18.0563C19.8288 17.722 19.8608 17.3213 19.9248 16.52L19.9248 16.5199C19.9502 16.201 19.963 16.0415 19.9933 15.8879C20.0628 15.5358 20.2015 15.201 20.4013 14.9029C20.4884 14.7729 20.5922 14.6511 20.7997 14.4076C21.3212 13.7957 21.5819 13.4898 21.7348 13.1699C22.0884 12.43 22.0884 11.57 21.7348 10.8301C21.5819 10.5102 21.3212 10.2043 20.7997 9.5924C20.5922 9.34887 20.4884 9.22711 20.4013 9.09706C20.2015 8.79896 20.0628 8.46417 19.9933 8.1121C19.963 7.95851 19.9502 7.79903 19.9248 7.48008L19.9248 7.48C19.8608 6.67867 19.8288 6.27799 19.7108 5.94371C19.4377 5.17051 18.8295 4.56233 18.0563 4.28923C17.722 4.17115 17.3213 4.13918 16.5199 4.07523L16.5199 4.07522C16.201 4.04977 16.0415 4.03705 15.8879 4.00672C15.5358 3.93721 15.201 3.79854 14.9029 3.59874C14.7729 3.51158 14.6511 3.40781 14.4076 3.20027C13.7957 2.67883 13.4898 2.41811 13.1699 2.26522C12.43 1.91159 11.57 1.91159 10.8301 2.26522C10.5102 2.4181 10.2043 2.67883 9.5924 3.20027L9.59236 3.20031Z" fill="black"/>
                                     <path d="M15.8309 8.17001C16.1487 8.48785 16.1487 9.00315 15.8309 9.32099L9.32001 15.8319C9.00218 16.1497 8.48687 16.1497 8.16904 15.8319C7.85121 15.514 7.85121 14.9987 8.16904 14.6809L14.6799 8.17001C14.9978 7.85218 15.5131 7.85218 15.8309 8.17001Z" fill="black"/>
@@ -1417,7 +1469,7 @@
                                     <path d="M9.2871 10.3732C9.88641 10.3732 10.3722 9.88738 10.3722 9.28807C10.3722 8.68876 9.88641 8.20293 9.2871 8.20293C8.68779 8.20293 8.20195 8.68876 8.20195 9.28807C8.20195 9.88738 8.68779 10.3732 9.2871 10.3732Z" fill="black"/>
                                 </svg>
                                 <span class="pm-btn-text">Гарантия лучшей цены</span>
-                            </a>
+                            </button>
                             <a href="#" class="pm-btn--link">
                                 <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <g opacity="0.5">
@@ -1530,6 +1582,9 @@
                                     <h3>О товаре</h3>
                                     <p>Antminer S21 XP — новый аппарат на воздушном охлаждении от Bitmain. Новая модель представлена в хешрейте 270 Th/s с энергопотреблением 3645 Вт. Энергоэффективность аппарата составляет 13.5 J/Th. </p>
                                     <img src="img/catalogCard/descImg.png" alt="">
+
+                                    <!--размытие описания-->
+                                    <div class="pm-product-desc__fade"></div>
                                 </div>
 
                                 <button class="pm-btn--ghost-primary">Развернуть описание</button>
@@ -1897,19 +1952,13 @@
                                     <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
                                     <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
                                 </div>
-                                <div class="pm-product__card-badges">
-                                    <div class="pm-event-tag pm-event-tag--yellow">Акция</div>
-                                    <div class="pm-event-tag pm-event-tag--blue">Рекомендуем</div>
-                                </div>
-                                <div class="pm-product__price-badge">-33%</div>
                                 <div class="pm-card-dots"></div>
                             </div>
 
                             <div class="pm-popular__card-text">
                                 <div class="pm-product-card__top-text">
                                     <div class="pm-product-card__title-wrapper">
-                                        <div class="pm-popular__card-title">от 128 000 ₽</div>
-                                        <span class="pm-product__old-price">492 000 ₽</span>
+                                        <div class="pm-popular__card-title">Цена по запросу</div>
                                     </div>
                                     <div class="pm-popular__card-subtitle">Asic майнер Bitmain Antminer S21 XP 270 TH/s</div>
                                 </div>
@@ -1928,12 +1977,9 @@
                                     </div>
                                 </div>
                                 <div class="pm-product__card-btns">
-                                    <button class="pm-btn pm-btn--primary">Заказать</button>
+                                    <button class="pm-btn pm-btn--primary pm-btn--primary--subtle">Узнать цену</button>
                                     <div class="pm-product__status-wrapper">
-                                        <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M10.1069 16.7735C9.84025 16.7735 9.58691 16.6668 9.40025 16.4801L5.62691 12.7068C5.24025 12.3201 5.24025 11.6801 5.62691 11.2935C6.01358 10.9068 6.65358 10.9068 7.04025 11.2935L10.1069 14.3601L16.9602 7.5068C17.3469 7.12013 17.9869 7.12013 18.3736 7.5068C18.7602 7.89346 18.7602 8.53346 18.3736 8.92013L10.8136 16.4801C10.6269 16.6668 10.3736 16.7735 10.1069 16.7735Z" fill="rgba(34, 197, 94, 1)"/>
-                                        </svg>
-                                        <span class="pm-product__status-name">В наличии</span>
+                                        <span class="pm-product__status-name">Предзаказ</span>
                                     </div>
                                 </div>
                             </div>
@@ -2809,6 +2855,448 @@
         </div>
     </section>
 </main>
+
+<div class="pm-popup-overlay" id="orderPopup">
+    <form class="pm-popup-feedback__container" id="orderForm" novalidate>
+        <div class="pm-popup-feedback__header">
+            <div class="pm-popup-feedback__header-content">
+                <div class="pm-popup-feedback__header-title">Заказать продукт</div>
+            </div>
+            <button class="pm-menu-mobile__header-btn pm-btn--neutral close-feedback-popup">
+                <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M15.7123 16.7729L7.22699 8.28765C6.93708 7.99773 6.93708 7.5169 7.22699 7.22699C7.51691 6.93707 7.99774 6.93707 8.28765 7.22699L16.7729 15.7123C17.0628 16.0022 17.0628 16.483 16.7729 16.7729C16.483 17.0628 16.0022 17.0628 15.7123 16.7729Z" fill="black"/>
+                    <path d="M7.22706 16.773C6.93715 16.4831 6.93715 16.0023 7.22706 15.7124L15.7123 7.22711C16.0023 6.93719 16.4831 6.93719 16.773 7.22711C17.0629 7.51702 17.0629 7.99785 16.773 8.28777L8.28772 16.773C7.99781 17.063 7.51698 17.063 7.22706 16.773Z" fill="black"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="pm-popup-feedback__content">
+            <div class="pm-popup-feedback__list">
+                <div class="pm-input__container">
+                    <div class="pm-input-wrapper">
+                        <label for="orderName" class="pm-input-label">Ваше имя<span class="pm-required">*</span></label>
+                        <input class="pm-input" type="text" name="firstName" id="orderName" required autocomplete="on">
+                    </div>
+
+                    <div class="pm-input__error">Заполните это поле</div>
+                </div>
+
+                <div class="pm-input__container">
+                    <div class="pm-input-wrapper pm-input-wrapper--phone">
+                        <div class="pm-input__phone-code">+7</div>
+                        <input class="pm-input" type="tel" name="tel" id="orderTel" required autocomplete="tel-national" aria-label="Телефон" placeholder="(999) 999-99-99">
+                    </div>
+                    <div class="pm-input__error">Заполните это поле</div>
+                </div>
+
+                <div class="pm-input__container">
+                    <div class="pm-input-wrapper">
+                        <label for="orderEmail" class="pm-input-label">Email</label>
+                        <input class="pm-input" type="email" name="email" id="orderEmail" autocomplete="on">
+                    </div>
+                    <div class="pm-input__error">Заполните это поле</div>
+                </div>
+            </div>
+
+            <div class="pm-popup-feedback__list">
+                <div class="pm-input__container">
+                    <div class="pm-input-wrapper">
+                        <label for="orderProductName" class="pm-input-label">Продукт</label>
+                        <input class="pm-input" type="text" name="productName" id="orderProductName" value="Asic майнер Bitmain Antminer S21 XP 270 TH/s" readonly>
+                    </div>
+                </div>
+
+                <div class="pm-input__container">
+                    <div class="pm-input-wrapper">
+                        <label for="orderProductPrice" class="pm-input-label">Цена</label>
+                        <input class="pm-input" type="text" name="productPrice" id="orderProductPrice" value="328 000 ₽" readonly>
+                    </div>
+                </div>
+
+                <div class="pm-input__container">
+                    <div class="pm-input-wrapper pm-counter">
+                        <button type="button" class="pm-counter__btn pm-counter__btn--minus pm-btn-icon">
+                            <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M18 12.75H6C5.59 12.75 5.25 12.41 5.25 12C5.25 11.59 5.59 11.25 6 11.25H18C18.41 11.25 18.75 11.59 18.75 12C18.75 12.41 18.41 12.75 18 12.75Z" fill="black"/>
+                            </svg>
+                        </button>
+
+                        <div class="pm-counter__value pm-input">
+                            <span class="pm-counter__number">1</span>
+                            <span class="pm-counter__unit">шт.</span>
+                        </div>
+
+                        <input
+                                class="pm-counter__input"
+                                type="number"
+                                name="productCount"
+                                id="orderProductCount"
+                                value="1"
+                                min="1"
+                        >
+
+                        <button type="button" class="pm-counter__btn pm-counter__btn--plus pm-btn-icon">
+                            <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M18 12.75H6C5.59 12.75 5.25 12.41 5.25 12C5.25 11.59 5.59 11.25 6 11.25H18C18.41 11.25 18.75 11.59 18.75 12C18.75 12.41 18.41 12.75 18 12.75Z" fill="black"/>
+                                <path d="M12 18.75C11.59 18.75 11.25 18.41 11.25 18V6C11.25 5.59 11.59 5.25 12 5.25C12.41 5.25 12.75 5.59 12.75 6V18C12.75 18.41 12.41 18.75 12 18.75Z" fill="black"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pm-input__container">
+                <div class="pm-popup-feedback__check-container">
+                    <input type="checkbox" name="agreement" id="orderAgreement" class="pm-checkbox" required>
+                    <label for="orderAgreement" class="pm-checkbox-label-container">
+                        <span class="pm-checkbox-label">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none">
+                              <path d="M3.57929 7C3.37919 7 3.18909 6.92187 3.04902 6.78514L0.217609 4.02128C-0.0725363 3.73805 -0.0725363 3.26927 0.217609 2.98605C0.507754 2.70283 0.987994 2.70283 1.27814 2.98605L3.57929 5.2323L8.72186 0.212417C9.01201 -0.0708057 9.49225 -0.0708057 9.78239 0.212417C10.0725 0.49564 10.0725 0.964422 9.78239 1.24765L4.10955 6.78514C3.96948 6.92187 3.77939 7 3.57929 7Z" fill="white"/>
+                            </svg>
+                        </span>
+                    </label>
+
+                    <div class="pm-checkbox-text">Я согласен на обработку <a href="#" target="_blank" class="pm-underline">персональных <br>данных</a> и с <a href="#" target="_blank" class="pm-underline">политикой конфиденциальности</a></div>
+                </div>
+
+                <div class="pm-input__error">Заполните это поле</div>
+            </div>
+        </div>
+
+        <div class="pm-popup-feedback__btn-container">
+            <button type="submit" class="pm-btn pm-btn--primary">Отправить</button>
+        </div>
+    </form>
+
+    <div class="pm-popup-feedback__container" id="orderSuccess">
+        <div class="pm-popup-feedback__header">
+            <div class="pm-popup-feedback__header-content"></div>
+            <button class="pm-menu-mobile__header-btn pm-btn--neutral close-feedback-popup">
+                <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M15.7123 16.7729L7.22699 8.28765C6.93708 7.99773 6.93708 7.5169 7.22699 7.22699C7.51691 6.93707 7.99774 6.93707 8.28765 7.22699L16.7729 15.7123C17.0628 16.0022 17.0628 16.483 16.7729 16.7729C16.483 17.0628 16.0022 17.0628 15.7123 16.7729Z" fill="black"/>
+                    <path d="M7.22706 16.773C6.93715 16.4831 6.93715 16.0023 7.22706 15.7124L15.7123 7.22711C16.0023 6.93719 16.4831 6.93719 16.773 7.22711C17.0629 7.51702 17.0629 7.99785 16.773 8.28777L8.28772 16.773C7.99781 17.063 7.51698 17.063 7.22706 16.773Z" fill="black"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="pm-popup-feedback__content">
+            <div class="pm-popup__success-icon-wrapper">
+                <svg class="pm-popup__success-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M29.3332 15.9998C29.3332 23.3636 23.3636 29.3332 15.9998 29.3332C8.63604 29.3332 2.6665 23.3636 2.6665 15.9998C2.6665 8.63604 8.63604 2.6665 15.9998 2.6665C23.3636 2.6665 29.3332 8.63604 29.3332 15.9998ZM21.3736 11.9594C21.7641 12.3499 21.7641 12.9831 21.3736 13.3736L14.7069 20.0403C14.3164 20.4308 13.6833 20.4308 13.2927 20.0403L10.6261 17.3736C10.2355 16.9831 10.2355 16.3499 10.6261 15.9594C11.0166 15.5689 11.6498 15.5689 12.0403 15.9594L13.9998 17.919L16.9796 14.9392L19.9594 11.9594C20.3499 11.5689 20.9831 11.5689 21.3736 11.9594Z" fill="white"/>
+                </svg>
+            </div>
+
+            <div class="pm-popup__success-title">Получили вашу заявку</div>
+            <div class="pm-popup__success-subtitle">Свяжемся с вами в ближайшее время!</div>
+        </div>
+
+        <div class="pm-popup-feedback__btn-container">
+            <button class="pm-btn pm-btn--primary close-feedback-popup">Отлично</button>
+        </div>
+    </div>
+</div>
+
+<div class="pm-popup-overlay" id="leasingPopup">
+    <form class="pm-popup-feedback__container" id="leasingForm" novalidate>
+        <div class="pm-popup-feedback__header">
+            <div class="pm-popup-feedback__header-content">
+                <div class="pm-popup-feedback__header-title">Рассчитать лизинг</div>
+            </div>
+            <button class="pm-menu-mobile__header-btn pm-btn--neutral close-feedback-popup">
+                <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M15.7123 16.7729L7.22699 8.28765C6.93708 7.99773 6.93708 7.5169 7.22699 7.22699C7.51691 6.93707 7.99774 6.93707 8.28765 7.22699L16.7729 15.7123C17.0628 16.0022 17.0628 16.483 16.7729 16.7729C16.483 17.0628 16.0022 17.0628 15.7123 16.7729Z" fill="black"/>
+                    <path d="M7.22706 16.773C6.93715 16.4831 6.93715 16.0023 7.22706 15.7124L15.7123 7.22711C16.0023 6.93719 16.4831 6.93719 16.773 7.22711C17.0629 7.51702 17.0629 7.99785 16.773 8.28777L8.28772 16.773C7.99781 17.063 7.51698 17.063 7.22706 16.773Z" fill="black"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="pm-popup-feedback__content">
+            <div class="pm-popup-feedback__list">
+                <div class="pm-input__container">
+                    <div class="pm-input-wrapper">
+                        <label for="leasingName" class="pm-input-label">Ваше имя<span class="pm-required">*</span></label>
+                        <input class="pm-input" type="text" name="firstName" id="leasingName" required autocomplete="on">
+                    </div>
+
+                    <div class="pm-input__error">Заполните это поле</div>
+                </div>
+
+                <div class="pm-input__container">
+                    <div class="pm-input-wrapper pm-input-wrapper--phone">
+                        <div class="pm-input__phone-code">+7</div>
+                        <input class="pm-input" type="tel" name="tel" id="leasingTel" required autocomplete="tel-national" aria-label="Телефон" placeholder="(999) 999-99-99">
+                    </div>
+                    <div class="pm-input__error">Заполните это поле</div>
+                </div>
+
+                <div class="pm-input__container">
+                    <div class="pm-input-wrapper">
+                        <label for="leasingEmail" class="pm-input-label">Email</label>
+                        <input class="pm-input" type="email" name="email" id="leasingEmail" autocomplete="on">
+                    </div>
+                    <div class="pm-input__error">Заполните это поле</div>
+                </div>
+            </div>
+
+            <div class="pm-popup-feedback__list">
+                <div class="pm-input__container">
+                    <div class="pm-input-wrapper">
+                        <label for="leasingProductName" class="pm-input-label">Продукт</label>
+                        <input class="pm-input" type="text" name="productName" id="leasingProductName" value="Asic майнер Bitmain Antminer S21 XP 270 TH/s" readonly>
+                    </div>
+                </div>
+
+                <div class="pm-input__container">
+                    <div class="pm-input-wrapper">
+                        <label for="leasingProductPrice" class="pm-input-label">Цена</label>
+                        <input class="pm-input" type="text" name="productPrice" id="leasingProductPrice" value="328 000 ₽" readonly>
+                    </div>
+                </div>
+
+                <div class="pm-input__container">
+                    <div class="pm-input-wrapper pm-counter">
+                        <button type="button" class="pm-counter__btn pm-counter__btn--minus pm-btn-icon">
+                            <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M18 12.75H6C5.59 12.75 5.25 12.41 5.25 12C5.25 11.59 5.59 11.25 6 11.25H18C18.41 11.25 18.75 11.59 18.75 12C18.75 12.41 18.41 12.75 18 12.75Z" fill="black"/>
+                            </svg>
+                        </button>
+
+                        <div class="pm-counter__value pm-input">
+                            <span class="pm-counter__number">1</span>
+                            <span class="pm-counter__unit">шт.</span>
+                        </div>
+
+                        <input
+                                class="pm-counter__input"
+                                type="number"
+                                name="productCount"
+                                id="leasingProductCount"
+                                value="1"
+                                min="1"
+                                aria-label="Количество"
+                        >
+
+                        <button type="button" class="pm-counter__btn pm-counter__btn--plus pm-btn-icon">
+                            <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M18 12.75H6C5.59 12.75 5.25 12.41 5.25 12C5.25 11.59 5.59 11.25 6 11.25H18C18.41 11.25 18.75 11.59 18.75 12C18.75 12.41 18.41 12.75 18 12.75Z" fill="black"/>
+                                <path d="M12 18.75C11.59 18.75 11.25 18.41 11.25 18V6C11.25 5.59 11.59 5.25 12 5.25C12.41 5.25 12.75 5.59 12.75 6V18C12.75 18.41 12.41 18.75 12 18.75Z" fill="black"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pm-popup-feedback__list">
+                <div class="pm-input__container">
+                    <div class="pm-range-title">Срок лизинга, месяцы</div>
+                    <div class="pm-input-wrapper">
+                        <div class="pm-month__value pm-input">6</div>
+                    </div>
+                    <input
+                            class="pm-range-input"
+                            type="range"
+                            id="leasingMonthCount"
+                            name="monthCount"
+                            min="6"
+                            max="24"
+                            value="6"
+                            step="1"
+                            aria-label="Количество месяцев"/>
+                </div>
+            </div>
+
+            <div class="pm-input__container">
+                <div class="pm-popup-feedback__check-container">
+                    <input type="checkbox" name="agreement" id="leasingAgreement" class="pm-checkbox" required>
+                    <label for="leasingAgreement" class="pm-checkbox-label-container">
+                        <span class="pm-checkbox-label">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none">
+                              <path d="M3.57929 7C3.37919 7 3.18909 6.92187 3.04902 6.78514L0.217609 4.02128C-0.0725363 3.73805 -0.0725363 3.26927 0.217609 2.98605C0.507754 2.70283 0.987994 2.70283 1.27814 2.98605L3.57929 5.2323L8.72186 0.212417C9.01201 -0.0708057 9.49225 -0.0708057 9.78239 0.212417C10.0725 0.49564 10.0725 0.964422 9.78239 1.24765L4.10955 6.78514C3.96948 6.92187 3.77939 7 3.57929 7Z" fill="white"/>
+                            </svg>
+                        </span>
+                    </label>
+
+                    <div class="pm-checkbox-text">Я согласен на обработку <a href="#" target="_blank" class="pm-underline">персональных <br>данных</a> и с <a href="#" target="_blank" class="pm-underline">политикой конфиденциальности</a></div>
+                </div>
+
+                <div class="pm-input__error">Заполните это поле</div>
+            </div>
+        </div>
+
+        <div class="pm-popup-feedback__btn-container">
+            <button type="submit" class="pm-btn pm-btn--primary">Отправить</button>
+        </div>
+    </form>
+
+    <div class="pm-popup-feedback__container" id="leasingSuccess">
+        <div class="pm-popup-feedback__header">
+            <div class="pm-popup-feedback__header-content"></div>
+            <button class="pm-menu-mobile__header-btn pm-btn--neutral close-feedback-popup">
+                <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M15.7123 16.7729L7.22699 8.28765C6.93708 7.99773 6.93708 7.5169 7.22699 7.22699C7.51691 6.93707 7.99774 6.93707 8.28765 7.22699L16.7729 15.7123C17.0628 16.0022 17.0628 16.483 16.7729 16.7729C16.483 17.0628 16.0022 17.0628 15.7123 16.7729Z" fill="black"/>
+                    <path d="M7.22706 16.773C6.93715 16.4831 6.93715 16.0023 7.22706 15.7124L15.7123 7.22711C16.0023 6.93719 16.4831 6.93719 16.773 7.22711C17.0629 7.51702 17.0629 7.99785 16.773 8.28777L8.28772 16.773C7.99781 17.063 7.51698 17.063 7.22706 16.773Z" fill="black"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="pm-popup-feedback__content">
+            <div class="pm-popup__success-icon-wrapper">
+                <svg class="pm-popup__success-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M29.3332 15.9998C29.3332 23.3636 23.3636 29.3332 15.9998 29.3332C8.63604 29.3332 2.6665 23.3636 2.6665 15.9998C2.6665 8.63604 8.63604 2.6665 15.9998 2.6665C23.3636 2.6665 29.3332 8.63604 29.3332 15.9998ZM21.3736 11.9594C21.7641 12.3499 21.7641 12.9831 21.3736 13.3736L14.7069 20.0403C14.3164 20.4308 13.6833 20.4308 13.2927 20.0403L10.6261 17.3736C10.2355 16.9831 10.2355 16.3499 10.6261 15.9594C11.0166 15.5689 11.6498 15.5689 12.0403 15.9594L13.9998 17.919L16.9796 14.9392L19.9594 11.9594C20.3499 11.5689 20.9831 11.5689 21.3736 11.9594Z" fill="white"/>
+                </svg>
+            </div>
+
+            <div class="pm-popup__success-title">Получили вашу заявку</div>
+            <div class="pm-popup__success-subtitle">Свяжемся с вами в ближайшее время!</div>
+        </div>
+
+        <div class="pm-popup-feedback__btn-container">
+            <button class="pm-btn pm-btn--primary close-feedback-popup">Отлично</button>
+        </div>
+    </div>
+</div>
+
+<div class="pm-popup-overlay" id="pricePopup">
+    <form class="pm-popup-feedback__container" id="priceForm" novalidate>
+        <div class="pm-popup-feedback__header">
+            <div class="pm-popup-feedback__header-content">
+                <div class="pm-popup-feedback__header-title">Нашли дешевле?</div>
+            </div>
+            <button class="pm-menu-mobile__header-btn pm-btn--neutral close-feedback-popup">
+                <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M15.7123 16.7729L7.22699 8.28765C6.93708 7.99773 6.93708 7.5169 7.22699 7.22699C7.51691 6.93707 7.99774 6.93707 8.28765 7.22699L16.7729 15.7123C17.0628 16.0022 17.0628 16.483 16.7729 16.7729C16.483 17.0628 16.0022 17.0628 15.7123 16.7729Z" fill="black"/>
+                    <path d="M7.22706 16.773C6.93715 16.4831 6.93715 16.0023 7.22706 15.7124L15.7123 7.22711C16.0023 6.93719 16.4831 6.93719 16.773 7.22711C17.0629 7.51702 17.0629 7.99785 16.773 8.28777L8.28772 16.773C7.99781 17.063 7.51698 17.063 7.22706 16.773Z" fill="black"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="pm-popup-feedback__content">
+            <div class="pm-popup-feedback__list">
+                <div class="pm-input__container">
+                    <div class="pm-input-wrapper">
+                        <label for="priceName" class="pm-input-label">Ваше имя<span class="pm-required">*</span></label>
+                        <input class="pm-input" type="text" name="firstName" id="priceName" required autocomplete="on">
+                    </div>
+
+                    <div class="pm-input__error">Заполните это поле</div>
+                </div>
+
+                <div class="pm-input__container">
+                    <div class="pm-input-wrapper pm-input-wrapper--phone">
+                        <div class="pm-input__phone-code">+7</div>
+                        <input class="pm-input" type="tel" name="tel" id="priceTel" required autocomplete="tel-national" aria-label="Телефон" placeholder="(999) 999-99-99">
+                    </div>
+                    <div class="pm-input__error">Заполните это поле</div>
+                </div>
+            </div>
+
+            <div class="pm-popup-feedback__list">
+                <div class="pm-input__container">
+                    <div class="pm-input-wrapper">
+                        <label for="priceProductName" class="pm-input-label">Продукт</label>
+                        <input class="pm-input" type="text" name="productName" id="priceProductName" value="Asic майнер Bitmain Antminer S21 XP 270 TH/s" readonly>
+                    </div>
+                </div>
+
+                <div class="pm-input__container">
+                    <div class="pm-input-wrapper">
+                        <label for="priceLink" class="pm-input-label">Ссылка на продукт другого магазина<span class="pm-required">*</span></label>
+                        <input class="pm-input" type="text" name="link" id="priceLink" required autocomplete="on">
+                    </div>
+
+                    <div class="pm-input__error">Заполните это поле</div>
+                </div>
+            </div>
+
+            <div class="pm-input__container">
+                <div class="pm-popup-feedback__check-container">
+                    <input type="checkbox" name="agreement" id="priceAgreement" class="pm-checkbox" required>
+                    <label for="priceAgreement" class="pm-checkbox-label-container">
+                        <span class="pm-checkbox-label">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none">
+                              <path d="M3.57929 7C3.37919 7 3.18909 6.92187 3.04902 6.78514L0.217609 4.02128C-0.0725363 3.73805 -0.0725363 3.26927 0.217609 2.98605C0.507754 2.70283 0.987994 2.70283 1.27814 2.98605L3.57929 5.2323L8.72186 0.212417C9.01201 -0.0708057 9.49225 -0.0708057 9.78239 0.212417C10.0725 0.49564 10.0725 0.964422 9.78239 1.24765L4.10955 6.78514C3.96948 6.92187 3.77939 7 3.57929 7Z" fill="white"/>
+                            </svg>
+                        </span>
+                    </label>
+
+                    <div class="pm-checkbox-text">Я согласен на обработку <a href="#" target="_blank" class="pm-underline">персональных <br>данных</a> и с <a href="#" target="_blank" class="pm-underline">политикой конфиденциальности</a></div>
+                </div>
+
+                <div class="pm-input__error">Заполните это поле</div>
+            </div>
+        </div>
+
+        <div class="pm-popup-feedback__btn-container">
+            <button type="submit" class="pm-btn pm-btn--primary">Отправить</button>
+        </div>
+    </form>
+
+    <div class="pm-popup-feedback__container" id="priceSuccess">
+        <div class="pm-popup-feedback__header">
+            <div class="pm-popup-feedback__header-content"></div>
+            <button class="pm-menu-mobile__header-btn pm-btn--neutral close-feedback-popup">
+                <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M15.7123 16.7729L7.22699 8.28765C6.93708 7.99773 6.93708 7.5169 7.22699 7.22699C7.51691 6.93707 7.99774 6.93707 8.28765 7.22699L16.7729 15.7123C17.0628 16.0022 17.0628 16.483 16.7729 16.7729C16.483 17.0628 16.0022 17.0628 15.7123 16.7729Z" fill="black"/>
+                    <path d="M7.22706 16.773C6.93715 16.4831 6.93715 16.0023 7.22706 15.7124L15.7123 7.22711C16.0023 6.93719 16.4831 6.93719 16.773 7.22711C17.0629 7.51702 17.0629 7.99785 16.773 8.28777L8.28772 16.773C7.99781 17.063 7.51698 17.063 7.22706 16.773Z" fill="black"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="pm-popup-feedback__content">
+            <div class="pm-popup__success-icon-wrapper">
+                <svg class="pm-popup__success-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M29.3332 15.9998C29.3332 23.3636 23.3636 29.3332 15.9998 29.3332C8.63604 29.3332 2.6665 23.3636 2.6665 15.9998C2.6665 8.63604 8.63604 2.6665 15.9998 2.6665C23.3636 2.6665 29.3332 8.63604 29.3332 15.9998ZM21.3736 11.9594C21.7641 12.3499 21.7641 12.9831 21.3736 13.3736L14.7069 20.0403C14.3164 20.4308 13.6833 20.4308 13.2927 20.0403L10.6261 17.3736C10.2355 16.9831 10.2355 16.3499 10.6261 15.9594C11.0166 15.5689 11.6498 15.5689 12.0403 15.9594L13.9998 17.919L16.9796 14.9392L19.9594 11.9594C20.3499 11.5689 20.9831 11.5689 21.3736 11.9594Z" fill="white"/>
+                </svg>
+            </div>
+
+            <div class="pm-popup__success-title">Получили вашу заявку</div>
+            <div class="pm-popup__success-subtitle">Свяжемся с вами в ближайшее время!</div>
+        </div>
+
+        <div class="pm-popup-feedback__btn-container">
+            <button class="pm-btn pm-btn--primary close-feedback-popup">Отлично</button>
+        </div>
+    </div>
+</div>
+
+<div class="pm-lightbox" id="productLightbox">
+    <div class="pm-lightbox__overlay"></div>
+
+    <div class="pm-lightbox__content pm-container">
+        <!-- Основной слайдер -->
+        <div class="swiper pm-lightbox-slider">
+            <div class="swiper-wrapper">
+
+            </div>
+        </div>
+
+        <!-- Миниатюры -->
+        <div class="swiper pm-lightbox-thumbs">
+            <div class="swiper-wrapper">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="pm-lightbox-title">Asic майнер Bitmain Antminer S21 XP 270 TH/s</div>
+    <button class="pm-lightbox__close pm-btn--neutral">
+        <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15.7118 16.773L7.22651 8.28777C6.93659 7.99785 6.93659 7.51702 7.22651 7.22711C7.51642 6.93719 7.99725 6.93719 8.28717 7.22711L16.7724 15.7124C17.0624 16.0023 17.0624 16.4831 16.7724 16.773C16.4825 17.063 16.0017 17.063 15.7118 16.773Z" fill="black"/>
+            <path d="M7.22755 16.773C6.93764 16.4831 6.93764 16.0023 7.22755 15.7124L15.7128 7.22711C16.0027 6.93719 16.4836 6.93719 16.7735 7.22711C17.0634 7.51702 17.0634 7.99785 16.7735 8.28777L8.28821 16.773C7.9983 17.063 7.51747 17.063 7.22755 16.773Z" fill="black"/>
+        </svg>
+    </button>
+    <button class="swiper-button-prev pm-btn--neutral">
+        <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5303 5.46967C10.8232 5.76256 10.8232 6.23744 10.5303 6.53033L5.81066 11.25H20C20.4142 11.25 20.75 11.5858 20.75 12C20.75 12.4142 20.4142 12.75 20 12.75H5.81066L10.5303 17.4697C10.8232 17.7626 10.8232 18.2374 10.5303 18.5303C10.2374 18.8232 9.76256 18.8232 9.46967 18.5303L3.46967 12.5303C3.17678 12.2374 3.17678 11.7626 3.46967 11.4697L9.46967 5.46967C9.76256 5.17678 10.2374 5.17678 10.5303 5.46967Z" fill="black"/>
+        </svg>
+    </button>
+    <button class="swiper-button-next pm-btn--neutral">
+        <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.4697 5.46967C13.7626 5.17678 14.2374 5.17678 14.5303 5.46967L20.5303 11.4697C20.8232 11.7626 20.8232 12.2374 20.5303 12.5303L14.5303 18.5303C14.2374 18.8232 13.7626 18.8232 13.4697 18.5303C13.1768 18.2374 13.1768 17.7626 13.4697 17.4697L18.1893 12.75H4C3.58579 12.75 3.25 12.4142 3.25 12C3.25 11.5858 3.58579 11.25 4 11.25H18.1893L13.4697 6.53033C13.1768 6.23744 13.1768 5.76256 13.4697 5.46967Z" fill="black"/>
+        </svg>
+    </button>
+</div>
+
 <footer class="pm-footer">
     <div class="pm-footer__dec-part"></div>
     <div class="pm-section footer-section">
@@ -3157,13 +3645,321 @@
     </div>
 </footer>
 
+<!--фиксированная шапка-->
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const instance = new Swiper('.pm-product-viewed-slider', {
+        const header = document.querySelector('.pm-product-header');
+        const target = document.querySelector('.pm-product-details');
+
+        if (!header || !target) return;
+
+        const onScroll = () => {
+            const rect = target.getBoundingClientRect();
+
+            // когда до конца блока остается 100px
+            if (rect.bottom <= window.innerHeight - 500) {
+                header.classList.add('active');
+            } else {
+                header.classList.remove('active');
+            }
+        };
+
+        window.addEventListener('scroll', onScroll);
+        onScroll(); // на случай если уже проскроллено
+    });
+</script>
+
+<!--лайтбокс-->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const lightbox = document.getElementById('productLightbox');
+        const openBtns = document.querySelectorAll('.pm-product__main-img, .pm-product__main-video'); // элементы, которые открывают лайтбокс
+        const lightboxWrapper = lightbox.querySelector('.pm-lightbox-slider .swiper-wrapper');
+        const lightboxThumbsWrapper = lightbox.querySelector('.pm-lightbox-thumbs .swiper-wrapper');
+        const closeBtn = lightbox.querySelector('.pm-lightbox__close');
+
+        let lightboxSwiper;
+        let thumbsSwiper;
+
+        openBtns.forEach((btn, index) => {
+            btn.addEventListener('click', () => {
+                // очистка предыдущих слайдов
+                lightboxWrapper.innerHTML = '';
+                lightboxThumbsWrapper.innerHTML = '';
+
+                // клонируем основные слайды
+                const mainSlides = document.querySelectorAll('.pm-product-slider-main .swiper-slide');
+                const thumbSlides = document.querySelectorAll('.pm-product-slider-thumbs .swiper-slide');
+
+                mainSlides.forEach(slide => {
+                    const clone = slide.cloneNode(true);
+
+                    // заменяем класс у изображений для лайтбокса
+                    const img = clone.querySelector('img');
+                    if (img) {
+                        img.classList.remove('pm-product__main-img');
+                        img.classList.add('pm-lightbox-img');
+                    }
+
+                    // если есть видео, добавляем controls и новый класс
+                    const video = clone.querySelector('video');
+                    if (video) {
+                        video.controls = true;
+                        video.classList.add('pm-lightbox-video');
+                    }
+
+                    lightboxWrapper.appendChild(clone);
+                });
+
+                // клонируем миниатюры
+                thumbSlides.forEach(slide => {
+                    const clone = slide.cloneNode(true);
+                    lightboxThumbsWrapper.appendChild(clone);
+                });
+
+                // показываем лайтбокс
+                lightbox.classList.add('active');
+                document.body.classList.add('lock');
+
+                // инициализация Swiper
+                thumbsSwiper = new Swiper(lightbox.querySelector('.pm-lightbox-thumbs'), {
+                    slidesPerView: 'auto',
+                    spaceBetween: 0,
+                    watchSlidesProgress: true,
+                });
+
+                thumbsSwiper.slides.forEach(slide => {
+                    slide.style.height = '58px';
+                });
+
+                lightboxSwiper = new Swiper(lightbox.querySelector('.pm-lightbox-slider'), {
+                    spaceBetween: 10,
+                    loop: true,
+                    effect: "fade",
+                    navigation: {
+                        nextEl: lightbox.querySelector('.swiper-button-next'),
+                        prevEl: lightbox.querySelector('.swiper-button-prev'),
+                    },
+                    thumbs: {
+                        swiper: thumbsSwiper,
+                    },
+                });
+
+                // выставляем открытый слайд на тот, по которому кликнули
+                lightboxSwiper.slideTo(index, 0, false);
+            });
+        });
+
+        // закрытие
+        closeBtn.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.classList.remove('lock');
+
+            if(lightboxSwiper) lightboxSwiper.destroy(true, true);
+            if(thumbsSwiper) thumbsSwiper.destroy(true, true);
+        });
+
+        // клик на оверлей
+        lightbox.querySelector('.pm-lightbox__overlay').addEventListener('click', () => closeBtn.click());
+    });
+</script>
+
+<!--модалки с формами-->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- RANGE INPUT ---
+        const range = document.getElementById('leasingMonthCount');
+        const monthValue = document.querySelector('.pm-month__value');
+
+        const updateRange = () => {
+            const min = +range.min;
+            const max = +range.max;
+            const val = +range.value;
+            const percent = ((val - min) / (max - min)) * 100;
+
+            range.style.background = `linear-gradient(to right, #7086FC 0%, #7086FC ${percent}%, rgba(82,82,82,0.16) ${percent}%, rgba(82,82,82,0.16) 100%)`;
+            monthValue.textContent = val;
+        };
+        range.addEventListener('input', updateRange);
+        updateRange();
+
+        // --- COUNTER ---
+        const counters = document.querySelectorAll('.pm-counter');
+        counters.forEach(counter => {
+                const input = counter.querySelector('.pm-counter__input');
+                const number = counter.querySelector('.pm-counter__number');
+                const btnMinus = counter.querySelector('.pm-counter__btn--minus');
+                const btnPlus = counter.querySelector('.pm-counter__btn--plus');
+
+                const updateCounter = (value) => {
+                    input.value = value;
+                    number.textContent = value;
+                };
+
+                btnPlus.addEventListener('click', () => updateCounter(+input.value + 1));
+                btnMinus.addEventListener('click', () => {
+                    if (+input.value > 1) updateCounter(+input.value - 1);
+                });
+        });
+
+        // --- FORM UTILITIES ---
+        const resetFormState = (form) => {
+            form.querySelectorAll('.pm-input__container').forEach(container => {
+                container.classList.remove('error');
+                const errorEl = container.querySelector('.pm-input__error');
+                if (errorEl) errorEl.textContent = '';
+            });
+
+            form.querySelectorAll('.pm-input-wrapper').forEach(wrapper => {
+                const input = wrapper.querySelector('.pm-input');
+                wrapper.classList.toggle('active', input.hasAttribute('readonly') || input.value);
+            });
+        };
+
+        const applyIMask = (selector) => {
+            const el = document.getElementById(selector);
+            if (el) IMask(el, { mask: '(000) 000-00-00' });
+        };
+        applyIMask('orderTel');
+        applyIMask('leasingTel');
+
+        const initInputFocus = (form) => {
+            form.querySelectorAll('.pm-input-wrapper').forEach(wrapper => {
+                const input = wrapper.querySelector('.pm-input');
+                input.addEventListener('focus', () => wrapper.classList.add('active'));
+                input.addEventListener('blur', () => {
+                    if (!input.value) wrapper.classList.remove('active');
+                });
+                if (input.value) wrapper.classList.add('active');
+            });
+        };
+
+        const clearErrorOnInput = (form) => {
+            form.querySelectorAll('.pm-input, .pm-checkbox').forEach(input => {
+                const container = input.closest('.pm-input__container');
+                const errorEl = container.querySelector('.pm-input__error');
+
+                input.addEventListener('input', () => {
+                    container.classList.remove('error');
+                    errorEl.textContent = '';
+                });
+
+                if (input.type === 'checkbox') {
+                    input.addEventListener('change', () => {
+                        container.classList.remove('error');
+                        errorEl.textContent = '';
+                    });
+                }
+            });
+        };
+
+        const validateForm = (form) => {
+            let hasError = false;
+            form.querySelectorAll('.pm-input, .pm-checkbox').forEach(input => {
+                const container = input.closest('.pm-input__container');
+                const errorEl = container.querySelector('.pm-input__error');
+                container.classList.remove('error');
+
+                const value = input.value?.trim() || '';
+
+                if (input.type === 'checkbox' && !input.checked) {
+                    container.classList.add('error');
+                    errorEl.textContent = 'Заполните это поле';
+                    hasError = true;
+                    return;
+                }
+
+                if (input.required && !value) {
+                    container.classList.add('error');
+                    errorEl.textContent = 'Заполните это поле';
+                    hasError = true;
+                    return;
+                }
+
+                if (input.type === 'email' && value) {
+                    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+                    if (!emailValid) {
+                        container.classList.add('error');
+                        errorEl.textContent = 'Некорректный формат';
+                        hasError = true;
+                    }
+                }
+
+                if (input.type === 'tel' && value) {
+                    const digits = value.replace(/\D/g, '');
+                    if (digits.length !== 10) {
+                        container.classList.add('error');
+                        errorEl.textContent = 'Некорректный формат';
+                        hasError = true;
+                    }
+                }
+            });
+            return !hasError;
+        };
+
+        const initFormPopup = (popupId, formId) => {
+            const popup = document.getElementById(popupId);
+            const form = document.getElementById(formId);
+
+            if (!popup || !form) return;
+
+            const openBtns = document.querySelectorAll(`[data-popup="${popupId}"]`);
+
+            openBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    popup.classList.add('active');
+                    document.body.classList.add('lock');
+                });
+            });
+
+            const closePopup = () => {
+                popup.classList.remove('active');
+                setTimeout(() => {
+                    popup.classList.remove('success');
+                    document.body.classList.remove('lock');
+                    form.reset();
+                    resetFormState(form);
+                }, 300);
+            };
+
+            popup.addEventListener('click', e => {
+                if (e.target === popup) closePopup();
+            });
+
+            popup.querySelectorAll('.close-feedback-popup').forEach(btn =>
+                btn.addEventListener('click', e => {
+                    e.preventDefault();
+                    closePopup();
+                })
+            );
+
+            initInputFocus(form);
+            clearErrorOnInput(form);
+
+            form.addEventListener('submit', e => {
+                e.preventDefault();
+                if (validateForm(form)) {
+                    popup.classList.add('success');
+                    form.reset();
+                    resetFormState(form);
+                }
+            });
+        };
+
+        initFormPopup('orderPopup', 'orderForm');
+        initFormPopup('leasingPopup', 'leasingForm');
+        initFormPopup('pricePopup', 'priceForm');
+    });
+</script>
+
+<!--слайдер вы смотрели-->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const viewedSlider = new Swiper('.pm-product-viewed-slider', {
             spaceBetween: 16,
             slidesPerView: 'auto',
             slidesPerGroup: 1,
-            speed: 600,
+            speed: 1200,
             pagination: {
                 el: document.querySelector('.pm-product-viewed-slider').querySelector('.pm-popular-pagination'),
                 clickable: true,
@@ -3175,9 +3971,12 @@
             breakpoints: {
                 1025: {
                     slidesPerView: 4,
+                    slidesPerGroup: 4,
+                    speed: 800,
                 },
                 1681: {
                     slidesPerView: 5,
+                    slidesPerGroup: 5,
                 }
             },
         });
@@ -3191,7 +3990,7 @@
                 spaceBetween: 8,
                 slidesPerView: 'auto',
                 slidesPerGroup: 1,
-                speed: 600,
+                speed: 1200,
                 pagination: {
                     el: document.querySelector('.pm-product__similar-slider').querySelector('.pm-popular-pagination'),
                     clickable: true,
@@ -3267,55 +4066,75 @@
         const tabs = document.querySelectorAll('.pm-product-tab');
         const panels = document.querySelectorAll('.pm-product__desc-wrapper');
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
+        const activateTab = (tab) => {
+            tabs.forEach(t => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+            });
+            panels.forEach(panel => panel.classList.remove('active'));
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
 
-                // убираем активность у табов
-                tabs.forEach(t => {
-                    t.classList.remove('active');
-                    t.setAttribute('aria-selected', 'false');
-                });
+            const panelId = tab.getAttribute('aria-controls');
+            const targetPanel = document.getElementById(panelId);
+            if (targetPanel) targetPanel.classList.add('active');
+        };
 
-                // скрываем панели
-                panels.forEach(panel => {
-                    panel.classList.remove('active');
-                });
+        tabs.forEach(tab => tab.addEventListener('click', () => activateTab(tab)));
 
-                // активируем таб
-                tab.classList.add('active');
-                tab.setAttribute('aria-selected', 'true');
+        // "Все характеристики" с плавным скроллом
+        const specsLink = document.querySelector('a.pm-btn--ghost-primary[href="#"]');
+        if (specsLink) {
+            specsLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                const specsTab = document.querySelector('.pm-product-tab[aria-controls="tab-specs"]');
+                if (specsTab && !specsTab.classList.contains('active')) {
+                    activateTab(specsTab);
+                }
 
-                // показываем нужную панель
-                const panelId = tab.getAttribute('aria-controls');
-                const targetPanel = document.getElementById(panelId);
-
-                if (targetPanel) {
-                    targetPanel.classList.add('active');
+                const scrollTarget = document.querySelector('.pm-product__description-container');
+                if (scrollTarget) {
+                    const offset = 100; // под шапку
+                    const topPos = scrollTarget.getBoundingClientRect().top + window.scrollY - offset;
+                    window.scrollTo({ top: topPos, behavior: 'smooth' });
                 }
             });
-        });
+        }
 
+        // развернуть/свернуть описание
         const descWrapper = document.querySelector('#tab-description');
-        const button = descWrapper.querySelector('.pm-btn--ghost-primary');
-        const content = descWrapper.querySelector('.pm-product-desc__text-content');
+        if (descWrapper) {
+            const button = descWrapper.querySelector('.pm-btn--ghost-primary');
+            const content = descWrapper.querySelector('.pm-product-desc__text-content');
+            const initialMaxHeight = parseInt(getComputedStyle(content).maxHeight);
 
-        // получаем исходное max-height из CSS
-        const initialMaxHeight = parseInt(getComputedStyle(content).maxHeight);
+            const checkButtonVisibility = () => {
+                const fade = descWrapper.querySelector('.pm-product-desc__fade');
+                if (content.scrollHeight > initialMaxHeight) {
+                    button.style.display = 'inline-flex';
+                    fade.classList.add('show');
+                } else {
+                    button.style.display = 'none';
+                    fade.classList.remove('show');
+                }
+            };
 
-        button.addEventListener('click', () => {
-            if (!descWrapper.classList.contains('expanded')) {
-                // разворачиваем: вычисляем реальную высоту
-                const fullHeight = content.scrollHeight;
-                content.style.maxHeight = fullHeight + 'px';
-                descWrapper.classList.add('expanded');
-                button.textContent = 'Скрыть описание';
-            } else {
-                // сворачиваем: используем max-height из CSS
-                content.style.maxHeight = initialMaxHeight + 'px';
-                descWrapper.classList.remove('expanded');
-                button.textContent = 'Развернуть описание';
-            }
-        });
+            // проверка при загрузке и при ресайзе
+            checkButtonVisibility();
+            window.addEventListener('resize', checkButtonVisibility);
+
+            button.addEventListener('click', () => {
+                if (!descWrapper.classList.contains('expanded')) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    descWrapper.classList.add('expanded');
+                    button.textContent = 'Скрыть описание';
+                } else {
+                    content.style.maxHeight = initialMaxHeight + 'px';
+                    descWrapper.classList.remove('expanded');
+                    button.textContent = 'Развернуть описание';
+                }
+            });
+        }
     });
 
     function syncStatValueWidth() {
