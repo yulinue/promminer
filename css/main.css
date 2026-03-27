@@ -2,7 +2,7 @@
    ModalFeedback Форма заказа звонка
 ======================== */
 .pm-popup-overlay#feedbackPopup{
-    padding: 0 var(--container-padding);
+    padding: 0 calc(var(--container-padding) + var(--scrollbar-width)) 0 var(--container-padding);
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
@@ -273,6 +273,12 @@
     line-height: var(--body-m-lh);
 }
 
+@media (max-width: 768px) and (min-width: 641px) {
+    #feedbackForm .pm-checkbox-text br{
+        display: none;
+    }
+}
+
 /* ========================
    MainBlock
 ======================== */
@@ -515,7 +521,7 @@
     grid-template-columns: repeat(6, 1fr);
     gap: 8px;
 }
-@media(max-width: 1225px){
+@media(max-width: 1240px){
     .pm-main-block__cards{
         -ms-grid-columns: (1fr)[3];
         grid-template-columns: repeat(3, 1fr);
@@ -656,7 +662,7 @@
         line-height: var(--caption-m-lh);
     }
 }
-@media(max-width: 1225px){
+@media(max-width: 1240px){
     .pm-main-card{
         -webkit-box-orient: horizontal;
         -webkit-box-direction: reverse;
@@ -1053,6 +1059,12 @@
     height: -webkit-fit-content;
     height: -moz-fit-content;
     height: fit-content;
+    transition: .3s ease;
+}
+@media(any-hover: hover){
+    .pm-features__object-badge:hover{
+        background: #f5f5f5;
+    }
 }
 @media(max-width: 768px){
     .pm-features__object-badge{
@@ -3453,6 +3465,12 @@
     font-size: clamp(16px, 1vw, 18px);
     font-weight: 600;
     line-height: 1.222;
+    transition: .3s ease;
+}
+@media(any-hover: hover){
+    .swiper-slide.pm-rewards__card:hover .pm-reward-title{
+        color: var(--content-sentiment-accent);
+    }
 }
 
 .pm-reward-name{
@@ -3513,9 +3531,9 @@
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    -webkit-transition: .2s ease;
-    -o-transition: .2s ease;
-    transition: .2s ease;
+    -webkit-transition: .3s ease;
+    -o-transition: .3s ease;
+    transition: .3s ease;
 }
 
 .pm-lightbox.active {
@@ -3549,6 +3567,14 @@
     gap: 33px;
     padding-top: 32px;
     padding-bottom: 28px;
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s ease;
+}
+
+.pm-lightbox.active .pm-lightbox__content{
+    opacity: 1;
+    visibility: visible;
 }
 
 .pm-lightbox__close {
@@ -3561,6 +3587,17 @@
     width: var(--base-size-1xl);
     height: var(--base-size-1xl);
     z-index: 2;
+    padding: 0;
+    transition: .3s ease;
+}
+
+.pm-lightbox__close .pm-btn-icon{
+    transform: translateY(1px);
+}
+@media(max-width: 768px){
+    .pm-lightbox__close .pm-btn-icon{
+        transform: translateY(2px);
+    }
 }
 
 .swiper.pm-lightbox-slider,
@@ -3658,6 +3695,7 @@
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
     border-radius: var(--radius-full);
+    transition: .3s ease;
 }
 
 .pm-lightbox .swiper-button-next svg,
@@ -3871,11 +3909,40 @@
     -ms-flex-item-align: stretch;
     -ms-grid-row-align: stretch;
     align-self: stretch;
-    background-size: cover;
+    background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
     border-radius: var(--radius-m);
+    overflow: hidden;
+    position: relative;
+
+    transition: .3s ease;
 }
+
+.pm-news-item__bg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    -webkit-transition: .25s ease-in-out;
+    -o-transition: .25s ease-in-out;
+    transition: .25s ease-in-out;
+    z-index: -1;
+}
+
+@media(any-hover: hover){
+    .pm-news-item:hover .pm-news-item__bg{
+        width: 103%;
+        height: 103%;
+    }
+}
+
 @media(max-width: 768px){
     .pm-news-item{
         height: clamp(185px, 30.20833vw,232px);
@@ -4037,7 +4104,7 @@
     gap: 16px;
     min-width: clamp(315px, 21.555vw, 388px);
     max-width: clamp(315px, 21.555vw, 388px);
-    transition: min-width .3s ease, max-width .3s ease;
+    transition: min-width .6s ease, max-width .6s ease;
 }
 .swiper-slide.pm-event-card.swiper-slide-active{
     padding: 0;
@@ -4049,7 +4116,7 @@
 }
 @media(max-width: 1280px){
     .swiper-slide.pm-event-card.swiper-slide-active{
-        min-height: calc(228px + 16px + 101px);
+        min-height: calc(228px + 30px + 101px);
     }
 }
 @media(max-width: 1220px){
@@ -4079,12 +4146,17 @@
         min-width: 270px;
         max-width: 270px;
         transform: translateY(22px);
-        transition: transform .3s ease;
+        transition: all .6s ease;
+    }
+
+    .swiper-slide.pm-event-card.swiper-slide-active{
+        transform: translateY(0);
+        transition: all .6s ease;
     }
 }
 @media(max-width: 600px){
     .swiper-slide.pm-event-card:not(.swiper-slide-active){
-        transform: translateY(0);
+        transform: none;
     }
 }
 
@@ -4108,9 +4180,9 @@
     background-position: center;
     width: 100%;
     aspect-ratio: 388 / 323;
-    -webkit-transition: .3s ease;
-    -o-transition: .3s ease;
-    transition: .3s ease;
+    -webkit-transition: .6s ease;
+    -o-transition: .6s ease;
+    transition: .6s ease;
     position: relative;
 }
 
@@ -4119,7 +4191,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: .25s ease-in-out;
+    transition: .6s ease-in-out;
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
@@ -4189,6 +4261,7 @@
 
 .swiper-slide.pm-event-card.swiper-slide-active .pm-event-logo{
     height: 72px;
+    transition: .6s ease;
 }
 
 .pm-event__text-container{
@@ -5041,6 +5114,7 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     overflow: hidden;
+    z-index: auto;
 }
 
 .pm-footer{
@@ -5500,6 +5574,11 @@
     -o-transition: .3s ease;
     transition: .3s ease;
 }
+@media(max-width: 600px){
+    .pm-footer-list:nth-child(1) .pm-footer-list--small {
+        display: flex;
+    }
+}
 
 .pm-footer__list-title{
     color: #737373;
@@ -5905,4 +5984,8 @@
         right: 32px;
         bottom: 96px;
     }
+}
+
+#goUpBtn .pm-btn-icon{
+    transform: translateY(1px);
 }

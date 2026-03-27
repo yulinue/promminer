@@ -25,5 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { root: null, threshold: 0 }
     );
 
-    observer.observe(mainBlock);
+    if(mainBlock){
+        observer.observe(mainBlock);
+    }
 });
