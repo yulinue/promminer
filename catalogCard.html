@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/catalog.css">
+    <link rel="stylesheet" href="./mini-profitability-widget.css" />
 
     <script src="js/DynamicAdapt.js"></script>
     <script src="js/topMenu.js" defer></script>
@@ -1515,6 +1516,24 @@
                 </div>
             </div>
         </section>
+
+    <div class="pm-container">
+        <div id="mini-profitability-widget"></div>
+        <script src="./mini-profitability-widget.iife.js"></script>
+        <script>
+            const api = window.MiniProfitabilityWidget;
+            const mount = typeof api === 'function' ? api : api?.create;
+
+            if (typeof mount !== 'function') {
+                throw new Error('MiniProfitabilityWidget API is not available');
+            }
+
+            mount('mini-profitability-widget', {
+                theme: 'light',
+                defaultAsicTitle: 'Antminer S21 XP 270 TH/s'
+            });
+        </script>
+    </div>
 
     <section class="pm-product-details">
             <div class="pm-container">
