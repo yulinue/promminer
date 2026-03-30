@@ -4,6 +4,7 @@
 .pm-popup-overlay#feedbackPopup,
 .pm-popup-overlay#orderPopup,
 .pm-popup-overlay#leasingPopup,
+.pm-popup-overlay#learnPricePopup,
 .pm-popup-overlay#pricePopup{
     padding: 0 calc(var(--container-padding) + var(--scrollbar-width)) 0 var(--container-padding);
     -webkit-box-align: center;
@@ -15,6 +16,7 @@
     .pm-popup-overlay#feedbackPopup,
     .pm-popup-overlay#orderPopup,
     .pm-popup-overlay#leasingPopup,
+    .pm-popup-overlay#learnPricePopup,
     .pm-popup-overlay#pricePopup{
         padding: 0;
         -webkit-box-align: end;
@@ -57,6 +59,7 @@
 .pm-popup-overlay#feedbackPopup.success .pm-popup-feedback__container#feedbackForm,
 .pm-popup-overlay#orderPopup.success .pm-popup-feedback__container#orderForm,
 .pm-popup-overlay#leasingPopup.success .pm-popup-feedback__container#leasingForm,
+.pm-popup-overlay#learnPricePopup.success .pm-popup-feedback__container#learnPriceForm,
 .pm-popup-overlay#pricePopup.success .pm-popup-feedback__container#priceForm{
     opacity: 0;
     visibility: hidden;
@@ -67,6 +70,7 @@
 .pm-popup-feedback__container#feedbackSuccess,
 .pm-popup-feedback__container#orderSuccess,
 .pm-popup-feedback__container#leasingSuccess,
+.pm-popup-feedback__container#learnPriceSuccess,
 .pm-popup-feedback__container#priceSuccess{
     opacity: 0;
     visibility: hidden;
@@ -80,6 +84,7 @@
 .pm-popup-overlay#feedbackPopup.success .pm-popup-feedback__container#feedbackSuccess,
 .pm-popup-overlay#orderPopup.success .pm-popup-feedback__container#orderSuccess,
 .pm-popup-overlay#leasingPopup.success .pm-popup-feedback__container#leasingSuccess,
+.pm-popup-overlay#learnPricePopup.success .pm-popup-feedback__container#learnPriceSuccess,
 .pm-popup-overlay#pricePopup.success .pm-popup-feedback__container#priceSuccess{
     opacity: 1;
     visibility: visible;
@@ -179,6 +184,7 @@
     #feedbackForm .pm-popup-feedback__content,
     #orderForm .pm-popup-feedback__content,
     #leasingForm .pm-popup-feedback__content,
+    #learnPriceForm .pm-popup-feedback__content,
     #priceForm .pm-popup-feedback__content{
         padding: 12px 16px;
     }
@@ -187,6 +193,7 @@
 #feedbackSuccess .pm-popup-feedback__content,
 #orderSuccess .pm-popup-feedback__content,
 #leasingSuccess .pm-popup-feedback__content,
+#learnPriceSuccess .pm-popup-feedback__content,
 #priceSuccess .pm-popup-feedback__content{
     gap: var(--spacing-12);
     -webkit-box-align: center;
@@ -298,6 +305,7 @@
     #feedbackForm .pm-checkbox-text br,
     #orderForm .pm-checkbox-text br,
     #leasingForm .pm-checkbox-text br,
+    #learnPriceForm .pm-checkbox-text br,
     #priceForm .pm-checkbox-text br{
         display: none;
     }
@@ -1241,6 +1249,7 @@
     -ms-flex-direction: column;
     flex-direction: column;
     gap: var(--spacing-32);
+    padding-left: 1px;
 }
 @media(max-width: 1140px){
     .swiper.pm-popular-slider{
@@ -3616,12 +3625,7 @@
 }
 
 .pm-lightbox__close .pm-btn-icon{
-    transform: translateY(1px);
-}
-@media(max-width: 768px){
-    .pm-lightbox__close .pm-btn-icon{
-        transform: translateY(2px);
-    }
+    transform: translateY(3px);
 }
 
 .swiper.pm-lightbox-slider,

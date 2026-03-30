@@ -23,7 +23,7 @@
     <script src="https://unpkg.com/imask"></script>
 </head>
 <body>
-<!--здесь шапка сразу фиксированная-->
+<!--здесь шапка сразу с классом pm-header--fixed-->
 <header class="pm-header pm-header--fixed">
     <div class="pm-container">
         <div class="pm-header__wrapper">
@@ -1204,7 +1204,8 @@
                 <div class="pm-input__container">
                     <div class="pm-input-wrapper pm-input-wrapper--phone">
                         <div class="pm-input__phone-code">+7</div>
-                        <input class="pm-input" type="tel" name="tel" id="tel" required autocomplete="tel-national" aria-label="Телефон" placeholder="(999) 999-99-99">
+                        <label for="tel" class="pm-input-label">(999) 999-99-99<span class="pm-required">*</span></label>
+                        <input class="pm-input" type="tel" name="tel" id="tel" required autocomplete="tel-national">
                     </div>
                     <div class="pm-input__error">Заполните это поле</div>
                 </div>
@@ -1324,23 +1325,53 @@
                         <!-- больше фото справа -->
                         <div class="pm-product-slider-main swiper">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide"><img src="img/catalogCard/image2.png" alt="" class="pm-product__main-img"></div>
                                 <div class="swiper-slide">
-                                    <div class="pm-thumb__video-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                            <path d="M10.7752 4.55822C12.9251 6.01968 14 6.75042 14 8.00022C14 9.25002 12.9251 9.98075 10.7752 11.4422C10.1817 11.8457 9.59312 12.2255 9.05222 12.542C8.57769 12.8197 8.04027 13.1069 7.48387 13.3889C5.33906 14.4758 4.26666 15.0192 3.30483 14.4176C2.343 13.8159 2.25559 12.5563 2.08076 10.0371C2.03132 9.32472 2 8.62632 2 8.00022C2 7.37412 2.03132 6.67572 2.08076 5.9633C2.25559 3.44414 2.343 2.18456 3.30483 1.58288C4.26666 0.981198 5.33906 1.52464 7.48387 2.61153C8.04027 2.89349 8.57769 3.18073 9.05222 3.45841C9.59312 3.77493 10.1817 4.15478 10.7752 4.55822Z" fill="white"/>
-                                        </svg>
+                                    <div class="pm-product__main-img-container">
+                                        <img src="img/catalogCard/image2.png" alt="" class="pm-product__main-img">
                                     </div>
-                                    <video class="pm-product__main-video" poster="img/catalogCard/videoPoster.png" playsinline preload="auto">
-                                        <source src="img/benefitsBlock/video1.mp4" type="video/mp4">
-                                    </video>
                                 </div>
-                                <div class="swiper-slide"><img src="img/catalogCard/image1.png" alt="" class="pm-product__main-img"></div>
-                                <div class="swiper-slide"><img src="img/catalogCard/image2.png" alt="" class="pm-product__main-img"></div>
-                                <div class="swiper-slide"><img src="img/catalogCard/image3.png" alt="" class="pm-product__main-img"></div>
-                                <div class="swiper-slide"><img src="img/catalogCard/image1.png" alt="" class="pm-product__main-img"></div>
-                                <div class="swiper-slide"><img src="img/catalogCard/image1.png" alt="" class="pm-product__main-img"></div>
-                                <div class="swiper-slide"><img src="img/catalogCard/image1.png" alt="" class="pm-product__main-img"></div>
+                                <div class="swiper-slide">
+                                    <div class="pm-product__main-img-container">
+                                        <div class="pm-thumb__video-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M10.7752 4.55822C12.9251 6.01968 14 6.75042 14 8.00022C14 9.25002 12.9251 9.98075 10.7752 11.4422C10.1817 11.8457 9.59312 12.2255 9.05222 12.542C8.57769 12.8197 8.04027 13.1069 7.48387 13.3889C5.33906 14.4758 4.26666 15.0192 3.30483 14.4176C2.343 13.8159 2.25559 12.5563 2.08076 10.0371C2.03132 9.32472 2 8.62632 2 8.00022C2 7.37412 2.03132 6.67572 2.08076 5.9633C2.25559 3.44414 2.343 2.18456 3.30483 1.58288C4.26666 0.981198 5.33906 1.52464 7.48387 2.61153C8.04027 2.89349 8.57769 3.18073 9.05222 3.45841C9.59312 3.77493 10.1817 4.15478 10.7752 4.55822Z" fill="white"/>
+                                            </svg>
+                                        </div>
+                                        <video class="pm-product__main-video" poster="img/catalogCard/videoPoster.png" playsinline preload="auto">
+                                            <source src="img/benefitsBlock/video1.mp4" type="video/mp4">
+                                        </video>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="pm-product__main-img-container">
+                                        <img src="img/catalogCard/image1.png" alt="" class="pm-product__main-img">
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="pm-product__main-img-container">
+                                        <img src="img/catalogCard/image2.png" alt="" class="pm-product__main-img">
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="pm-product__main-img-container">
+                                        <img src="img/catalogCard/image3.png" alt="" class="pm-product__main-img">
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="pm-product__main-img-container">
+                                        <img src="img/catalogCard/image1.png" alt="" class="pm-product__main-img">
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="pm-product__main-img-container">
+                                        <img src="img/catalogCard/image1.png" alt="" class="pm-product__main-img">
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="pm-product__main-img-container">
+                                        <img src="img/catalogCard/image1.png" alt="" class="pm-product__main-img">
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="pm-product-badge" data-da=".pm-product__title-container,1140,first">Хит</div>
@@ -1775,7 +1806,7 @@
                                     <div class="pm-product__download-subtitle">Руководитель группы продаж</div>
                                 </div>
                             </div>
-                            <a href="#" class="pm-btn pm-btn--secondary">Связаться</a>
+                            <button class="pm-btn pm-btn--secondary js-open-popup" data-popup="feedbackPopup">Связаться</button>
                         </div>
                     </div>
                 </div>
@@ -1828,7 +1859,7 @@
                                     </div>
                                 </div>
                                 <div class="pm-product__card-btns">
-                                    <button class="pm-btn pm-btn--primary">Заказать</button>
+                                    <button class="pm-btn pm-btn--primary js-open-popup" data-popup="orderPopup">Заказать</button>
                                     <div class="pm-product__status-wrapper">
                                         <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <path d="M10.1069 16.7735C9.84025 16.7735 9.58691 16.6668 9.40025 16.4801L5.62691 12.7068C5.24025 12.3201 5.24025 11.6801 5.62691 11.2935C6.01358 10.9068 6.65358 10.9068 7.04025 11.2935L10.1069 14.3601L16.9602 7.5068C17.3469 7.12013 17.9869 7.12013 18.3736 7.5068C18.7602 7.89346 18.7602 8.53346 18.3736 8.92013L10.8136 16.4801C10.6269 16.6668 10.3736 16.7735 10.1069 16.7735Z" fill="rgba(34, 197, 94, 1)"/>
@@ -1871,7 +1902,7 @@
                                     </div>
                                 </div>
                                 <div class="pm-product__card-btns">
-                                    <button class="pm-btn pm-btn--primary">Заказать</button>
+                                    <button class="pm-btn pm-btn--primary js-open-popup" data-popup="orderPopup">Заказать</button>
                                     <div class="pm-product__status-wrapper status-unavailable">
                                         <span class="pm-product__status-name">Предзаказ</span>
                                     </div>
@@ -1911,7 +1942,7 @@
                                     </div>
                                 </div>
                                 <div class="pm-product__card-btns">
-                                    <button class="pm-btn pm-btn--primary">Заказать</button>
+                                    <button class="pm-btn pm-btn--primary js-open-popup" data-popup="orderPopup">Заказать</button>
                                     <div class="pm-product__status-wrapper">
                                         <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <path d="M10.1069 16.7735C9.84025 16.7735 9.58691 16.6668 9.40025 16.4801L5.62691 12.7068C5.24025 12.3201 5.24025 11.6801 5.62691 11.2935C6.01358 10.9068 6.65358 10.9068 7.04025 11.2935L10.1069 14.3601L16.9602 7.5068C17.3469 7.12013 17.9869 7.12013 18.3736 7.5068C18.7602 7.89346 18.7602 8.53346 18.3736 8.92013L10.8136 16.4801C10.6269 16.6668 10.3736 16.7735 10.1069 16.7735Z" fill="rgba(34, 197, 94, 1)"/>
@@ -1956,7 +1987,7 @@
                                     </div>
                                 </div>
                                 <div class="pm-product__card-btns">
-                                    <button class="pm-btn pm-btn--primary">Заказать</button>
+                                    <button class="pm-btn pm-btn--primary js-open-popup" data-popup="orderPopup">Заказать</button>
                                     <div class="pm-product__status-wrapper">
                                         <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <path d="M10.1069 16.7735C9.84025 16.7735 9.58691 16.6668 9.40025 16.4801L5.62691 12.7068C5.24025 12.3201 5.24025 11.6801 5.62691 11.2935C6.01358 10.9068 6.65358 10.9068 7.04025 11.2935L10.1069 14.3601L16.9602 7.5068C17.3469 7.12013 17.9869 7.12013 18.3736 7.5068C18.7602 7.89346 18.7602 8.53346 18.3736 8.92013L10.8136 16.4801C10.6269 16.6668 10.3736 16.7735 10.1069 16.7735Z" fill="rgba(34, 197, 94, 1)"/>
@@ -1999,7 +2030,7 @@
                                     </div>
                                 </div>
                                 <div class="pm-product__card-btns">
-                                    <button class="pm-btn pm-btn--primary pm-btn--primary--subtle">Узнать цену</button>
+                                    <button class="pm-btn pm-btn--primary pm-btn--primary--subtle js-open-popup" data-popup="learnPricePopup">Узнать цену</button>
                                     <div class="pm-product__status-wrapper">
                                         <span class="pm-product__status-name">Предзаказ</span>
                                     </div>
@@ -2045,7 +2076,7 @@
                                     </div>
                                 </div>
                                 <div class="pm-product__card-btns">
-                                    <button class="pm-btn pm-btn--primary">Заказать</button>
+                                    <button class="pm-btn pm-btn--primary js-open-popup" data-popup="orderPopup">Заказать</button>
                                     <div class="pm-product__status-wrapper">
                                         <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <path d="M10.1069 16.7735C9.84025 16.7735 9.58691 16.6668 9.40025 16.4801L5.62691 12.7068C5.24025 12.3201 5.24025 11.6801 5.62691 11.2935C6.01358 10.9068 6.65358 10.9068 7.04025 11.2935L10.1069 14.3601L16.9602 7.5068C17.3469 7.12013 17.9869 7.12013 18.3736 7.5068C18.7602 7.89346 18.7602 8.53346 18.3736 8.92013L10.8136 16.4801C10.6269 16.6668 10.3736 16.7735 10.1069 16.7735Z" fill="rgba(34, 197, 94, 1)"/>
@@ -2094,7 +2125,7 @@
                                     </div>
                                 </div>
                                 <div class="pm-product__card-btns">
-                                    <button class="pm-btn pm-btn--primary">Заказать</button>
+                                    <button class="pm-btn pm-btn--primary js-open-popup" data-popup="orderPopup">Заказать</button>
                                     <div class="pm-product__status-wrapper">
                                         <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <path d="M10.1069 16.7735C9.84025 16.7735 9.58691 16.6668 9.40025 16.4801L5.62691 12.7068C5.24025 12.3201 5.24025 11.6801 5.62691 11.2935C6.01358 10.9068 6.65358 10.9068 7.04025 11.2935L10.1069 14.3601L16.9602 7.5068C17.3469 7.12013 17.9869 7.12013 18.3736 7.5068C18.7602 7.89346 18.7602 8.53346 18.3736 8.92013L10.8136 16.4801C10.6269 16.6668 10.3736 16.7735 10.1069 16.7735Z" fill="rgba(34, 197, 94, 1)"/>
@@ -2143,7 +2174,7 @@
                                     </div>
                                 </div>
                                 <div class="pm-product__card-btns">
-                                    <button class="pm-btn pm-btn--primary">Заказать</button>
+                                    <button class="pm-btn pm-btn--primary js-open-popup" data-popup="orderPopup">Заказать</button>
                                     <div class="pm-product__status-wrapper">
                                         <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <path d="M10.1069 16.7735C9.84025 16.7735 9.58691 16.6668 9.40025 16.4801L5.62691 12.7068C5.24025 12.3201 5.24025 11.6801 5.62691 11.2935C6.01358 10.9068 6.65358 10.9068 7.04025 11.2935L10.1069 14.3601L16.9602 7.5068C17.3469 7.12013 17.9869 7.12013 18.3736 7.5068C18.7602 7.89346 18.7602 8.53346 18.3736 8.92013L10.8136 16.4801C10.6269 16.6668 10.3736 16.7735 10.1069 16.7735Z" fill="rgba(34, 197, 94, 1)"/>
@@ -2192,7 +2223,7 @@
                                     </div>
                                 </div>
                                 <div class="pm-product__card-btns">
-                                    <button class="pm-btn pm-btn--primary">Заказать</button>
+                                    <button class="pm-btn pm-btn--primary js-open-popup" data-popup="orderPopup">Заказать</button>
                                     <div class="pm-product__status-wrapper">
                                         <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <path d="M10.1069 16.7735C9.84025 16.7735 9.58691 16.6668 9.40025 16.4801L5.62691 12.7068C5.24025 12.3201 5.24025 11.6801 5.62691 11.2935C6.01358 10.9068 6.65358 10.9068 7.04025 11.2935L10.1069 14.3601L16.9602 7.5068C17.3469 7.12013 17.9869 7.12013 18.3736 7.5068C18.7602 7.89346 18.7602 8.53346 18.3736 8.92013L10.8136 16.4801C10.6269 16.6668 10.3736 16.7735 10.1069 16.7735Z" fill="rgba(34, 197, 94, 1)"/>
@@ -2241,7 +2272,7 @@
                                     </div>
                                 </div>
                                 <div class="pm-product__card-btns">
-                                    <button class="pm-btn pm-btn--primary">Заказать</button>
+                                    <button class="pm-btn pm-btn--primary js-open-popup" data-popup="orderPopup">Заказать</button>
                                     <div class="pm-product__status-wrapper">
                                         <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <path d="M10.1069 16.7735C9.84025 16.7735 9.58691 16.6668 9.40025 16.4801L5.62691 12.7068C5.24025 12.3201 5.24025 11.6801 5.62691 11.2935C6.01358 10.9068 6.65358 10.9068 7.04025 11.2935L10.1069 14.3601L16.9602 7.5068C17.3469 7.12013 17.9869 7.12013 18.3736 7.5068C18.7602 7.89346 18.7602 8.53346 18.3736 8.92013L10.8136 16.4801C10.6269 16.6668 10.3736 16.7735 10.1069 16.7735Z" fill="rgba(34, 197, 94, 1)"/>
@@ -2290,7 +2321,7 @@
                                     </div>
                                 </div>
                                 <div class="pm-product__card-btns">
-                                    <button class="pm-btn pm-btn--primary">Заказать</button>
+                                    <<button class="pm-btn pm-btn--primary js-open-popup" data-popup="orderPopup">Заказать</button>
                                     <div class="pm-product__status-wrapper">
                                         <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <path d="M10.1069 16.7735C9.84025 16.7735 9.58691 16.6668 9.40025 16.4801L5.62691 12.7068C5.24025 12.3201 5.24025 11.6801 5.62691 11.2935C6.01358 10.9068 6.65358 10.9068 7.04025 11.2935L10.1069 14.3601L16.9602 7.5068C17.3469 7.12013 17.9869 7.12013 18.3736 7.5068C18.7602 7.89346 18.7602 8.53346 18.3736 8.92013L10.8136 16.4801C10.6269 16.6668 10.3736 16.7735 10.1069 16.7735Z" fill="rgba(34, 197, 94, 1)"/>
@@ -2339,7 +2370,7 @@
                                     </div>
                                 </div>
                                 <div class="pm-product__card-btns">
-                                    <button class="pm-btn pm-btn--primary">Заказать</button>
+                                    <button class="pm-btn pm-btn--primary js-open-popup" data-popup="orderPopup">Заказать</button>
                                     <div class="pm-product__status-wrapper">
                                         <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <path d="M10.1069 16.7735C9.84025 16.7735 9.58691 16.6668 9.40025 16.4801L5.62691 12.7068C5.24025 12.3201 5.24025 11.6801 5.62691 11.2935C6.01358 10.9068 6.65358 10.9068 7.04025 11.2935L10.1069 14.3601L16.9602 7.5068C17.3469 7.12013 17.9869 7.12013 18.3736 7.5068C18.7602 7.89346 18.7602 8.53346 18.3736 8.92013L10.8136 16.4801C10.6269 16.6668 10.3736 16.7735 10.1069 16.7735Z" fill="rgba(34, 197, 94, 1)"/>
@@ -2388,7 +2419,7 @@
                                     </div>
                                 </div>
                                 <div class="pm-product__card-btns">
-                                    <button class="pm-btn pm-btn--primary">Заказать</button>
+                                    <button class="pm-btn pm-btn--primary js-open-popup" data-popup="orderPopup">Заказать</button>
                                     <div class="pm-product__status-wrapper">
                                         <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <path d="M10.1069 16.7735C9.84025 16.7735 9.58691 16.6668 9.40025 16.4801L5.62691 12.7068C5.24025 12.3201 5.24025 11.6801 5.62691 11.2935C6.01358 10.9068 6.65358 10.9068 7.04025 11.2935L10.1069 14.3601L16.9602 7.5068C17.3469 7.12013 17.9869 7.12013 18.3736 7.5068C18.7602 7.89346 18.7602 8.53346 18.3736 8.92013L10.8136 16.4801C10.6269 16.6668 10.3736 16.7735 10.1069 16.7735Z" fill="rgba(34, 197, 94, 1)"/>
@@ -2437,7 +2468,7 @@
                                     </div>
                                 </div>
                                 <div class="pm-product__card-btns">
-                                    <button class="pm-btn pm-btn--primary">Заказать</button>
+                                    <button class="pm-btn pm-btn--primary js-open-popup" data-popup="orderPopup">Заказать</button>
                                     <div class="pm-product__status-wrapper">
                                         <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <path d="M10.1069 16.7735C9.84025 16.7735 9.58691 16.6668 9.40025 16.4801L5.62691 12.7068C5.24025 12.3201 5.24025 11.6801 5.62691 11.2935C6.01358 10.9068 6.65358 10.9068 7.04025 11.2935L10.1069 14.3601L16.9602 7.5068C17.3469 7.12013 17.9869 7.12013 18.3736 7.5068C18.7602 7.89346 18.7602 8.53346 18.3736 8.92013L10.8136 16.4801C10.6269 16.6668 10.3736 16.7735 10.1069 16.7735Z" fill="rgba(34, 197, 94, 1)"/>
@@ -2486,7 +2517,7 @@
                                     </div>
                                 </div>
                                 <div class="pm-product__card-btns">
-                                    <button class="pm-btn pm-btn--primary">Заказать</button>
+                                    <button class="pm-btn pm-btn--primary js-open-popup" data-popup="orderPopup">Заказать</button>
                                     <div class="pm-product__status-wrapper">
                                         <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <path d="M10.1069 16.7735C9.84025 16.7735 9.58691 16.6668 9.40025 16.4801L5.62691 12.7068C5.24025 12.3201 5.24025 11.6801 5.62691 11.2935C6.01358 10.9068 6.65358 10.9068 7.04025 11.2935L10.1069 14.3601L16.9602 7.5068C17.3469 7.12013 17.9869 7.12013 18.3736 7.5068C18.7602 7.89346 18.7602 8.53346 18.3736 8.92013L10.8136 16.4801C10.6269 16.6668 10.3736 16.7735 10.1069 16.7735Z" fill="rgba(34, 197, 94, 1)"/>
@@ -2906,7 +2937,8 @@
                 <div class="pm-input__container">
                     <div class="pm-input-wrapper pm-input-wrapper--phone">
                         <div class="pm-input__phone-code">+7</div>
-                        <input class="pm-input" type="tel" name="tel" id="orderTel" required autocomplete="tel-national" aria-label="Телефон" placeholder="(999) 999-99-99">
+                        <label for="orderTel" class="pm-input-label">(999) 999-99-99<span class="pm-required">*</span></label>
+                        <input class="pm-input" type="tel" name="tel" id="orderTel" required autocomplete="tel-national">
                     </div>
                     <div class="pm-input__error">Заполните это поле</div>
                 </div>
@@ -3018,6 +3050,140 @@
     </div>
 </div>
 
+<div class="pm-popup-overlay" id="learnPricePopup">
+    <form class="pm-popup-feedback__container" id="learnPriceForm" novalidate>
+        <div class="pm-popup-feedback__header">
+            <div class="pm-popup-feedback__header-content">
+                <div class="pm-popup-feedback__header-title">Узнать цену</div>
+            </div>
+            <button class="pm-menu-mobile__header-btn pm-btn--neutral close-feedback-popup">
+                <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M15.7123 16.7729L7.22699 8.28765C6.93708 7.99773 6.93708 7.5169 7.22699 7.22699C7.51691 6.93707 7.99774 6.93707 8.28765 7.22699L16.7729 15.7123C17.0628 16.0022 17.0628 16.483 16.7729 16.7729C16.483 17.0628 16.0022 17.0628 15.7123 16.7729Z" fill="black"/>
+                    <path d="M7.22706 16.773C6.93715 16.4831 6.93715 16.0023 7.22706 15.7124L15.7123 7.22711C16.0023 6.93719 16.4831 6.93719 16.773 7.22711C17.0629 7.51702 17.0629 7.99785 16.773 8.28777L8.28772 16.773C7.99781 17.063 7.51698 17.063 7.22706 16.773Z" fill="black"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="pm-popup-feedback__content">
+            <div class="pm-popup-feedback__list">
+                <div class="pm-input__container">
+                    <div class="pm-input-wrapper">
+                        <label for="learnPriceName" class="pm-input-label">Ваше имя<span class="pm-required">*</span></label>
+                        <input class="pm-input" type="text" name="firstName" id="learnPriceName" required autocomplete="on">
+                    </div>
+
+                    <div class="pm-input__error">Заполните это поле</div>
+                </div>
+
+                <div class="pm-input__container">
+                    <div class="pm-input-wrapper pm-input-wrapper--phone">
+                        <div class="pm-input__phone-code">+7</div>
+                        <label for="learnPriceTel" class="pm-input-label">(999) 999-99-99<span class="pm-required">*</span></label>
+                        <input class="pm-input" type="tel" name="tel" id="learnPriceTel" required autocomplete="tel-national">
+                    </div>
+                    <div class="pm-input__error">Заполните это поле</div>
+                </div>
+
+                <div class="pm-input__container">
+                    <div class="pm-input-wrapper">
+                        <label for="learnPriceEmail" class="pm-input-label">Email</label>
+                        <input class="pm-input" type="email" name="email" id="learnPriceEmail" autocomplete="on">
+                    </div>
+                    <div class="pm-input__error">Заполните это поле</div>
+                </div>
+            </div>
+
+            <div class="pm-popup-feedback__list">
+                <div class="pm-input__container">
+                    <div class="pm-input-wrapper">
+                        <label for="learnPriceProductName" class="pm-input-label">Продукт</label>
+                        <input class="pm-input" type="text" name="productName" id="learnPriceProductName" value="Asic майнер Bitmain Antminer S21 XP 270 TH/s" readonly>
+                    </div>
+                </div>
+
+                <div class="pm-input__container">
+                    <div class="pm-input-wrapper pm-counter">
+                        <button type="button" class="pm-counter__btn pm-counter__btn--minus pm-btn-icon">
+                            <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M18 12.75H6C5.59 12.75 5.25 12.41 5.25 12C5.25 11.59 5.59 11.25 6 11.25H18C18.41 11.25 18.75 11.59 18.75 12C18.75 12.41 18.41 12.75 18 12.75Z" fill="black"/>
+                            </svg>
+                        </button>
+
+                        <div class="pm-counter__value pm-input">
+                            <span class="pm-counter__number">1</span>
+                            <span class="pm-counter__unit">шт.</span>
+                        </div>
+
+                        <input
+                                class="pm-counter__input"
+                                type="number"
+                                name="productCount"
+                                id="learnPriceProductCount"
+                                value="1"
+                                min="1"
+                        >
+
+                        <button type="button" class="pm-counter__btn pm-counter__btn--plus pm-btn-icon">
+                            <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M18 12.75H6C5.59 12.75 5.25 12.41 5.25 12C5.25 11.59 5.59 11.25 6 11.25H18C18.41 11.25 18.75 11.59 18.75 12C18.75 12.41 18.41 12.75 18 12.75Z" fill="black"/>
+                                <path d="M12 18.75C11.59 18.75 11.25 18.41 11.25 18V6C11.25 5.59 11.59 5.25 12 5.25C12.41 5.25 12.75 5.59 12.75 6V18C12.75 18.41 12.41 18.75 12 18.75Z" fill="black"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pm-input__container">
+                <div class="pm-popup-feedback__check-container">
+                    <input type="checkbox" name="agreement" id="learnPriceAgreement" class="pm-checkbox" required>
+                    <label for="learnPriceAgreement" class="pm-checkbox-label-container">
+                        <span class="pm-checkbox-label">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none">
+                              <path d="M3.57929 7C3.37919 7 3.18909 6.92187 3.04902 6.78514L0.217609 4.02128C-0.0725363 3.73805 -0.0725363 3.26927 0.217609 2.98605C0.507754 2.70283 0.987994 2.70283 1.27814 2.98605L3.57929 5.2323L8.72186 0.212417C9.01201 -0.0708057 9.49225 -0.0708057 9.78239 0.212417C10.0725 0.49564 10.0725 0.964422 9.78239 1.24765L4.10955 6.78514C3.96948 6.92187 3.77939 7 3.57929 7Z" fill="white"/>
+                            </svg>
+                        </span>
+                    </label>
+
+                    <div class="pm-checkbox-text">Я согласен на обработку <a href="#" target="_blank" class="pm-underline">персональных <br>данных</a> и с <a href="#" target="_blank" class="pm-underline">политикой конфиденциальности</a></div>
+                </div>
+
+                <div class="pm-input__error">Заполните это поле</div>
+            </div>
+        </div>
+
+        <div class="pm-popup-feedback__btn-container">
+            <button type="submit" class="pm-btn pm-btn--primary">Отправить</button>
+        </div>
+    </form>
+
+    <div class="pm-popup-feedback__container" id="learnPriceSuccess">
+        <div class="pm-popup-feedback__header">
+            <div class="pm-popup-feedback__header-content"></div>
+            <button class="pm-menu-mobile__header-btn pm-btn--neutral close-feedback-popup">
+                <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M15.7123 16.7729L7.22699 8.28765C6.93708 7.99773 6.93708 7.5169 7.22699 7.22699C7.51691 6.93707 7.99774 6.93707 8.28765 7.22699L16.7729 15.7123C17.0628 16.0022 17.0628 16.483 16.7729 16.7729C16.483 17.0628 16.0022 17.0628 15.7123 16.7729Z" fill="black"/>
+                    <path d="M7.22706 16.773C6.93715 16.4831 6.93715 16.0023 7.22706 15.7124L15.7123 7.22711C16.0023 6.93719 16.4831 6.93719 16.773 7.22711C17.0629 7.51702 17.0629 7.99785 16.773 8.28777L8.28772 16.773C7.99781 17.063 7.51698 17.063 7.22706 16.773Z" fill="black"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="pm-popup-feedback__content">
+            <div class="pm-popup__success-icon-wrapper">
+                <svg class="pm-popup__success-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M29.3332 15.9998C29.3332 23.3636 23.3636 29.3332 15.9998 29.3332C8.63604 29.3332 2.6665 23.3636 2.6665 15.9998C2.6665 8.63604 8.63604 2.6665 15.9998 2.6665C23.3636 2.6665 29.3332 8.63604 29.3332 15.9998ZM21.3736 11.9594C21.7641 12.3499 21.7641 12.9831 21.3736 13.3736L14.7069 20.0403C14.3164 20.4308 13.6833 20.4308 13.2927 20.0403L10.6261 17.3736C10.2355 16.9831 10.2355 16.3499 10.6261 15.9594C11.0166 15.5689 11.6498 15.5689 12.0403 15.9594L13.9998 17.919L16.9796 14.9392L19.9594 11.9594C20.3499 11.5689 20.9831 11.5689 21.3736 11.9594Z" fill="white"/>
+                </svg>
+            </div>
+
+            <div class="pm-popup__success-title">Получили вашу заявку</div>
+            <div class="pm-popup__success-subtitle">Свяжемся с вами в ближайшее время!</div>
+        </div>
+
+        <div class="pm-popup-feedback__btn-container">
+            <button class="pm-btn pm-btn--primary close-feedback-popup">Отлично</button>
+        </div>
+    </div>
+</div>
+
 <div class="pm-popup-overlay" id="leasingPopup">
     <form class="pm-popup-feedback__container" id="leasingForm" novalidate>
         <div class="pm-popup-feedback__header">
@@ -3044,9 +3210,13 @@
                 </div>
 
                 <div class="pm-input__container">
-                    <div class="pm-input-wrapper pm-input-wrapper--phone">
-                        <div class="pm-input__phone-code">+7</div>
-                        <input class="pm-input" type="tel" name="tel" id="leasingTel" required autocomplete="tel-national" aria-label="Телефон" placeholder="(999) 999-99-99">
+                    <div class="pm-input__container">
+                        <div class="pm-input-wrapper pm-input-wrapper--phone">
+                            <div class="pm-input__phone-code">+7</div>
+                            <label for="leasingTel" class="pm-input-label">(999) 999-99-99<span class="pm-required">*</span></label>
+                            <input class="pm-input" type="tel" name="tel" id="leasingTel" required autocomplete="tel-national">
+                        </div>
+                        <div class="pm-input__error">Заполните это поле</div>
                     </div>
                     <div class="pm-input__error">Заполните это поле</div>
                 </div>
@@ -3206,7 +3376,8 @@
                 <div class="pm-input__container">
                     <div class="pm-input-wrapper pm-input-wrapper--phone">
                         <div class="pm-input__phone-code">+7</div>
-                        <input class="pm-input" type="tel" name="tel" id="priceTel" required autocomplete="tel-national" aria-label="Телефон" placeholder="(999) 999-99-99">
+                        <label for="priceTel" class="pm-input-label">(999) 999-99-99<span class="pm-required">*</span></label>
+                        <input class="pm-input" type="tel" name="tel" id="priceTel" required autocomplete="tel-national">
                     </div>
                     <div class="pm-input__error">Заполните это поле</div>
                 </div>
@@ -3319,7 +3490,8 @@
     </button>
 </div>
 
-<footer class="pm-footer">
+<!--у футера доп класс-->
+<footer class="pm-footer catalog-footer">
     <div class="pm-footer__dec-part"></div>
     <div class="pm-section footer-section">
         <div class="pm-container">
@@ -3346,14 +3518,15 @@
                                     <div class="pm-input__container">
                                         <div class="pm-input-wrapper pm-input-wrapper--phone">
                                             <div class="pm-input__phone-code">+7</div>
-                                            <input class="pm-input" type="tel" name="tel" id="footertel" required autocomplete="tel-national" aria-label="Телефон" placeholder="(999) 999-99-99">
+                                            <label for="footerTel" class="pm-input-label">(999) 999-99-99<span class="pm-required">*</span></label>
+                                            <input class="pm-input" type="tel" name="tel" id="footerTel" required autocomplete="tel-national">
                                         </div>
                                         <div class="pm-input__error">Заполните это поле</div>
                                     </div>
 
                                     <div class="pm-input__container">
                                         <div class="pm-input-wrapper">
-                                            <label for="footeremail" class="pm-input-label">Email</label>
+                                            <label for="footerEmail" class="pm-input-label">Email</label>
                                             <input class="pm-input" type="email" name="email" id="footerEmail" autocomplete="on">
                                         </div>
                                         <div class="pm-input__error">Заполните это поле</div>
@@ -3657,7 +3830,7 @@
                 <div class="pm-footer__divider"></div>
 
                 <div class="pm-footer__copyright-container">
-                    <div class="pm-copyright-text">© Promminer Pool, 2026. Все права защищены. Не является публичной офертой</div>
+                    <div class="pm-copyright-text">© Promminer, 2026. Все права защищены. Не является публичной офертой</div>
                     <div class="pm-footer__copyright-list">
                         <a href="#" target="_blank" class="pm-copyright-text">Политика конфиденциальности</a>
                     </div>
@@ -3667,19 +3840,37 @@
     </div>
 </footer>
 
+<script>
+    const checkImage = (img) => {
+        const container = img.closest('.pm-product__main-img-container');
+
+        if (img.offsetHeight > container.offsetHeight) {
+            container.classList.add('is-large');
+        }
+    };
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.pm-product__main-img').forEach(img => {
+            if (img.complete) {
+                checkImage(img);
+            } else {
+                img.onload = () => checkImage(img);
+            }
+        });
+    });
+</script>
+
 <!--фиксированная шапка-->
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const header = document.querySelector('.pm-product-header');
-        const target = document.querySelector('.pm-product-details');
+        const target = document.querySelector('.calculator-container');
 
         if (!header || !target) return;
 
         const onScroll = () => {
             const rect = target.getBoundingClientRect();
 
-            // когда до конца блока остается 100px
-            if (rect.bottom <= window.innerHeight - 500) {
+            if (rect.bottom <= window.innerHeight - 400) {
                 header.classList.add('active');
             } else {
                 header.classList.remove('active');
@@ -3971,6 +4162,8 @@
         initFormPopup('orderPopup', 'orderForm');
         initFormPopup('leasingPopup', 'leasingForm');
         initFormPopup('pricePopup', 'priceForm');
+        initFormPopup('feedbackPopup', 'feedbackForm');
+        initFormPopup('learnPricePopup', 'learnPriceForm');
     });
 </script>
 
@@ -4200,15 +4393,15 @@
             spaceBetween: 4,
             freeMode: true,
             watchSlidesProgress: true,
+            navigation: {
+                nextEl: ".swiper-button-next.pm-product-slide__nav-btn",
+                prevEl: ".swiper-button-prev",
+            },
         });
 
         const productMainSwiper = new Swiper(".pm-product-slider-main", {
             slidesPerView: 1,
             effect: 'fade',
-            navigation: {
-                nextEl: ".swiper-button-next.pm-product-slide__nav-btn",
-                prevEl: ".swiper-button-prev",
-            },
             pagination: {
                 el: document.querySelector('.pm-product-slider').querySelector('.pm-product-pagination'),
                 clickable: true,
@@ -4303,9 +4496,30 @@
         }
     });
 
-    const footerPhoneInput = document.getElementById('footertel');
+    const footerPhoneInput = document.getElementById('footerTel');
     IMask(footerPhoneInput, {
         mask: '(000) 000-00-00'
+    });
+
+    document.querySelectorAll('.pm-input-wrapper').forEach(container => {
+        const input = container.querySelector('.pm-input');
+
+        // При фокусе добавляем класс
+        input.addEventListener('focus', () => {
+            container.classList.add('active');
+        });
+
+        // При blur убираем класс, если инпут пустой
+        input.addEventListener('blur', () => {
+            if (!input.value) {
+                container.classList.remove('active');
+            }
+        });
+
+        // Если инпут уже заполнен при загрузке, показываем активное состояние
+        if (input.value) {
+            container.classList.add('active');
+        }
     });
 </script>
 

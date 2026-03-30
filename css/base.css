@@ -433,6 +433,7 @@ input.pm-input:-webkit-autofill {
     -webkit-box-pack: start;
     -ms-flex-pack: start;
     justify-content: flex-start;
+    align-items: center;
     gap: 12px;
 }
 
@@ -520,6 +521,10 @@ input.pm-input:-webkit-autofill {
     line-height: var(--caption-m-lh);
 }
 
+.pm-input-wrapper.active.pm-input-wrapper--phone .pm-input-label{
+    display: none;
+}
+
 .pm-input-wrapper.active .pm-input-label .pm-required{
     color: inherit;
 }
@@ -551,8 +556,7 @@ input.pm-input:-webkit-autofill {
     color: #171717;
 }
 
-.pm-input-wrapper.active .pm-input,
-.pm-input-wrapper--phone .pm-input {
+.pm-input-wrapper.active .pm-input{
     position: unset;
     opacity: 1;
     -webkit-transform: none;
