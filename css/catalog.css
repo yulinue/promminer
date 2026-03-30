@@ -2558,3 +2558,7 @@ h1.pm-breadcrumb-title{
     align-items: center;
     gap: 8px;
 }
+
+.pm-container.calculator-container{
+    z-index: auto;
+}
