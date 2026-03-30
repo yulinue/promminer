@@ -1300,9 +1300,7 @@
                                         <source src="img/benefitsBlock/video1.mp4" type="video/mp4">
                                     </video>
                                 </div>
-                                <div class="swiper-slide pm-product-thumb">
-                                    <img src="img/catalogCard/image1.png" alt="" class="pm-product__thumb-img">
-                                </div>
+                                <div class="swiper-slide pm-product-thumb"><img src="img/catalogCard/image1.png" alt="" class="pm-product__thumb-img"></div>
                                 <div class="swiper-slide pm-product-thumb"><img src="img/catalogCard/image2.png" alt="" class="pm-product__thumb-img"></div>
                                 <div class="swiper-slide pm-product-thumb"><img src="img/catalogCard/image3.png" alt="" class="pm-product__thumb-img"></div>
                                 <div class="swiper-slide pm-product-thumb"><img src="img/catalogCard/image1.png" alt="" class="pm-product__thumb-img"></div>
@@ -3770,7 +3768,7 @@
                 });
 
                 // выставляем открытый слайд на тот, по которому кликнули
-                lightboxSwiper.slideTo(index, 0, false);
+                lightboxSwiper.slideToLoop(index - 1 );
             });
         });
 

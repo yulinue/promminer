@@ -392,6 +392,7 @@ h1.pm-breadcrumb-title{
 .pm-product-slider-main .swiper-slide .pm-thumb__video-icon{
     width: 70px;
     height: 70px;
+    pointer-events: none;
 }
 
 .pm-product-slider-main .swiper-slide .pm-thumb__video-icon svg{
@@ -409,6 +410,7 @@ h1.pm-breadcrumb-title{
     }
 }
 
+
 .pm-product__main-img,
 .pm-product__main-video{
     width: 100%;
@@ -417,6 +419,11 @@ h1.pm-breadcrumb-title{
     object-fit: contain;
     border-radius: inherit;
     cursor: pointer;
+}
+
+.pm-product-thumb .pm-product__main-video{
+    object-fit: cover;
+    -o-object-fit: cover;
 }
 
 #productLightbox .pm-lightbox__content{
