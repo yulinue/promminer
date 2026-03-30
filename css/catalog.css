@@ -2416,9 +2416,13 @@ h1.pm-breadcrumb-title{
     -webkit-transform: translateY(-100%);
     -ms-transform: translateY(-100%);
     transform: translateY(-100%);
-    -webkit-transition: .3s ease;
-    -o-transition: .3s ease;
-    transition: .3s ease;
+    -webkit-transition: .3s ease, margin-left 0s, width 0s;
+    -o-transition: .3s ease, margin-left 0s, width 0s;
+    transition: .3s ease, margin-left 0s, width 0s;
+}
+.lock .pm-product-header{
+    width: calc(100% + var(--scrollbar-width));
+    margin-left: calc(var(--scrollbar-width) * -1);
 }
 .pm-product-header.active{
     opacity: 1;
