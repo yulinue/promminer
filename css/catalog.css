@@ -1580,13 +1580,18 @@ h1.pm-breadcrumb-title{
     gap: 12px;
 
     position: sticky;
-    top: 100px;
+    top: 188px;
     -ms-flex-item-align: start;
     -ms-grid-row-align: start;
     align-self: start;
     height: -webkit-fit-content;
     height: -moz-fit-content;
     height: fit-content;
+}
+@media(max-width: 1120px){
+    .pm-product__docs-container{
+        top: 100px;
+    }
 }
 @media(max-width: 991px){
     .pm-product__docs-container{
