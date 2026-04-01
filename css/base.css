@@ -759,6 +759,178 @@ input.pm-input:-webkit-autofill {
     background: #fff;
 }
 
+
+.pm-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 24px;
+}
+
+.pm-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.pm-switch-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--control-neutral-primary);
+    -webkit-transition: .3s;
+    transition: .3s;
+    border-radius: var(--radius-full);
+}
+
+.pm-switch-slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .3s;
+    transition: .3s;
+    border-radius: var(--radius-full);
+}
+
+.pm-switch input:checked + .pm-switch-slider {
+    background-color: var(--control-primary);
+}
+
+.pm-switch-slider:active{
+    background: var(--control-neutral-primary-hover);
+    opacity: var(--active);
+}
+
+.pm-switch input:checked + .pm-switch-slider:active {
+    background-color: var(--control-primary-hover);
+    opacity: var(--active);
+}
+
+@media(any-hover: hover){
+    .pm-switch-slider:hover{
+        background: var(--control-neutral-primary-hover);
+    }
+
+    .pm-switch input:checked + .pm-switch-slider:hover {
+        background-color: var(--control-primary-hover);
+    }
+}
+
+.pm-switch input:checked + .pm-switch-slider:before {
+    -webkit-transform: translateX(16px);
+    -ms-transform: translateX(16px);
+    transform: translateX(16px);
+}
+
+.pm-select {
+    position: relative;
+    width: 100%;
+    max-width: 314px;
+    display: flex;
+    justify-content: flex-end;
+    height: fit-content;
+}
+
+.pm-select__selected {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 8px 0;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000;
+}
+
+.pm-select__arrow {
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+.pm-select__arrow--mobile{
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+@media (max-width: 1130px) {
+    .pm-select__arrow{
+        display: none;
+    }
+    .pm-select__arrow--mobile{
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+ul.pm-select__dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    margin: 0;
+    padding: 8px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    list-style: none;
+    background: #FFF;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px 0 rgba(203, 208, 233, 0.40);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.pm-select__dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.pm-select__option {
+    padding: 8px 0;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 600;
+    color: var(--content-base-primary);
+    transition: background 0.2s ease;
+}
+
+.pm-select__option.selected {
+    position: relative;
+}
+
+.pm-select__option::before{
+    content: unset;
+}
+
+.pm-select__option.selected::after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M10.1064 16.7735C9.83976 16.7735 9.58643 16.6668 9.39976 16.4801L5.62643 12.7068C5.23976 12.3201 5.23976 11.6801 5.62643 11.2935C6.01309 10.9068 6.65309 10.9068 7.03976 11.2935L10.1064 14.3601L16.9598 7.5068C17.3464 7.12013 17.9864 7.12013 18.3731 7.5068C18.7598 7.89346 18.7598 8.53346 18.3731 8.92013L10.8131 16.4801C10.6264 16.6668 10.3731 16.7735 10.1064 16.7735Z' fill='rgba(112, 134, 252, 1)'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 /* ========================
    BUTTONS
 ======================== */
@@ -917,11 +1089,18 @@ input.pm-input:-webkit-autofill {
     line-height: 1.25;
     transition: .3s ease;
 }
+.pm-btn--link.pm-btn--link--secondary{
+    color: var(--content-base-primary);
+}
 @media(max-width: 1280px){
     .pm-btn--link{
         font-size: 14px;
         line-height: 18px;
     }
+}
+
+.pm-btn--link.pm-btn--link--secondary:active{
+    opacity: var(--active);
 }
 
 .pm-btn--link .pm-btn-text{

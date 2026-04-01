@@ -1274,7 +1274,8 @@
     display: flex;
 }
 
-.swiper-slide.pm-popular__card{
+.swiper-slide.pm-popular__card,
+.pm-popular__card{
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
