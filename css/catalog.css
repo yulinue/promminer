@@ -3011,8 +3011,10 @@ h1.pm-breadcrumb-title{
     cursor: pointer;
 }
 
-.pm-filter__item-content:not(:has(.pm-filter-item__slider)){
-    margin-right: 5px;
+@media(min-width: 1131px){
+    .pm-filter__item-content:not(:has(.pm-filter-item__slider)){
+        margin-right: 5px;
+    }
 }
 
 .pm-filter__item-content:has(.pm-filter-item__slider){
@@ -3372,6 +3374,11 @@ h1.pm-breadcrumb-title{
     padding: 0;
     flex-direction: column;
     justify-content: flex-end;
+}
+@media (min-width: 1131px) {
+    .pm-popup-overlay#sortPopup,.pm-popup-overlay#filterPopup{
+        display: none;
+    }
 }
 @media(max-width: 1130px){
     #sortPopup .pm-menu-popup__container{
