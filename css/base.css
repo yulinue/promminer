@@ -505,7 +505,7 @@ input.pm-input:-webkit-autofill {
 
 .pm-input-label,
 .pm-input::placeholder {
-    color: var(--content-base-secondary);
+    color: var(--content-base-secondary) !important;
     /* Body/M/Semi Bold */
     font-size: var(--body-m-fs);
     font-weight: 600;
