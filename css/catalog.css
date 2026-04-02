@@ -2160,6 +2160,10 @@ h1.pm-breadcrumb-title{
     .pm-catalog__products-grid .pm-product-card .pm-popular__card-image{
         max-height: 289px;
     }
+
+    .pm-catalog__products-grid{
+        margin-bottom: 8px;
+    }
 }
 
 .pm-product-card .pm-card-dots{
@@ -4324,6 +4328,10 @@ h1.pm-breadcrumb-title{
         font-size: 14px;
         line-height: 18px;
         height: 24px;
+    }
+
+    .pm-catalog-desc{
+        margin-top: 8px;
     }
 }
 
