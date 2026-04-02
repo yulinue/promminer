@@ -914,7 +914,12 @@ ul.pm-select__dropdown {
     line-height: 20px;
     font-weight: 600;
     color: var(--content-base-primary);
-    transition: background 0.2s ease;
+    transition: background 0.2s ease, color .3s ease;
+}
+@media(any-hover: hover){
+    .pm-select__option:hover{
+        color: var(--content-sentiment-accent);
+    }
 }
 
 .pm-select__option.selected {
