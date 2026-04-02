@@ -1382,7 +1382,7 @@
       <div class="pm-catalog__main-wrapper">
         <!--фильтр-->
         <form action="" class="pm-filter-container" data-da=".pm-filter-mobile__container,1130,last">
-          <div class="pm-filter__item-container">
+          <div class="pm-filter__item-container" data-filter="price">
             <div class="pm-filter__item-header">
               <h3 class="pm-filter__item-title">Цена</h3>
               <button class="pm-filter__area-toggle-btn" aria-expanded="true">
@@ -1392,7 +1392,7 @@
                 </svg>
               </button>
             </div>
-            <div class="pm-filter__item-content">
+            <div class="pm-filter__item-content" data-filter-content="price">
               <div class="pm-filter-item__output-container">
                 <input class="pm-filter-item__output min-val" type="text" aria-label="Минимальная цена">
                 <input class="pm-filter-item__output max-val" type="text" aria-label="Максимальная цена">
@@ -1407,7 +1407,7 @@
             </div>
           </div>
 
-          <div class="pm-filter__item-container">
+          <div class="pm-filter__item-container" data-filter="hashrate">
             <div class="pm-filter__item-header">
               <h3 class="pm-filter__item-title">Хешрейт</h3>
               <button class="pm-filter__area-toggle-btn" aria-expanded="true">
@@ -1417,7 +1417,7 @@
                 </svg>
               </button>
             </div>
-            <div class="pm-filter__item-content">
+            <div class="pm-filter__item-content" data-filter-content="hashrate">
               <div class="pm-filter-item__output-container">
                 <input class="pm-filter-item__output min-val" type="text" aria-label="Минимальный хешрейт">
                 <input class="pm-filter-item__output max-val" type="text" aria-label="Максимальный хешрейт">
@@ -1488,6 +1488,50 @@
                 <div class="pm-checkbox-text">Equihash</div>
               </div>
               <div class="pm-popup-feedback__check-container">
+                <input type="checkbox" class="pm-checkbox" id="X2" required>
+                <label for="X2" class="pm-checkbox-label-container">
+                        <span class="pm-checkbox-label">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none">
+                              <path d="M3.57929 7C3.37919 7 3.18909 6.92187 3.04902 6.78514L0.217609 4.02128C-0.0725363 3.73805 -0.0725363 3.26927 0.217609 2.98605C0.507754 2.70283 0.987994 2.70283 1.27814 2.98605L3.57929 5.2323L8.72186 0.212417C9.01201 -0.0708057 9.49225 -0.0708057 9.78239 0.212417C10.0725 0.49564 10.0725 0.964422 9.78239 1.24765L4.10955 6.78514C3.96948 6.92187 3.77939 7 3.57929 7Z" fill="white"/>
+                            </svg>
+                        </span>
+                </label>
+                <div class="pm-checkbox-text">X11</div>
+              </div>
+              <div class="pm-popup-feedback__check-container">
+                <input type="checkbox" class="pm-checkbox" id="Eth" required>
+                <label for="Eth" class="pm-checkbox-label-container">
+                        <span class="pm-checkbox-label">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none">
+                              <path d="M3.57929 7C3.37919 7 3.18909 6.92187 3.04902 6.78514L0.217609 4.02128C-0.0725363 3.73805 -0.0725363 3.26927 0.217609 2.98605C0.507754 2.70283 0.987994 2.70283 1.27814 2.98605L3.57929 5.2323L8.72186 0.212417C9.01201 -0.0708057 9.49225 -0.0708057 9.78239 0.212417C10.0725 0.49564 10.0725 0.964422 9.78239 1.24765L4.10955 6.78514C3.96948 6.92187 3.77939 7 3.57929 7Z" fill="white"/>
+                            </svg>
+                        </span>
+                </label>
+                <div class="pm-checkbox-text">Ethash</div>
+              </div>
+              <div class="pm-popup-feedback__check-container">
+                <input type="checkbox" class="pm-checkbox" id="Equ" required>
+                <label for="Equ" class="pm-checkbox-label-container">
+                        <span class="pm-checkbox-label">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none">
+                              <path d="M3.57929 7C3.37919 7 3.18909 6.92187 3.04902 6.78514L0.217609 4.02128C-0.0725363 3.73805 -0.0725363 3.26927 0.217609 2.98605C0.507754 2.70283 0.987994 2.70283 1.27814 2.98605L3.57929 5.2323L8.72186 0.212417C9.01201 -0.0708057 9.49225 -0.0708057 9.78239 0.212417C10.0725 0.49564 10.0725 0.964422 9.78239 1.24765L4.10955 6.78514C3.96948 6.92187 3.77939 7 3.57929 7Z" fill="white"/>
+                            </svg>
+                        </span>
+                </label>
+                <div class="pm-checkbox-text">Equihash</div>
+              </div>
+              <div class="pm-popup-feedback__check-container">
+                <input type="checkbox" class="pm-checkbox" id="Xx1" required>
+                <label for="Xx1" class="pm-checkbox-label-container">
+                        <span class="pm-checkbox-label">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none">
+                              <path d="M3.57929 7C3.37919 7 3.18909 6.92187 3.04902 6.78514L0.217609 4.02128C-0.0725363 3.73805 -0.0725363 3.26927 0.217609 2.98605C0.507754 2.70283 0.987994 2.70283 1.27814 2.98605L3.57929 5.2323L8.72186 0.212417C9.01201 -0.0708057 9.49225 -0.0708057 9.78239 0.212417C10.0725 0.49564 10.0725 0.964422 9.78239 1.24765L4.10955 6.78514C3.96948 6.92187 3.77939 7 3.57929 7Z" fill="white"/>
+                            </svg>
+                        </span>
+                </label>
+                <div class="pm-checkbox-text">X11</div>
+              </div>
+              <div class="pm-popup-feedback__check-container">
                 <input type="checkbox" class="pm-checkbox" id="X" required>
                 <label for="X" class="pm-checkbox-label-container">
                         <span class="pm-checkbox-label">
@@ -1499,8 +1543,8 @@
                 <div class="pm-checkbox-text">X11</div>
               </div>
               <div class="pm-popup-feedback__check-container">
-                <input type="checkbox" class="pm-checkbox" id="Ethh" required>
-                <label for="Ethh" class="pm-checkbox-label-container">
+                <input type="checkbox" class="pm-checkbox" id="Ehh" required>
+                <label for="Ehh" class="pm-checkbox-label-container">
                         <span class="pm-checkbox-label">
                             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none">
                               <path d="M3.57929 7C3.37919 7 3.18909 6.92187 3.04902 6.78514L0.217609 4.02128C-0.0725363 3.73805 -0.0725363 3.26927 0.217609 2.98605C0.507754 2.70283 0.987994 2.70283 1.27814 2.98605L3.57929 5.2323L8.72186 0.212417C9.01201 -0.0708057 9.49225 -0.0708057 9.78239 0.212417C10.0725 0.49564 10.0725 0.964422 9.78239 1.24765L4.10955 6.78514C3.96948 6.92187 3.77939 7 3.57929 7Z" fill="white"/>
@@ -1510,8 +1554,8 @@
                 <div class="pm-checkbox-text">Ethash</div>
               </div>
               <div class="pm-popup-feedback__check-container">
-                <input type="checkbox" class="pm-checkbox" id="Equi" required>
-                <label for="Equi" class="pm-checkbox-label-container">
+                <input type="checkbox" class="pm-checkbox" id="Eui" required>
+                <label for="Eui" class="pm-checkbox-label-container">
                         <span class="pm-checkbox-label">
                             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none">
                               <path d="M3.57929 7C3.37919 7 3.18909 6.92187 3.04902 6.78514L0.217609 4.02128C-0.0725363 3.73805 -0.0725363 3.26927 0.217609 2.98605C0.507754 2.70283 0.987994 2.70283 1.27814 2.98605L3.57929 5.2323L8.72186 0.212417C9.01201 -0.0708057 9.49225 -0.0708057 9.78239 0.212417C10.0725 0.49564 10.0725 0.964422 9.78239 1.24765L4.10955 6.78514C3.96948 6.92187 3.77939 7 3.57929 7Z" fill="white"/>
@@ -1530,6 +1574,17 @@
                         </span>
                 </label>
                 <div class="pm-checkbox-text">X11</div>
+              </div>
+              <div class="pm-popup-feedback__check-container">
+                <input type="checkbox" class="pm-checkbox" id="Eu" required>
+                <label for="Eu" class="pm-checkbox-label-container">
+                        <span class="pm-checkbox-label">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="7" viewBox="0 0 10 7" fill="none">
+                              <path d="M3.57929 7C3.37919 7 3.18909 6.92187 3.04902 6.78514L0.217609 4.02128C-0.0725363 3.73805 -0.0725363 3.26927 0.217609 2.98605C0.507754 2.70283 0.987994 2.70283 1.27814 2.98605L3.57929 5.2323L8.72186 0.212417C9.01201 -0.0708057 9.49225 -0.0708057 9.78239 0.212417C10.0725 0.49564 10.0725 0.964422 9.78239 1.24765L4.10955 6.78514C3.96948 6.92187 3.77939 7 3.57929 7Z" fill="white"/>
+                            </svg>
+                        </span>
+                </label>
+                <div class="pm-checkbox-text">Equihash</div>
               </div>
             </div>
             <button class="pm-btn--link" data-filter-open="algorithm">Смотреть все</button>
@@ -1795,6 +1850,7 @@
 
         <div class="pm-catalog__products-wrapper">
           <div class="pm-catalog__products-wrapper-header">
+            <!--баджи которые в десктопе показывают, если применен какой-либо фильтр-->
             <div class="pm-catalog__badges-list">
               <div class="pm-catalog-badge">
                 <span class="pm-catalog__badge-text">Цена: от 0 до 1 388 115</span>
@@ -1814,7 +1870,7 @@
                   </svg>
                 </button>
               </div>
-              <div class="pm-catalog-badge pm-catalog-badge--delete-all">
+              <div class="pm-catalog-badge pm-catalog-badge--gray">
                 <span class="pm-catalog__badge-text">Сбросить все</span>
                 <button class="pm-catalog__badge-delete pm-btn-icon">
                   <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -1822,6 +1878,55 @@
                     <path d="M7.22706 16.773C6.93715 16.4831 6.93715 16.0023 7.22706 15.7124L15.7123 7.22711C16.0023 6.93719 16.4831 6.93719 16.773 7.22711C17.0629 7.51702 17.0629 7.99785 16.773 8.28777L8.28772 16.773C7.99781 17.063 7.51698 17.063 7.22706 16.773Z" fill="rgba(112, 134, 252, 1)"/>
                   </svg>
                 </button>
+              </div>
+            </div>
+            <!--баджи которые в мобилке открывают модальные окна с конкретным фильтром-->
+            <div class="pm-catalog__applied-list">
+              <div class="pm-catalog-badge" data-filter-modal="price">
+                <span class="pm-catalog__badge-text">Цена</span>
+                <svg class="pm-btn-icon pm-badge__delete-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M15.7123 16.773L7.22699 8.28771C6.93708 7.99779 6.93708 7.51696 7.22699 7.22705C7.51691 6.93713 7.99774 6.93713 8.28765 7.22705L16.7729 15.7123C17.0628 16.0022 17.0628 16.4831 16.7729 16.773C16.483 17.0629 16.0022 17.0629 15.7123 16.773Z" fill="rgba(112, 134, 252, 1)"/>
+                  <path d="M7.22706 16.773C6.93715 16.4831 6.93715 16.0023 7.22706 15.7124L15.7123 7.22711C16.0023 6.93719 16.4831 6.93719 16.773 7.22711C17.0629 7.51702 17.0629 7.99785 16.773 8.28777L8.28772 16.773C7.99781 17.063 7.51698 17.063 7.22706 16.773Z" fill="rgba(112, 134, 252, 1)"/>
+                </svg>
+                <svg class="pm-btn-icon pm-badge__apply-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M4.43057 8.51192C4.70014 8.19743 5.17361 8.161 5.48811 8.43057L12 14.0122L18.5119 8.43057C18.8264 8.16101 19.2999 8.19743 19.5695 8.51192C19.839 8.82642 19.8026 9.29989 19.4881 9.56946L12.4881 15.5695C12.2072 15.8102 11.7928 15.8102 11.5119 15.5695L4.51192 9.56946C4.19743 9.29989 4.161 8.82641 4.43057 8.51192Z" fill="black"/>
+                </svg>
+              </div>
+              <div class="pm-catalog-badge" data-filter-modal="brand">
+                <span class="pm-catalog__badge-text">Бренд</span>
+                <svg class="pm-btn-icon pm-badge__delete-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M15.7123 16.773L7.22699 8.28771C6.93708 7.99779 6.93708 7.51696 7.22699 7.22705C7.51691 6.93713 7.99774 6.93713 8.28765 7.22705L16.7729 15.7123C17.0628 16.0022 17.0628 16.4831 16.7729 16.773C16.483 17.0629 16.0022 17.0629 15.7123 16.773Z" fill="rgba(112, 134, 252, 1)"/>
+                  <path d="M7.22706 16.773C6.93715 16.4831 6.93715 16.0023 7.22706 15.7124L15.7123 7.22711C16.0023 6.93719 16.4831 6.93719 16.773 7.22711C17.0629 7.51702 17.0629 7.99785 16.773 8.28777L8.28772 16.773C7.99781 17.063 7.51698 17.063 7.22706 16.773Z" fill="rgba(112, 134, 252, 1)"/>
+                </svg>
+                <svg class="pm-btn-icon pm-badge__apply-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M4.43057 8.51192C4.70014 8.19743 5.17361 8.161 5.48811 8.43057L12 14.0122L18.5119 8.43057C18.8264 8.16101 19.2999 8.19743 19.5695 8.51192C19.839 8.82642 19.8026 9.29989 19.4881 9.56946L12.4881 15.5695C12.2072 15.8102 11.7928 15.8102 11.5119 15.5695L4.51192 9.56946C4.19743 9.29989 4.161 8.82641 4.43057 8.51192Z" fill="black"/>
+                </svg>
+              </div>
+              <div class="pm-catalog-badge active" data-filter-modal="algorithm">
+                <span class="pm-catalog__badge-text">Алгоритм</span>
+                <svg class="pm-btn-icon pm-badge__delete-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M15.7123 16.773L7.22699 8.28771C6.93708 7.99779 6.93708 7.51696 7.22699 7.22705C7.51691 6.93713 7.99774 6.93713 8.28765 7.22705L16.7729 15.7123C17.0628 16.0022 17.0628 16.4831 16.7729 16.773C16.483 17.0629 16.0022 17.0629 15.7123 16.773Z" fill="rgba(112, 134, 252, 1)"/>
+                  <path d="M7.22706 16.773C6.93715 16.4831 6.93715 16.0023 7.22706 15.7124L15.7123 7.22711C16.0023 6.93719 16.4831 6.93719 16.773 7.22711C17.0629 7.51702 17.0629 7.99785 16.773 8.28777L8.28772 16.773C7.99781 17.063 7.51698 17.063 7.22706 16.773Z" fill="rgba(112, 134, 252, 1)"/>
+                </svg>
+                <svg class="pm-btn-icon pm-badge__apply-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M4.43057 8.51192C4.70014 8.19743 5.17361 8.161 5.48811 8.43057L12 14.0122L18.5119 8.43057C18.8264 8.16101 19.2999 8.19743 19.5695 8.51192C19.839 8.82642 19.8026 9.29989 19.4881 9.56946L12.4881 15.5695C12.2072 15.8102 11.7928 15.8102 11.5119 15.5695L4.51192 9.56946C4.19743 9.29989 4.161 8.82641 4.43057 8.51192Z" fill="black"/>
+                </svg>
+              </div>
+              <div class="pm-catalog-badge" data-filter-modal="hashrate">
+                <span class="pm-catalog__badge-text">Хэшрейт</span>
+                <svg class="pm-btn-icon pm-badge__delete-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M15.7123 16.773L7.22699 8.28771C6.93708 7.99779 6.93708 7.51696 7.22699 7.22705C7.51691 6.93713 7.99774 6.93713 8.28765 7.22705L16.7729 15.7123C17.0628 16.0022 17.0628 16.4831 16.7729 16.773C16.483 17.0629 16.0022 17.0629 15.7123 16.773Z" fill="rgba(112, 134, 252, 1)"/>
+                  <path d="M7.22706 16.773C6.93715 16.4831 6.93715 16.0023 7.22706 15.7124L15.7123 7.22711C16.0023 6.93719 16.4831 6.93719 16.773 7.22711C17.0629 7.51702 17.0629 7.99785 16.773 8.28777L8.28772 16.773C7.99781 17.063 7.51698 17.063 7.22706 16.773Z" fill="rgba(112, 134, 252, 1)"/>
+                </svg>
+                <svg class="pm-btn-icon pm-badge__apply-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M4.43057 8.51192C4.70014 8.19743 5.17361 8.161 5.48811 8.43057L12 14.0122L18.5119 8.43057C18.8264 8.16101 19.2999 8.19743 19.5695 8.51192C19.839 8.82642 19.8026 9.29989 19.4881 9.56946L12.4881 15.5695C12.2072 15.8102 11.7928 15.8102 11.5119 15.5695L4.51192 9.56946C4.19743 9.29989 4.161 8.82641 4.43057 8.51192Z" fill="black"/>
+                </svg>
+              </div>
+              <div class="pm-catalog-badge">
+                <span class="pm-catalog__badge-text">Самый прибыльный</span>
+              </div>
+              <div class="pm-catalog-badge">
+                <span class="pm-catalog__badge-text">Скидка</span>
               </div>
             </div>
             <!--при установке какого-либо фильтра в мобильной версии #openFilterBtn добавить класс active-->
@@ -1849,7 +1954,7 @@
                   <path d="M11.6661 18.494C11.8242 18.7336 12.1758 18.7336 12.3339 18.494L15.0548 14.3703C15.2303 14.1044 15.0396 13.75 14.7209 13.75H9.27906C8.96044 13.75 8.76971 14.1044 8.94519 14.3703L11.6661 18.494Z" fill="#171717"/>
                 </svg>
               </div>
-              <ul class="pm-select__dropdown" data-select="sort" data-da="#sortPopup .pm-menu-popup__container,1130,1">
+              <ul class="pm-select__dropdown" data-select="sort" data-da="#sortPopup .pm-filter__list-wrapper,1130,1">
                 <li class="pm-select__option" data-value="popular-asc">По популярности (возрастание)</li>
                 <li class="pm-select__option" data-value="popular-desc">По популярности (убывание)</li>
                 <li class="pm-select__option" data-value="alphabet-asc">По алфавиту (возрастание)</li>
@@ -1881,7 +1986,7 @@
               <div class="pm-popular__card-text">
                 <a href="#" class="pm-product-card__top-text">
                   <div class="pm-product-card__title-wrapper">
-                    <div class="pm-popular__card-title">от 128 000 ₽</div>
+                    <div class="pm-popular__card-title">от 300 000 ₽</div>
                     <span class="pm-product__old-price">492 000 ₽</span>
                   </div>
                   <div class="pm-popular__card-subtitle">Asic майнер Bitmain Antminer S21 XP 270 TH/s</div>
@@ -2322,6 +2427,339 @@
           </div>
 
           <button class="pm-btn pm-btn--neutral">Загрузить еще</button>
+
+          <div class="pm-product__desc-wrapper active pm-catalog-desc">
+            <div class="pm-product-desc__text-content pm-catalog-desc__text-content">
+              <h3>ASIC майнеры</h3>
+              <p>Это специализированные устройства, разработанные для максимально эффективного майнинга за счёт высокой производительности и энергоэффективности. В разделе представлены ASIC-майнеры для добычи различных криптовалют, включая Bitcoin, Litecoin, Dogecoin и другие.</p>
+              <p>Компания Promminer с 2017 года занимается поставкой и обслуживанием асиков и прочего оборудования для майнинга. Мы предлагаем решения как для начинающих пользователей, так и для профессиональных майнинг-операторов. Все устройства проходят проверку перед отправкой и сопровождаются технической поддержкой.</p>
+            </div>
+
+            <button class="pm-btn--ghost-primary">
+              <span class="pm-btn-text">Развернуть</span>
+              <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.43057 8.51192C4.70014 8.19743 5.17361 8.161 5.48811 8.43057L12 14.0122L18.5119 8.43057C18.8264 8.16101 19.2999 8.19743 19.5695 8.51192C19.839 8.82642 19.8026 9.29989 19.4881 9.56946L12.4881 15.5695C12.2072 15.8102 11.7928 15.8102 11.5119 15.5695L4.51192 9.56946C4.19743 9.29989 4.161 8.82641 4.43057 8.51192Z" fill="rgba(112, 134, 252, 1)"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pm-product__similar-section pm-product__viewed-section">
+    <div class="pm-container">
+      <div class="pm-product__similar-wrapper">
+        <h2 class="pm-product__section-title">Вы смотрели</h2>
+
+        <div class="swiper pm-popular-slider pm-product-viewed-slider">
+          <div class="swiper-wrapper">
+            <a href="#" class="swiper-slide pm-popular__card">
+              <div class="pm-popular__card-top swiper">
+                <div class="pm-card-images">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                  <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                </div>
+                <div class="pm-popular__card-badges">
+                  <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                </div>
+                <div class="pm-card-dots"></div>
+              </div>
+
+              <div class="pm-popular__card-text">
+                <div class="pm-popular__card-title">от 128 000 ₽</div>
+                <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+              </div>
+            </a>
+            <a href="#" class="swiper-slide pm-popular__card">
+              <div class="pm-popular__card-top swiper">
+                <div class="pm-card-images">
+                  <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image active">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                </div>
+                <div class="pm-popular__card-badges">
+                  <img src="img/popularBlock/doge.svg" alt="" class="pm-popular__card-badge">
+                  <img src="img/popularBlock/ltc.svg" alt="" class="pm-popular__card-badge">
+                </div>
+                <div class="pm-card-dots"></div>
+              </div>
+
+              <div class="pm-popular__card-text">
+                <div class="pm-popular__card-title">от 256 000 ₽</div>
+                <div class="pm-popular__card-subtitle">Asic майнер JASMINER X16-P 5800</div>
+              </div>
+            </a>
+            <a href="#" class="swiper-slide pm-popular__card">
+              <div class="pm-popular__card-top swiper">
+                <div class="pm-card-images">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image active">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                </div>
+                <div class="pm-popular__card-badges">
+                  <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                </div>
+                <div class="pm-card-dots"></div>
+              </div>
+
+              <div class="pm-popular__card-text">
+                <div class="pm-popular__card-title">от 512 000 ₽</div>
+                <div class="pm-popular__card-subtitle">Asic майнер BM-KS Max 10.5 TH/s</div>
+              </div>
+            </a>
+            <a href="#" class="swiper-slide pm-popular__card">
+              <div class="pm-popular__card-top swiper">
+                <div class="pm-card-images">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                  <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                </div>
+                <div class="pm-popular__card-badges">
+                  <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                </div>
+                <div class="pm-card-dots"></div>
+              </div>
+
+              <div class="pm-popular__card-text">
+                <div class="pm-popular__card-title">от 128 000 ₽</div>
+                <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+              </div>
+            </a>
+            <a href="#" class="swiper-slide pm-popular__card">
+              <div class="pm-popular__card-top swiper">
+                <div class="pm-card-images">
+                  <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image active">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                </div>
+                <div class="pm-popular__card-badges">
+                  <img src="img/popularBlock/doge.svg" alt="" class="pm-popular__card-badge">
+                  <img src="img/popularBlock/ltc.svg" alt="" class="pm-popular__card-badge">
+                </div>
+                <div class="pm-card-dots"></div>
+              </div>
+
+              <div class="pm-popular__card-text">
+                <div class="pm-popular__card-title">от 256 000 ₽</div>
+                <div class="pm-popular__card-subtitle">Asic майнер JASMINER X16-P 5800</div>
+              </div>
+            </a>
+            <a href="#" class="swiper-slide pm-popular__card">
+              <div class="pm-popular__card-top swiper">
+                <div class="pm-card-images">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                  <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                </div>
+                <div class="pm-popular__card-badges">
+                  <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                </div>
+                <div class="pm-card-dots"></div>
+              </div>
+
+              <div class="pm-popular__card-text">
+                <div class="pm-popular__card-title">от 128 000 ₽</div>
+                <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+              </div>
+            </a>
+            <a href="#" class="swiper-slide pm-popular__card">
+              <div class="pm-popular__card-top swiper">
+                <div class="pm-card-images">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                  <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                </div>
+                <div class="pm-popular__card-badges">
+                  <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                </div>
+                <div class="pm-card-dots"></div>
+              </div>
+
+              <div class="pm-popular__card-text">
+                <div class="pm-popular__card-title">от 128 000 ₽</div>
+                <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+              </div>
+            </a>
+            <a href="#" class="swiper-slide pm-popular__card">
+              <div class="pm-popular__card-top swiper">
+                <div class="pm-card-images">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                  <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                </div>
+                <div class="pm-popular__card-badges">
+                  <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                </div>
+                <div class="pm-card-dots"></div>
+              </div>
+
+              <div class="pm-popular__card-text">
+                <div class="pm-popular__card-title">от 128 000 ₽</div>
+                <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+              </div>
+            </a>
+            <a href="#" class="swiper-slide pm-popular__card">
+              <div class="pm-popular__card-top swiper">
+                <div class="pm-card-images">
+                  <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image active">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                </div>
+                <div class="pm-popular__card-badges">
+                  <img src="img/popularBlock/doge.svg" alt="" class="pm-popular__card-badge">
+                  <img src="img/popularBlock/ltc.svg" alt="" class="pm-popular__card-badge">
+                </div>
+                <div class="pm-card-dots"></div>
+              </div>
+
+              <div class="pm-popular__card-text">
+                <div class="pm-popular__card-title">от 256 000 ₽</div>
+                <div class="pm-popular__card-subtitle">Asic майнер JASMINER X16-P 5800</div>
+              </div>
+            </a>
+            <a href="#" class="swiper-slide pm-popular__card">
+              <div class="pm-popular__card-top swiper">
+                <div class="pm-card-images">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image active">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                </div>
+                <div class="pm-popular__card-badges">
+                  <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                </div>
+                <div class="pm-card-dots"></div>
+              </div>
+
+              <div class="pm-popular__card-text">
+                <div class="pm-popular__card-title">от 512 000 ₽</div>
+                <div class="pm-popular__card-subtitle">Asic майнер BM-KS Max 10.5 TH/s</div>
+              </div>
+            </a>
+            <a href="#" class="swiper-slide pm-popular__card">
+              <div class="pm-popular__card-top swiper">
+                <div class="pm-card-images">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                  <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                </div>
+                <div class="pm-popular__card-badges">
+                  <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                </div>
+                <div class="pm-card-dots"></div>
+              </div>
+
+              <div class="pm-popular__card-text">
+                <div class="pm-popular__card-title">от 128 000 ₽</div>
+                <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+              </div>
+            </a>
+            <a href="#" class="swiper-slide pm-popular__card">
+              <div class="pm-popular__card-top swiper">
+                <div class="pm-card-images">
+                  <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image active">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                </div>
+                <div class="pm-popular__card-badges">
+                  <img src="img/popularBlock/doge.svg" alt="" class="pm-popular__card-badge">
+                  <img src="img/popularBlock/ltc.svg" alt="" class="pm-popular__card-badge">
+                </div>
+                <div class="pm-card-dots"></div>
+              </div>
+
+              <div class="pm-popular__card-text">
+                <div class="pm-popular__card-title">от 256 000 ₽</div>
+                <div class="pm-popular__card-subtitle">Asic майнер JASMINER X16-P 5800</div>
+              </div>
+            </a>
+            <a href="#" class="swiper-slide pm-popular__card">
+              <div class="pm-popular__card-top swiper">
+                <div class="pm-card-images">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                  <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                </div>
+                <div class="pm-popular__card-badges">
+                  <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                </div>
+                <div class="pm-card-dots"></div>
+              </div>
+
+              <div class="pm-popular__card-text">
+                <div class="pm-popular__card-title">от 128 000 ₽</div>
+                <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+              </div>
+            </a>
+            <a href="#" class="swiper-slide pm-popular__card">
+              <div class="pm-popular__card-top swiper">
+                <div class="pm-card-images">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                  <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                </div>
+                <div class="pm-popular__card-badges">
+                  <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                </div>
+                <div class="pm-card-dots"></div>
+              </div>
+
+              <div class="pm-popular__card-text">
+                <div class="pm-popular__card-title">от 128 000 ₽</div>
+                <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+              </div>
+            </a>
+            <a href="#" class="swiper-slide pm-popular__card">
+              <div class="pm-popular__card-top swiper">
+                <div class="pm-card-images">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image active">
+                  <img src="img/popularBlock/popular2.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular3.png" alt="" class="pm-popular__card-image">
+                  <img src="img/popularBlock/popular1.png" alt="" class="pm-popular__card-image">
+                </div>
+                <div class="pm-popular__card-badges">
+                  <img src="img/popularBlock/btc.svg" alt="" class="pm-popular__card-badge">
+                </div>
+                <div class="pm-card-dots"></div>
+              </div>
+
+              <div class="pm-popular__card-text">
+                <div class="pm-popular__card-title">от 128 000 ₽</div>
+                <div class="pm-popular__card-subtitle">Asic майнер Innosilicon A11 ETH 1500</div>
+              </div>
+            </a>
+          </div>
+
+          <div class="pm-popular__navigation-container">
+            <div class="pm-popular__nav-btn pm-popular__prev-btn swiper-button-prev pm-btn--neutral">
+              <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5303 5.46967C10.8232 5.76256 10.8232 6.23744 10.5303 6.53033L5.81066 11.25H20C20.4142 11.25 20.75 11.5858 20.75 12C20.75 12.4142 20.4142 12.75 20 12.75H5.81066L10.5303 17.4697C10.8232 17.7626 10.8232 18.2374 10.5303 18.5303C10.2374 18.8232 9.76256 18.8232 9.46967 18.5303L3.46967 12.5303C3.17678 12.2374 3.17678 11.7626 3.46967 11.4697L9.46967 5.46967C9.76256 5.17678 10.2374 5.17678 10.5303 5.46967Z" fill="black"/>
+              </svg>
+            </div>
+            <div class="swiper-pagination pm-popular-pagination"></div>
+            <div class="pm-popular__nav-btn pm-popular__next-btn swiper-button-next pm-btn--neutral">
+              <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M13.4697 5.46967C13.7626 5.17678 14.2374 5.17678 14.5303 5.46967L20.5303 11.4697C20.8232 11.7626 20.8232 12.2374 20.5303 12.5303L14.5303 18.5303C14.2374 18.8232 13.7626 18.8232 13.4697 18.5303C13.1768 18.2374 13.1768 17.7626 13.4697 17.4697L18.1893 12.75H4C3.58579 12.75 3.25 12.4142 3.25 12C3.25 11.5858 3.58579 11.25 4 11.25H18.1893L13.4697 6.53033C13.1768 6.23744 13.1768 5.76256 13.4697 5.46967Z" fill="black"/>
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -2617,7 +3055,34 @@
       </button>
     </div>
 
+    <div class="pm-filter__list-wrapper">
+
+    </div>
+
     <button class="pm-btn pm-btn--primary sort-popup-close">Применить</button>
+  </div>
+</div>
+
+<div class="pm-popup-overlay" id="filterDetailPopup">
+  <div class="pm-menu-popup__container">
+
+    <div class="pm-menu-popup__mobile-header">
+      <div class="pm-menu-mobile__header-title">Фильтр</div>
+
+      <div class="pm-detail-filter__btns-container">
+        <button class="pm-btn--link pm-btn--link--secondary">Сбросить</button>
+        <button class="pm-menu-mobile__header-btn pm-btn--neutral filter-detail-close">
+          <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15.7123 16.7729L7.22699 8.28765C6.93708 7.99773 6.93708 7.5169 7.22699 7.22699C7.51691 6.93707 7.99774 6.93707 8.28765 7.22699L16.7729 15.7123C17.0628 16.0022 17.0628 16.483 16.7729 16.7729C16.483 17.0628 16.0022 17.0628 15.7123 16.7729Z" fill="black"/>
+            <path d="M7.22706 16.773C6.93715 16.4831 6.93715 16.0023 7.22706 15.7124L15.7123 7.22711C16.0023 6.93719 16.4831 6.93719 16.773 7.22711C17.0629 7.51702 17.0629 7.99785 16.773 8.28777L8.28772 16.773C7.99781 17.063 7.51698 17.063 7.22706 16.773Z" fill="black"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="pm-filter-detail__content"></div>
+
+    <button class="pm-btn pm-btn--primary filter-detail-apply">Применить</button>
   </div>
 </div>
 
@@ -2634,7 +3099,7 @@
         <div class="pm-menu-mobile__header-title">Фильтры</div>
       </div>
 
-      <button class="pm-menu-mobile__header-btn pm-btn--neutral" id="mobileFilterClose">
+      <button class="pm-menu-mobile__header-btn pm-btn--neutral mobile-filter-close">
         <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
           <path d="M15.7123 16.7729L7.22699 8.28765C6.93708 7.99773 6.93708 7.5169 7.22699 7.22699C7.51691 6.93707 7.99774 6.93707 8.28765 7.22699L16.7729 15.7123C17.0628 16.0022 17.0628 16.483 16.7729 16.7729C16.483 17.0628 16.0022 17.0628 15.7123 16.7729Z" fill="black"/>
           <path d="M7.22706 16.773C6.93715 16.4831 6.93715 16.0023 7.22706 15.7124L15.7123 7.22711C16.0023 6.93719 16.4831 6.93719 16.773 7.22711C17.0629 7.51702 17.0629 7.99785 16.773 8.28777L8.28772 16.773C7.99781 17.063 7.51698 17.063 7.22706 16.773Z" fill="black"/>
@@ -2644,7 +3109,7 @@
     </div>
 
     <div class="pm-product__actions-btns pm-filter-modal__footer">
-      <button class="pm-btn pm-btn--primary">Применить</button>
+      <button class="pm-btn pm-btn--primary mobile-filter-close">Применить</button>
     </div>
 
     <div class="pm-filter__section">
@@ -2667,7 +3132,7 @@
             </svg>
           </button>
         </div>
-        <div class="pm-catalog-badge pm-catalog-badge--delete-all">
+        <div class="pm-catalog-badge pm-catalog-badge--gray">
           <span class="pm-catalog__badge-text">Сбросить все</span>
           <button class="pm-catalog__badge-delete pm-btn-icon">
             <svg class="pm-btn-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -3034,6 +3499,73 @@
   </div>
 </footer>
 
+<!--слайдер вы смотрели-->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const viewedSlider = new Swiper('.pm-product-viewed-slider', {
+      spaceBetween: 16,
+      slidesPerView: 'auto',
+      slidesPerGroup: 1,
+      speed: 1200,
+      pagination: {
+        el: document.querySelector('.pm-product-viewed-slider').querySelector('.pm-popular-pagination'),
+        clickable: true,
+      },
+      navigation: {
+        nextEl: document.querySelector('.pm-product-viewed-slider').querySelector('.pm-popular__next-btn'),
+        prevEl: document.querySelector('.pm-product-viewed-slider').querySelector('.pm-popular__prev-btn'),
+      },
+      breakpoints: {
+        1025: {
+          slidesPerView: 4,
+          slidesPerGroup: 4,
+        },
+        1681: {
+          slidesPerView: 5,
+          slidesPerGroup: 5,
+        }
+      },
+    });
+  })
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const descWrappers = document.querySelectorAll('.pm-catalog-desc');
+
+    descWrappers.forEach(wrapper => {
+      const button = wrapper.querySelector('.pm-btn--ghost-primary');
+      const buttonText = button.querySelector('.pm-btn-text'); // <span> с текстом
+      const content = wrapper.querySelector('.pm-catalog-desc__text-content');
+      const initialMaxHeight = parseInt(getComputedStyle(content).maxHeight);
+
+      const checkButtonVisibility = () => {
+        if (content.scrollHeight > initialMaxHeight) {
+          button.style.display = 'inline-flex';
+        } else {
+          button.style.display = 'none';
+        }
+      };
+
+      // Проверка при загрузке и ресайзе
+      checkButtonVisibility();
+      window.addEventListener('resize', checkButtonVisibility);
+
+      button.addEventListener('click', () => {
+        if (!wrapper.classList.contains('expanded')) {
+          content.style.maxHeight = content.scrollHeight + 'px';
+          wrapper.classList.add('expanded');
+          buttonText.textContent = 'Свернуть'; // Меняем только span
+        } else {
+          content.style.maxHeight = initialMaxHeight + 'px';
+          wrapper.classList.remove('expanded');
+          buttonText.textContent = 'Развернуть';
+        }
+      });
+    });
+  });
+</script>
+
 <!--модальные окна фильтров-->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -3042,7 +3574,7 @@
     const scrollContainer = filterPopup?.querySelector('.pm-filter-mobile__container'); // ВАЖНО
     const filterSection = document.querySelector('.pm-filter__section');
     const filterSectionContent = document.querySelector('[data-filter-modal-content]');
-    const closeBtn = document.querySelector('#mobileFilterClose');
+    const closeBtns = document.querySelectorAll('.mobile-filter-close');
     const backBtn = document.querySelector('#mobileFilterPrev');
     const filterSectionApply = document.querySelector('.filter-section-apply');
     const headerTitle = filterPopup.querySelector('.pm-menu-mobile__header-title');
@@ -3112,11 +3644,13 @@
       }
     };
 
-    closeBtn?.addEventListener('click', () => {
-      returnContent();
-      filterSection.classList.remove('active');
-      filterPopup.classList.remove('active', 'filter-section-open');
-      document.body.classList.remove('lock');
+    closeBtns?.forEach(closeBtn => {
+      closeBtn.addEventListener('click', () => {
+        returnContent();
+        filterSection.classList.remove('active');
+        filterPopup.classList.remove('active', 'filter-section-open');
+        document.body.classList.remove('lock');
+      });
     });
 
     backBtn?.addEventListener('click', () => {
@@ -3156,8 +3690,10 @@
         if (e.target.type === 'checkbox') updateButtonText();
       });
     }
-  });
 
+
+  });
+  <!--модальное окно сортировки-->
   document.addEventListener('DOMContentLoaded', () => {
     const sortPopup = document.querySelector('#sortPopup');
     const closePopup = () => {
@@ -3176,6 +3712,198 @@
         e.preventDefault();
         closePopup();
       });
+    });
+  });
+  <!--модальные окна фильтров-->
+  document.addEventListener('DOMContentLoaded', () => {
+    const detailPopup = document.querySelector('#filterDetailPopup');
+    const detailContent = detailPopup.querySelector('.pm-filter-detail__content');
+    const detailTitle = detailPopup.querySelector('.pm-menu-mobile__header-title');
+    const resetBtn = detailPopup.querySelector('.pm-btn--link--secondary');
+
+    const originalPositions = new Map();
+    const initialValues = new Map();
+
+    document.querySelectorAll('[data-filter-content]').forEach(content => {
+      originalPositions.set(content, {
+        parent: content.parentElement,
+        nextSibling: content.nextElementSibling
+      });
+    })
+
+    const updateResetButton = () => {
+      const inputs = detailContent.querySelectorAll('input');
+
+      const isChanged = [...inputs].some(input => {
+        if (input.type === 'checkbox') {
+          return input.checked === true; // дефолт - false
+        }
+
+        if (input.classList.contains('min-range')) {
+          // сравниваем с атрибутом min
+          return input.value !== input.getAttribute('min');
+        }
+
+        if (input.classList.contains('max-range')) {
+          // сравниваем с атрибутом max
+          return input.value !== input.getAttribute('max');
+        }
+
+        if (input.classList.contains('min-val')) {
+          // находим соответствующий слайдер и сравниваем с его min
+          const container = input.closest('.pm-filter__item-container');
+          const slider = container?.querySelector('.min-range');
+          if (slider) {
+            return input.value !== slider.getAttribute('min');
+          }
+        }
+
+        if (input.classList.contains('max-val')) {
+          // находим соответствующий слайдер и сравниваем с его max
+          const container = input.closest('.pm-filter__item-container');
+          const slider = container?.querySelector('.max-range');
+          if (slider) {
+            return input.value !== slider.getAttribute('max');
+          }
+        }
+
+        // для остальных текстовых полей
+        return false;
+      });
+
+      resetBtn.classList.toggle('active', isChanged);
+    };
+
+    // --- открытие по баджу ---
+    document.querySelectorAll('[data-filter-modal]').forEach(badge => {
+      badge.addEventListener('click', () => {
+        const key = badge.dataset.filterModal;
+        const content = document.querySelector(`[data-filter-content="${key}"]`);
+        const title = badge.querySelector('.pm-catalog__badge-text')?.textContent;
+
+        if (!content) return;
+
+        // переносим контент
+        detailContent.innerHTML = '';
+        detailContent.appendChild(content);
+        detailContent.querySelectorAll('input').forEach(input => {
+          initialValues.set(input, input.value);
+        });
+        updateResetButton();
+
+        // заголовок
+        if (title) detailTitle.textContent = title;
+
+        // открываем
+        detailPopup.classList.add('active');
+        document.body.classList.add('lock');
+      });
+    });
+
+    // --- возврат контента ---
+    const returnContent = () => {
+      const content = detailContent.firstElementChild;
+
+      if (content && originalPositions.has(content)) {
+        const { parent, nextSibling } = originalPositions.get(content);
+
+        if (nextSibling) parent.insertBefore(content, nextSibling);
+        else parent.appendChild(content);
+      }
+    };
+
+    // --- закрытие ---
+    const closePopup = () => {
+      returnContent();
+      detailPopup.classList.remove('active');
+      document.body.classList.remove('lock');
+    };
+
+    detailPopup.addEventListener('click', e => {
+      if (e.target === detailPopup) closePopup();
+    });
+
+    detailPopup.querySelectorAll('.filter-detail-close, .filter-detail-apply')
+            .forEach(btn => {
+              btn.addEventListener('click', e => {
+                e.preventDefault();
+                closePopup();
+              });
+            });
+
+    detailContent.addEventListener('input', updateResetButton);
+    detailContent.addEventListener('change', updateResetButton);
+
+    resetBtn.addEventListener('click', () => {
+      // Сбрасываем ползунки
+      const minSliders = detailContent.querySelectorAll('.min-range');
+      const maxSliders = detailContent.querySelectorAll('.max-range');
+
+      minSliders.forEach(slider => {
+        const defaultValue = slider.getAttribute('min');
+        slider.value = defaultValue;
+        // Вызываем событие input для триггера обновления
+        slider.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+
+      maxSliders.forEach(slider => {
+        const defaultValue = slider.getAttribute('max');
+        slider.value = defaultValue;
+        // Вызываем событие input для триггера обновления
+        slider.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+
+      // Сбрасываем текстовые поля
+      const minValInputs = detailContent.querySelectorAll('.min-val');
+      const maxValInputs = detailContent.querySelectorAll('.max-val');
+
+      minValInputs.forEach(input => {
+        const slider = input.closest('.pm-filter__item-container')?.querySelector('.min-range');
+        if (slider) {
+          const defaultValue = slider.getAttribute('min');
+          if (input._imask) {
+            input._imask.value = defaultValue;
+            // Принудительно обновляем маску
+            input._imask.updateValue();
+          } else {
+            input.value = defaultValue;
+          }
+          // Вызываем событие input
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+      });
+
+      maxValInputs.forEach(input => {
+        const slider = input.closest('.pm-filter__item-container')?.querySelector('.max-range');
+        if (slider) {
+          const defaultValue = slider.getAttribute('max');
+          if (input._imask) {
+            input._imask.value = defaultValue;
+            // Принудительно обновляем маску
+            input._imask.updateValue();
+          } else {
+            input.value = defaultValue;
+          }
+          // Вызываем событие input
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+      });
+
+      // Сбрасываем прогресс-бар
+      const progressBars = detailContent.querySelectorAll('.pm-range-progress');
+      progressBars.forEach(progress => {
+        progress.style.left = '0%';
+        progress.style.width = '100%';
+      });
+
+      // Сбрасываем чекбоксы
+      const checkboxes = detailContent.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
+        checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+
+      updateResetButton();
     });
   });
 </script>
