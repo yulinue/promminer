@@ -515,6 +515,11 @@ input.pm-input:-webkit-autofill {
     transition: all 0.3s ease;
 }
 
+.pm-input:focus + .pm-input-label,
+.pm-input:not(:placeholder-shown) + .pm-input-label {
+    color: var(--content-base-secondary) !important;
+}
+
 .pm-input-wrapper.active .pm-input-label{
     font-size: var(--caption-m-fs);
     font-weight: 500;
