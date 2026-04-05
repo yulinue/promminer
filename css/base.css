@@ -372,6 +372,10 @@ input.pm-input:-webkit-autofill {
     -webkit-text-fill-color: inherit;
     transition: background-color 9999s ease-in-out 0s;
 }
+.pm-page-dark .pm-popup-feedback__container input.pm-input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px transparent inset;
+    -webkit-text-fill-color: #F9FAFB;
+}
 .pm-input__container{
     display: -webkit-box;
     display: -ms-flexbox;

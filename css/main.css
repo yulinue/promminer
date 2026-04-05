@@ -5,7 +5,9 @@
 .pm-popup-overlay#orderPopup,
 .pm-popup-overlay#leasingPopup,
 .pm-popup-overlay#learnPricePopup,
-.pm-popup-overlay#pricePopup{
+.pm-popup-overlay#pricePopup,
+.pm-popup-overlay#solutionPopup,
+.pm-popup-overlay#servicePopup{
     padding: 0 calc(var(--container-padding) + var(--scrollbar-width)) 0 var(--container-padding);
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -17,7 +19,9 @@
     .pm-popup-overlay#orderPopup,
     .pm-popup-overlay#leasingPopup,
     .pm-popup-overlay#learnPricePopup,
-    .pm-popup-overlay#pricePopup{
+    .pm-popup-overlay#pricePopup,
+    .pm-popup-overlay#solutionPopup,
+    .pm-popup-overlay#servicePopup{
         padding: 0;
         -webkit-box-align: end;
         -ms-flex-align: end;
@@ -60,7 +64,9 @@
 .pm-popup-overlay#orderPopup.success .pm-popup-feedback__container#orderForm,
 .pm-popup-overlay#leasingPopup.success .pm-popup-feedback__container#leasingForm,
 .pm-popup-overlay#learnPricePopup.success .pm-popup-feedback__container#learnPriceForm,
-.pm-popup-overlay#pricePopup.success .pm-popup-feedback__container#priceForm{
+.pm-popup-overlay#pricePopup.success .pm-popup-feedback__container#priceForm,
+.pm-popup-overlay#solutionPopup.success .pm-popup-feedback__container#solutionForm,
+.pm-popup-overlay#servicePopup.success .pm-popup-feedback__container#serviceForm{
     opacity: 0;
     visibility: hidden;
     position: absolute;
@@ -71,7 +77,9 @@
 .pm-popup-feedback__container#orderSuccess,
 .pm-popup-feedback__container#leasingSuccess,
 .pm-popup-feedback__container#learnPriceSuccess,
-.pm-popup-feedback__container#priceSuccess{
+.pm-popup-feedback__container#priceSuccess,
+.pm-popup-feedback__container#solutionSuccess,
+.pm-popup-feedback__container#serviceSuccess{
     opacity: 0;
     visibility: hidden;
     position: absolute;
@@ -85,7 +93,9 @@
 .pm-popup-overlay#orderPopup.success .pm-popup-feedback__container#orderSuccess,
 .pm-popup-overlay#leasingPopup.success .pm-popup-feedback__container#leasingSuccess,
 .pm-popup-overlay#learnPricePopup.success .pm-popup-feedback__container#learnPriceSuccess,
-.pm-popup-overlay#pricePopup.success .pm-popup-feedback__container#priceSuccess{
+.pm-popup-overlay#pricePopup.success .pm-popup-feedback__container#priceSuccess,
+.pm-popup-overlay#solutionPopup.success .pm-popup-feedback__container#solutionSuccess,
+.pm-popup-overlay#servicePopup.success .pm-popup-feedback__container#serviceSuccess{
     opacity: 1;
     visibility: visible;
     position: unset;
@@ -185,7 +195,9 @@
     #orderForm .pm-popup-feedback__content,
     #leasingForm .pm-popup-feedback__content,
     #learnPriceForm .pm-popup-feedback__content,
-    #priceForm .pm-popup-feedback__content{
+    #priceForm .pm-popup-feedback__content,
+    #solutionForm .pm-popup-feedback__content,
+    #serviceForm .pm-popup-feedback__content{
         padding: 12px 16px;
     }
 }
@@ -194,7 +206,9 @@
 #orderSuccess .pm-popup-feedback__content,
 #leasingSuccess .pm-popup-feedback__content,
 #learnPriceSuccess .pm-popup-feedback__content,
-#priceSuccess .pm-popup-feedback__content{
+#priceSuccess .pm-popup-feedback__content,
+#solutionSuccess .pm-popup-feedback__content,
+#serviceSuccess .pm-popup-feedback__content{
     gap: var(--spacing-12);
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -306,7 +320,9 @@
     #orderForm .pm-checkbox-text br,
     #leasingForm .pm-checkbox-text br,
     #learnPriceForm .pm-checkbox-text br,
-    #priceForm .pm-checkbox-text br{
+    #priceForm .pm-checkbox-text br,
+    #solutionForm .pm-checkbox-text br,
+    #serviceForm .pm-checkbox-text br{
         display: none;
     }
 }
