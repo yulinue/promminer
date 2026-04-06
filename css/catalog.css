@@ -4250,7 +4250,6 @@ h1.pm-breadcrumb-title{
 
     #filterPopup.filter-section-open .pm-menu-mobile__header-title, #filterPopup .pm-menu-popup__mobile-header--fixed .pm-menu-mobile__header-title {
         font-size: 16px;
-        line-height: 20px;
     }
 
     #filterPopup.filter-section-open .pm-btn--ghost-primary {
