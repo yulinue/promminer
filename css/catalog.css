@@ -2379,6 +2379,10 @@ h1.pm-breadcrumb-title{
     margin-top: auto;
 }
 
+.pm-product__card-btns .pm-btn--primary{
+    font-weight: 600;
+}
+
 @media(max-width: 600px){
     .pm-catalog__products-grid .pm-product__card-btns .pm-btn--primary{
         height: var(--base-size-l);
@@ -3729,6 +3733,11 @@ h1.pm-breadcrumb-title{
         line-height: 16px;
         padding: 2px 8px;
     }
+
+    .pm-catalog__products-grid .pm-product__price-badge{
+        font-size: 12px;
+        line-height: 16px;
+    }
 }
 
 .pm-catalog__banner-info .pm-event-tag.pm-event-tag--blue{
@@ -3764,6 +3773,7 @@ h1.pm-breadcrumb-title{
 
 .pm-catalog__banner-info .pm-btn--primary{
     height: var(--base-size-2xl);
+    font-weight: 600;
 }
 @media (max-width: 768px) {
     .pm-catalog__banner-info .pm-btn--primary{
