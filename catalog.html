@@ -3712,6 +3712,7 @@
     const mobileHeader = filterPopup.querySelector('.pm-menu-popup__mobile-header');
 
     const originalPositions = new Map();
+    let currentOriginalContent = null; // Сохраняем ссылку на текущий оригинальный контент
 
     openFilterBtn.addEventListener('click', () => {
       filterPopup.classList.add('active');
@@ -3733,9 +3734,21 @@
       originalPositions.set(content, {
         parent: content.parentElement,
         nextSibling: content.nextElementSibling,
-        originalContent: content // сохраняем ссылку на оригинал
+        originalContent: content
       });
     });
+
+    // Функция для синхронизации всех чекбоксов из клона в оригинал
+    function syncAllCheckboxesFromCloneToOriginal(cloneContent, originalContent) {
+      const cloneCheckboxes = cloneContent.querySelectorAll('input[type="checkbox"]');
+      const originalCheckboxes = originalContent.querySelectorAll('input[type="checkbox"]');
+
+      cloneCheckboxes.forEach((cloneCb, index) => {
+        if (originalCheckboxes[index]) {
+          originalCheckboxes[index].checked = cloneCb.checked;
+        }
+      });
+    }
 
     // открытие секции
     document.querySelectorAll('[data-filter-open]').forEach(btn => {
@@ -3747,11 +3760,13 @@
 
         if (!originalContent) return;
 
+        // Сохраняем ссылку на оригинальный контент
+        currentOriginalContent = originalContent;
+
         // СОЗДАЕМ КЛОН для модалки, оригинал остается на месте
         const clonedContent = originalContent.cloneNode(true);
 
-        // Клонируем также события с чекбоксов? Да, если нужно
-        // Можно также синхронизировать состояние между клоном и оригиналом
+        // Синхронизируем состояние и добавляем обработчики
         syncCheckboxesState(originalContent, clonedContent);
 
         setTimeout(() => {
@@ -3766,7 +3781,7 @@
       });
     });
 
-    // Функция для синхронизации чекбоксов (опционально)
+    // Функция для синхронизации чекбоксов
     function syncCheckboxesState(original, clone) {
       const originalCheckboxes = original.querySelectorAll('input[type="checkbox"]');
       const cloneCheckboxes = clone.querySelectorAll('input[type="checkbox"]');
@@ -3774,29 +3789,6 @@
       cloneCheckboxes.forEach((cloneCb, index) => {
         if (originalCheckboxes[index]) {
           cloneCb.checked = originalCheckboxes[index].checked;
-
-          // ФИКС ДЛЯ SAFARI: убираем подсказку
-          cloneCb.setAttribute('title', '');
-          cloneCb.setAttribute('aria-label', '');
-
-          // Добавляем атрибуты, которые отключают контекстное меню
-          cloneCb.style.webkitTouchCallout = 'none';
-          cloneCb.style.userSelect = 'none';
-
-          // Отключаем контекстное меню на чекбоксе
-          cloneCb.addEventListener('contextmenu', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            return false;
-          });
-
-          // Для iOS touchstart
-          cloneCb.addEventListener('touchstart', (e) => {
-            // Не даём появиться системному меню при долгом нажатии
-            if (e.cancelable) {
-              // Не делаем preventDefault полностью, чтобы чекбокс работал
-            }
-          });
 
           // Синхронизация изменений: когда меняется клон - меняем оригинал
           cloneCb.addEventListener('change', (e) => {
@@ -3807,12 +3799,9 @@
     }
 
     const returnContent = () => {
-      const content = filterSectionContent.firstElementChild;
-
-      // Просто очищаем модальное содержимое, оригинал возвращать не нужно
       filterSectionContent.innerHTML = '';
-
       headerTitle.textContent = 'Фильтры';
+      currentOriginalContent = null;
 
       if (scrollContainer) {
         scrollContainer.scrollTop = 0;
@@ -3841,13 +3830,12 @@
       filterPopup.classList.remove('filter-section-open');
     });
 
-    // --- выбрать все (обновляем для работы с динамическим содержимым) ---
+    // --- выбрать все (с синхронизацией с оригиналом) ---
     const selectAllBtn = document.querySelector('.select-all');
     const modalContent = document.querySelector('[data-filter-modal-content]');
 
     if (selectAllBtn && modalContent) {
       const updateButtonText = () => {
-        // Теперь ищем чекбоксы внутри активного клона
         const activeContent = modalContent.firstElementChild;
         if (!activeContent) return;
 
@@ -3864,14 +3852,24 @@
         if (!checkboxes.length) return;
 
         const allChecked = [...checkboxes].every(cb => cb.checked);
+
+        // Меняем состояние чекбоксов в клоне
         checkboxes.forEach(cb => cb.checked = !allChecked);
+
+        // СИНХРОНИЗИРУЕМ с оригиналом
+        if (currentOriginalContent) {
+          syncAllCheckboxesFromCloneToOriginal(activeContent, currentOriginalContent);
+        }
 
         updateButtonText();
       });
 
       // Слушаем изменения на уровне modalContent (делегирование)
       modalContent.addEventListener('change', e => {
-        if (e.target.type === 'checkbox') updateButtonText();
+        if (e.target.type === 'checkbox') {
+          updateButtonText();
+          // Синхронизация уже происходит в syncCheckboxesState через change событие
+        }
       });
     }
   });
