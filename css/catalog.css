@@ -3499,6 +3499,7 @@ h1.pm-breadcrumb-title{
     font-size: 14px;
     font-weight: 600;
     line-height: 18px;
+    cursor: pointer;
 }
 
 .pm-catalog-badge.pm-catalog-badge--gray{
@@ -3916,9 +3917,9 @@ h1.pm-breadcrumb-title{
         position: absolute;
         left: 16px;
         top: 50%;
-        -webkit-transition: .2s ease;
-        -o-transition: .2s ease;
-        transition: .2s ease;
+        -webkit-transition: .2s;
+        -o-transition: .2s;
+        transition: .2s;
     }
 
     #filterPopup.filter-section-open .pm-menu-mobile__header-title,
@@ -3931,6 +3932,41 @@ h1.pm-breadcrumb-title{
         -webkit-transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
+    }
+
+    #filterPopup:not(.filter-section-open) .pm-menu-mobile__header-title {
+        animation: titleFadeReverse .2s ease-in;
+    }
+    #filterPopup.filter-section-open .pm-menu-mobile__header-title{
+        animation: titleFade .2s ease-in;
+    }
+    @keyframes titleFade {
+        0% {
+            opacity: 0;
+        }
+        85% {
+            opacity: 0.2;
+        }
+        95% {
+            opacity: 0.75;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    @keyframes titleFadeReverse {
+        0% {
+            opacity: 0;
+        }
+        85% {
+            opacity: 0.2;
+        }
+        95% {
+            opacity: 0.75;
+        }
+        100% {
+            opacity: 1;
+        }
     }
 
     #filterPopup .pm-menu-popup__mobile-header .pm-btn--ghost-primary{
@@ -4074,6 +4110,7 @@ h1.pm-breadcrumb-title{
         -webkit-transition: .3s ease;
         -o-transition: .3s ease;
         transition: .3s ease;
+        color: var(--content-sentiment-accent);
     }
 
     .pm-detail-filter__btns-container .pm-btn--link.active{
