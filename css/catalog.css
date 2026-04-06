@@ -3975,17 +3975,6 @@ h1.pm-breadcrumb-title{
         }
     }
 
-    .pm-filter__dynamic-content input[type="checkbox"] {
-        -webkit-touch-callout: none !important;
-        -webkit-user-select: none !important;
-        user-select: none !important;
-        pointer-events: auto;
-    }
-
-    .pm-filter__dynamic-content {
-        -webkit-touch-callout: none;
-    }
-
     #filterPopup .pm-menu-popup__mobile-header .pm-btn--ghost-primary{
         display: none;
     }

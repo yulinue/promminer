@@ -3775,6 +3775,29 @@
         if (originalCheckboxes[index]) {
           cloneCb.checked = originalCheckboxes[index].checked;
 
+          // ФИКС ДЛЯ SAFARI: убираем подсказку
+          cloneCb.setAttribute('title', '');
+          cloneCb.setAttribute('aria-label', '');
+
+          // Добавляем атрибуты, которые отключают контекстное меню
+          cloneCb.style.webkitTouchCallout = 'none';
+          cloneCb.style.userSelect = 'none';
+
+          // Отключаем контекстное меню на чекбоксе
+          cloneCb.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+          });
+
+          // Для iOS touchstart
+          cloneCb.addEventListener('touchstart', (e) => {
+            // Не даём появиться системному меню при долгом нажатии
+            if (e.cancelable) {
+              // Не делаем preventDefault полностью, чтобы чекбокс работал
+            }
+          });
+
           // Синхронизация изменений: когда меняется клон - меняем оригинал
           cloneCb.addEventListener('change', (e) => {
             originalCheckboxes[index].checked = e.target.checked;
