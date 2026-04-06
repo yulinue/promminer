@@ -3752,6 +3752,14 @@
 
     // открытие секции
     document.querySelectorAll('[data-filter-open]').forEach(btn => {
+      // Отключаем контекстное меню (долгое нажатие) на кнопке
+      btn.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      });
+
+      // Основной обработчик клика
       btn.addEventListener('click', () => {
         const key = btn.dataset.filterOpen;
         const originalContent = document.querySelector(`[data-filter-content="${key}"]`);
