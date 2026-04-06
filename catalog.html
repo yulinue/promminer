@@ -1550,7 +1550,7 @@
                 <div class="pm-checkbox-text">Equihash</div>
               </div>
             </div>
-            <button class="pm-btn--link" data-filter-open="algorithm">Смотреть все</button>
+            <div class="pm-btn--link" data-filter-open="algorithm">Смотреть все</div>
           </div>
 
           <div class="pm-filter__item-container">
@@ -3752,14 +3752,6 @@
 
     // открытие секции
     document.querySelectorAll('[data-filter-open]').forEach(btn => {
-      // Отключаем контекстное меню (долгое нажатие) на кнопке
-      btn.addEventListener('contextmenu', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-      });
-
-      // Основной обработчик клика
       btn.addEventListener('click', () => {
         const key = btn.dataset.filterOpen;
         const originalContent = document.querySelector(`[data-filter-content="${key}"]`);
