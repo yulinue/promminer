@@ -3782,6 +3782,12 @@ h1.pm-breadcrumb-title{
 /* ========================
    Модальное окно сортировки
 ======================== */
+.pm-btn--link[data-filter-open] {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+}
 .pm-popup-overlay#sortPopup,
 .pm-popup-overlay#filterDetailPopup,
 .pm-popup-overlay#filterPopup{
