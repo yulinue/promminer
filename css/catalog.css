@@ -3928,6 +3928,7 @@ h1.pm-breadcrumb-title{
 
         backface-visibility: hidden;
         -webkit-backface-visibility: hidden;
+        will-change: transform;
     }
 
     #filterPopup.filter-section-open .pm-menu-mobile__header-title,
@@ -3942,10 +3943,10 @@ h1.pm-breadcrumb-title{
     }
 
     #filterPopup:not(.filter-section-open) .pm-menu-mobile__header-title {
-        animation: titleFadeReverse .2s ease-in;
+        animation: titleFadeReverse .2s ease-in-out;
     }
     #filterPopup.filter-section-open .pm-menu-mobile__header-title{
-        animation: titleFade .2s ease-in;
+        animation: titleFade .2s ease-in-out;
     }
     @keyframes titleFade {
         0% {
