@@ -3922,9 +3922,9 @@ h1.pm-breadcrumb-title{
         position: absolute;
         left: 16px;
         top: 50%;
-        -webkit-transition: .2s;
-        -o-transition: .2s;
-        transition: .2s;
+        -webkit-transition: all .2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        -o-transition: all .2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transition: all .2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
         backface-visibility: hidden;
         -webkit-backface-visibility: hidden;
