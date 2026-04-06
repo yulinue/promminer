@@ -519,25 +519,18 @@ input.pm-input:-webkit-autofill {
     transition: all 0.3s ease;
 }
 
-/* Более специфичный селектор для label телефона */
 .pm-input-wrapper--phone .pm-input-label {
+    display: block !important;
     color: var(--content-base-secondary) !important;
-    -webkit-text-fill-color: var(--content-base-secondary);
-    text-fill-color: var(--content-base-secondary);
+    -webkit-text-fill-color: var(--content-base-secondary) !important;
+    text-fill-color: var(--content-base-secondary) !important;
+    background-color: transparent !important;
+    -webkit-opacity: 1 !important;
+    opacity: 1 !important;
 }
 
-/* Отключаем синюю подсветку при фокусе */
-.pm-input-wrapper--phone input:focus {
-    outline: none;
-}
-
-/* Убираем синий фон у инпутов в Safari */
-.pm-input-wrapper--phone input:-webkit-autofill,
-.pm-input-wrapper--phone input:-webkit-autofill:hover,
-.pm-input-wrapper--phone input:-webkit-autofill:focus,
-.pm-input-wrapper--phone input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px white inset !important;
-    box-shadow: 0 0 0 30px white inset !important;
+.pm-input-wrapper--phone input::placeholder{
+    display: none;
 }
 
 .pm-input:focus + .pm-input-label,
