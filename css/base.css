@@ -518,6 +518,8 @@ input.pm-input:-webkit-autofill {
     -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
 
+    -webkit-text-fill-color: var(--content-base-secondary);
+    text-fill-color: var(--content-base-secondary);
     -webkit-appearance: none;
     appearance: none;
 }
