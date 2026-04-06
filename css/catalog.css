@@ -2298,6 +2298,18 @@ h1.pm-breadcrumb-title{
     font-size: 16px;
     line-height: 20px;
 }
+@media(max-width: 991px){
+    .pm-product-card__title-wrapper .pm-product__old-price{
+        font-size: 14px;
+        line-height: 18px;
+    }
+}
+@media(max-width: 600px){
+    .pm-product-card__title-wrapper .pm-product__old-price{
+        font-size: 12px;
+        line-height: 16px;
+    }
+}
 
 .pm-product-card__top-text .pm-popular__card-subtitle{
     width: 100%;
