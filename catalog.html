@@ -2164,7 +2164,7 @@
                 </div>
                 <div class="pm-product__card-btns">
                   <button class="pm-btn pm-btn--primary pm-btn--primary--subtle js-open-popup" data-popup="learnPricePopup">Узнать цену</button>
-                  <div class="pm-product__status-wrapper">
+                  <div class="pm-product__status-wrapper status-unavailable">
                     <span class="pm-product__status-name">Предзаказ</span>
                   </div>
                 </div>
@@ -2381,7 +2381,7 @@
                 </div>
                 <div class="pm-product__card-btns">
                   <button class="pm-btn pm-btn--primary pm-btn--primary--subtle js-open-popup" data-popup="learnPricePopup">Узнать цену</button>
-                  <div class="pm-product__status-wrapper">
+                  <div class="pm-product__status-wrapper status-unavailable">
                     <span class="pm-product__status-name">Предзаказ</span>
                   </div>
                 </div>
@@ -2549,7 +2549,7 @@
                 </div>
                 <div class="pm-product__card-btns">
                   <button class="pm-btn pm-btn--primary pm-btn--primary--subtle js-open-popup" data-popup="learnPricePopup">Узнать цену</button>
-                  <div class="pm-product__status-wrapper">
+                  <div class="pm-product__status-wrapper status-unavailable">
                     <span class="pm-product__status-name">Предзаказ</span>
                   </div>
                 </div>
@@ -3702,7 +3702,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     const filterPopup = document.querySelector('#filterPopup');
     const openFilterBtn = document.querySelector('#openFilterBtn');
-    const scrollContainer = filterPopup?.querySelector('.pm-filter-mobile__container'); // ВАЖНО
+    const scrollContainer = filterPopup?.querySelector('.pm-filter-mobile__container');
     const filterSection = document.querySelector('.pm-filter__section');
     const filterSectionContent = document.querySelector('[data-filter-modal-content]');
     const closeBtns = document.querySelectorAll('.mobile-filter-close');
@@ -3716,9 +3716,8 @@
     openFilterBtn.addEventListener('click', () => {
       filterPopup.classList.add('active');
       document.body.classList.add('lock');
-    })
+    });
 
-    // --- фикс хедера при скролле ---
     if (scrollContainer && mobileHeader) {
       scrollContainer.addEventListener('scroll', () => {
         if (scrollContainer.scrollTop > 0) {
@@ -3729,11 +3728,12 @@
       });
     }
 
-    // сохраняем позиции
+    // сохраняем оригиналы
     document.querySelectorAll('[data-filter-content]').forEach(content => {
       originalPositions.set(content, {
         parent: content.parentElement,
-        nextSibling: content.nextElementSibling
+        nextSibling: content.nextElementSibling,
+        originalContent: content // сохраняем ссылку на оригинал
       });
     });
 
@@ -3741,14 +3741,23 @@
     document.querySelectorAll('[data-filter-open]').forEach(btn => {
       btn.addEventListener('click', () => {
         const key = btn.dataset.filterOpen;
-        const content = document.querySelector(`[data-filter-content="${key}"]`);
+        const originalContent = document.querySelector(`[data-filter-content="${key}"]`);
         const filterItem = btn.closest('.pm-filter__item-container');
         const filterTitle = filterItem?.querySelector('.pm-filter__item-title')?.textContent;
 
-        if (!content) return;
+        if (!originalContent) return;
 
-        filterSectionContent.innerHTML = '';
-        filterSectionContent.appendChild(content);
+        // СОЗДАЕМ КЛОН для модалки, оригинал остается на месте
+        const clonedContent = originalContent.cloneNode(true);
+
+        // Клонируем также события с чекбоксов? Да, если нужно
+        // Можно также синхронизировать состояние между клоном и оригиналом
+        syncCheckboxesState(originalContent, clonedContent);
+
+        setTimeout(() => {
+          filterSectionContent.innerHTML = '';
+          filterSectionContent.appendChild(clonedContent);
+        }, 200);
 
         filterSection.classList.add('active');
         filterPopup.classList.add('filter-section-open');
@@ -3757,18 +3766,31 @@
       });
     });
 
+    // Функция для синхронизации чекбоксов (опционально)
+    function syncCheckboxesState(original, clone) {
+      const originalCheckboxes = original.querySelectorAll('input[type="checkbox"]');
+      const cloneCheckboxes = clone.querySelectorAll('input[type="checkbox"]');
+
+      cloneCheckboxes.forEach((cloneCb, index) => {
+        if (originalCheckboxes[index]) {
+          cloneCb.checked = originalCheckboxes[index].checked;
+
+          // Синхронизация изменений: когда меняется клон - меняем оригинал
+          cloneCb.addEventListener('change', (e) => {
+            originalCheckboxes[index].checked = e.target.checked;
+          });
+        }
+      });
+    }
+
     const returnContent = () => {
       const content = filterSectionContent.firstElementChild;
 
-      if (content && originalPositions.has(content)) {
-        const { parent, nextSibling } = originalPositions.get(content);
-        if (nextSibling) parent.insertBefore(content, nextSibling);
-        else parent.appendChild(content);
-      }
+      // Просто очищаем модальное содержимое, оригинал возвращать не нужно
+      filterSectionContent.innerHTML = '';
 
       headerTitle.textContent = 'Фильтры';
 
-      // сброс скролла и фикса хедера
       if (scrollContainer) {
         scrollContainer.scrollTop = 0;
         mobileHeader.classList.remove('pm-menu-popup__mobile-header--fixed');
@@ -3796,19 +3818,26 @@
       filterPopup.classList.remove('filter-section-open');
     });
 
-    // --- выбрать все ---
+    // --- выбрать все (обновляем для работы с динамическим содержимым) ---
     const selectAllBtn = document.querySelector('.select-all');
     const modalContent = document.querySelector('[data-filter-modal-content]');
 
     if (selectAllBtn && modalContent) {
       const updateButtonText = () => {
-        const checkboxes = modalContent.querySelectorAll('input[type="checkbox"]');
+        // Теперь ищем чекбоксы внутри активного клона
+        const activeContent = modalContent.firstElementChild;
+        if (!activeContent) return;
+
+        const checkboxes = activeContent.querySelectorAll('input[type="checkbox"]');
         const allChecked = [...checkboxes].every(cb => cb.checked);
         selectAllBtn.textContent = allChecked ? 'Снять все' : 'Выбрать все';
       };
 
       selectAllBtn.addEventListener('click', () => {
-        const checkboxes = modalContent.querySelectorAll('input[type="checkbox"]');
+        const activeContent = modalContent.firstElementChild;
+        if (!activeContent) return;
+
+        const checkboxes = activeContent.querySelectorAll('input[type="checkbox"]');
         if (!checkboxes.length) return;
 
         const allChecked = [...checkboxes].every(cb => cb.checked);
@@ -3817,12 +3846,11 @@
         updateButtonText();
       });
 
+      // Слушаем изменения на уровне modalContent (делегирование)
       modalContent.addEventListener('change', e => {
         if (e.target.type === 'checkbox') updateButtonText();
       });
     }
-
-
   });
   <!--модальное окно сортировки-->
   document.addEventListener('DOMContentLoaded', () => {
