@@ -3930,7 +3930,6 @@ h1.pm-breadcrumb-title{
     #filterPopup.filter-section-open .pm-menu-mobile__header-title,
     #filterPopup .pm-menu-popup__mobile-header--fixed .pm-menu-mobile__header-title{
         font-size: 20px;
-        line-height: 24px;
         position: absolute;
         left: 50%;
         top: 50%;
