@@ -2392,6 +2392,11 @@
     -ms-flex-item-align: start;
     align-self: flex-start;
 }
+@media(max-width: 1024px){
+    .pm-gas-stages__left{
+        position: static;
+    }
+}
 
 .pm-gas-stages__label {
     display: -webkit-box;

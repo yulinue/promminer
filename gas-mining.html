@@ -3935,84 +3935,100 @@
     </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // JS-sticky для pm-gas-stages__left (CSS sticky не работает из-за overflow-x:hidden на body)
-            (function() {
-                var left = document.querySelector('.pm-gas-stages__left');
-                var wrapper = document.querySelector('.pm-gas-stages__wrapper');
-                if (!left || !wrapper) return;
+        (function() {
+            var left = document.querySelector('.pm-gas-stages__left');
+            var wrapper = document.querySelector('.pm-gas-stages__wrapper');
+            if (!left || !wrapper) return;
 
-                var topOffset = 90;
+            var topOffset = 90;
+            var placeholder = document.createElement('div');
+            placeholder.style.display = 'none';
+            left.parentNode.insertBefore(placeholder, left);
+            wrapper.style.position = 'relative';
 
-                // Создаём placeholder для сохранения места в потоке
-                var placeholder = document.createElement('div');
+            var isFixed = false;
+            var currentMode = null; // 'fixed', 'absolute', null
+
+            function isMobile() {
+                return window.innerWidth < 1025;
+            }
+
+            function reset() {
+                left.style.position = '';
+                left.style.top = '';
+                left.style.left = '';
+                left.style.width = '';
                 placeholder.style.display = 'none';
-                left.parentNode.insertBefore(placeholder, left);
+                isFixed = false;
+                currentMode = null;
+            }
 
-                var isFixed = false;
+            function onScroll() {
+                // ЖЁСТКАЯ проверка — если мобилка, сбрасываем ВСЁ и выходим
+                if (isMobile()) {
+                    reset();
+                    return;
+                }
 
-                function onScroll() {
-                    if (window.innerWidth < 1025) {
-                        reset();
-                        return;
-                    }
+                var wrapperRect = wrapper.getBoundingClientRect();
+                var leftNaturalWidth = placeholder.style.display === 'none'
+                    ? left.offsetWidth
+                    : parseFloat(placeholder.style.width);
+                var leftHeight = left.offsetHeight;
+                var wrapperBottom = wrapperRect.top + wrapperRect.height;
+                var leftX = wrapperRect.left;
 
-                    var wrapperRect = wrapper.getBoundingClientRect();
-                    var leftNaturalWidth = placeholder.style.display === 'none'
-                        ? left.offsetWidth
-                        : parseFloat(placeholder.style.width);
-                    var leftHeight = left.offsetHeight;
-                    var wrapperBottom = wrapperRect.top + wrapperRect.height;
-                    var leftX = wrapperRect.left;
-
-                    if (wrapperRect.top > topOffset) {
-                        // Секция ещё не дошла — обычный поток
-                        reset();
-                    } else if (wrapperBottom - topOffset > leftHeight) {
-                        // Фиксируем
-                        if (!isFixed || left.style.position !== 'fixed') {
-                            if (!isFixed) {
-                                placeholder.style.width = left.offsetWidth + 'px';
-                                placeholder.style.height = left.offsetHeight + 'px';
-                                placeholder.style.flexShrink = '0';
-                            }
-                            placeholder.style.display = 'block';
-                            left.style.position = 'fixed';
-                            left.style.top = topOffset + 'px';
-                            left.style.left = leftX + 'px';
-                            left.style.width = leftNaturalWidth + 'px';
-                            isFixed = true;
+                // Секция выше viewport — обычный поток
+                if (wrapperRect.top > topOffset) {
+                    reset();
+                }
+                // Секция в зоне фиксации
+                else if (wrapperBottom - topOffset > leftHeight) {
+                    if (currentMode !== 'fixed') {
+                        if (!isFixed) {
+                            placeholder.style.width = left.offsetWidth + 'px';
+                            placeholder.style.height = left.offsetHeight + 'px';
+                            placeholder.style.flexShrink = '0';
                         }
-                    } else {
-                        // Дошли до конца секции — прибиваем к низу
+                        placeholder.style.display = 'block';
+                        left.style.position = 'fixed';
+                        left.style.top = topOffset + 'px';
+                        left.style.left = leftX + 'px';
+                        left.style.width = leftNaturalWidth + 'px';
+                        isFixed = true;
+                        currentMode = 'fixed';
+                    }
+                }
+                // Секция заканчивается — прибиваем к низу
+                else {
+                    if (currentMode !== 'absolute') {
                         placeholder.style.display = 'block';
                         left.style.position = 'absolute';
                         left.style.top = (wrapperRect.height - leftHeight) + 'px';
                         left.style.left = '0px';
                         left.style.width = leftNaturalWidth + 'px';
                         isFixed = true;
+                        currentMode = 'absolute';
                     }
                 }
+            }
 
-                function reset() {
-                    left.style.position = '';
-                    left.style.top = '';
-                    left.style.left = '';
-                    left.style.width = '';
-                    placeholder.style.display = 'none';
-                    isFixed = false;
-                }
-
-                wrapper.style.position = 'relative';
-
-                window.addEventListener('scroll', onScroll, { passive: true });
-                window.addEventListener('resize', function() {
+            // Обработчик ресайза
+            function onResize() {
+                if (isMobile()) {
+                    // Если перешли на мобилку — полностью сбрасываем
+                    reset();
+                } else {
+                    // Если перешли на десктоп — пересчитываем
                     reset();
                     onScroll();
-                });
-                onScroll();
-            })();
-        })
+                }
+            }
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', onResize);
+            onScroll();
+        })();
     </script>
 
     <!-- футер-->
