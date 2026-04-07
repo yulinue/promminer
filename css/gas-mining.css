@@ -57,11 +57,7 @@
     color: #fff;
 }
 
-.pm-page-dark .pm-popup-feedback__container .pm-popup-feedback__header-subtitle,
-.pm-page-dark .pm-footer-title,
-.pm-page-dark .pm-footer-subtitle {
-    color: #a3a3a3;
-}
+
 
 .pm-page-dark .pm-popup-feedback__container .pm-input {
     color: var(--content-base-primary, #F9FAFB);
