@@ -1667,7 +1667,8 @@
                                     <div class="pm-input__container">
                                         <div class="pm-input-wrapper pm-input-wrapper--phone">
                                             <div class="pm-input__phone-code">+7</div>
-                                            <input class="pm-input" type="tel" name="tel" id="footertel" required autocomplete="tel-national" aria-label="Телефон" placeholder="(999) 999-99-99">
+                                            <label for="footerTel" class="pm-input-label">(999) 999-99-99<span class="pm-required">*</span></label>
+                                            <input class="pm-input" type="tel" name="tel" id="footerTel" required autocomplete="tel-national">
                                         </div>
                                         <div class="pm-input__error">Заполните это поле</div>
                                     </div>
@@ -2206,116 +2207,6 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const tabs = document.querySelectorAll('.pm-tab-item');
-        const contents = document.querySelectorAll('[data-tab-content]');
-
-        const popularSliders = document.querySelectorAll('.pm-popular-slider');
-        const swipers = [];
-
-        // инициализация свайперов
-        popularSliders.forEach(slider => {
-            const instance = new Swiper(slider, {
-                spaceBetween: 16,
-                slidesPerView: 'auto',
-                slidesPerGroup: 1,
-                speed: 1200,
-                pagination: {
-                    el: slider.querySelector('.pm-popular-pagination'),
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: slider.querySelector('.pm-popular__next-btn'),
-                    prevEl: slider.querySelector('.pm-popular__prev-btn'),
-                },
-                breakpoints: {
-                    1025: {
-                        slidesPerView: 4,
-                        slidesPerGroup: 4,
-                        speed: 800,
-                    },
-                    1681: {
-                        slidesPerView: 5,
-                        slidesPerGroup: 5,
-                    }
-                },
-            });
-
-            swipers.push({
-                el: slider,
-                instance
-            });
-        });
-
-
-        // табы
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const id = tab.dataset.tab;
-
-                // активный таб
-                tabs.forEach(t => {
-                    t.classList.remove('active');
-                    t.setAttribute('aria-selected', 'false');
-                });
-
-                tab.classList.add('active');
-                tab.setAttribute('aria-selected', 'true');
-
-                contents.forEach(c => c.classList.remove('active'));
-
-                const activeContent = document.querySelector(`[data-tab-content="${id}"]`);
-                activeContent.classList.add('active');
-
-                // обновление нужного swiper
-                const current = swipers.find(s => s.el === activeContent);
-                if (current) {
-                    current.instance.update();
-                }
-            });
-        });
-
-        document.querySelectorAll('.pm-card-images').forEach(container => {
-            const images = container.querySelectorAll('img');
-            const dotsContainer = container.parentElement.querySelector('.pm-card-dots');
-
-            images.forEach((_, i) => {
-                const dot = document.createElement('span');
-                if (i === 0) dot.classList.add('active');
-                dotsContainer.appendChild(dot);
-            });
-
-            const dots = dotsContainer.querySelectorAll('span');
-
-            container.addEventListener('mousemove', (e) => {
-                const rect = container.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const percent = x / rect.width;
-
-                const index = Math.min(
-                    Math.floor(percent * images.length),
-                    images.length - 1
-                );
-
-                images.forEach(img => img.classList.remove('active'));
-                dots.forEach(dot => dot.classList.remove('active'));
-
-                images[index].classList.add('active');
-                dots[index].classList.add('active');
-            });
-
-            container.addEventListener('mouseleave', () => {
-                images.forEach(img => img.classList.remove('active'));
-                dots.forEach(dot => dot.classList.remove('active'));
-
-                images[0].classList.add('active');
-                dots[0].classList.add('active');
-            });
-        });
-    })
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.pm-input-wrapper').forEach(container => {
             const input = container.querySelector('.pm-input');
 
@@ -2430,13 +2321,13 @@
 
         const openFeedbackBtn = document.querySelector('#openFeedbackPopup');
         const feedbackPopup = document.getElementById('feedbackPopup');
-        openFeedbackBtn.addEventListener('click', () => {
+        openFeedbackBtn?.addEventListener('click', () => {
             feedbackPopup.classList.add('active');
             document.body.classList.add('lock');
         });
 
         const closeFeedbackBtns = document.querySelectorAll('.close-feedback-popup');
-        closeFeedbackBtns.forEach(btn => {
+        closeFeedbackBtns?.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 feedbackPopup.classList.remove('active');

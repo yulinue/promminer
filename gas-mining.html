@@ -2749,7 +2749,7 @@
                         <div class="pm-gas-stages__label"><span class="pm-gas-stages__label-dot"></span> Процесс работы</div>
                         <h2 class="pm-gas-stages__title">Этапы строительства дата-центра на ГПУ</h2>
                         <div class="pm-gas-stages__cta desktop">
-                            <button class="pm-gas-stages__btn" id="openServicePopup">Заказать услугу</button>
+                            <button class="pm-gas-stages__btn open-service-popup">Заказать услугу</button>
                             <div class="pm-gas-stages__term">
                                 <span class="pm-gas-stages__term-label">Средний срок реализации</span>
                                 <span class="pm-gas-stages__term-value">от 1 месяца</span>
@@ -2827,7 +2827,7 @@
                             </div>
                         </div>
                         <div class="pm-gas-stages__cta mobile">
-                            <button class="pm-gas-stages__btn">Заказать услугу</button>
+                            <button class="pm-gas-stages__btn open-service-popup">Заказать услугу</button>
                             <div class="pm-gas-stages__term">
                                 <span class="pm-gas-stages__term-label">Средний срок реализации</span>
                                 <span class="pm-gas-stages__term-value">от 1 месяца</span>
@@ -3645,13 +3645,15 @@
                 });
             }
 
-            const openServiceBtn = document.querySelector('#openServicePopup');
+            const openServiceBtns = document.querySelectorAll('.open-service-popup');
             const servicePopup = document.getElementById('servicePopup');
-            if (openServiceBtn){
-                openServiceBtn.addEventListener('click', () => {
-                    servicePopup.classList.add('active');
-                    document.body.classList.add('lock');
-                });
+            if (openServiceBtns){
+                openServiceBtns.forEach(openServiceBtn => {
+                    openServiceBtn.addEventListener('click', () => {
+                        servicePopup.classList.add('active');
+                        document.body.classList.add('lock');
+                    });
+                })
             }
 
             const closeFeedbackBtns = document.querySelectorAll('.close-feedback-popup');
