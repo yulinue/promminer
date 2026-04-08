@@ -42,7 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const inputs = container.querySelectorAll('input, textarea, select');
 
-            // Функция для обновления отступов с учётом клавиатуры
+            // Сохраняем оригинальную высоту оверлея
+            const originalHeight = popup.style.height || '100dvh';
+
+            // Функция для обновления высоты оверлея с учётом клавиатуры
             function updateForKeyboard() {
                 if (!window.visualViewport) return;
 
@@ -50,24 +53,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 const windowHeight = window.innerHeight;
                 const keyboardHeight = windowHeight - viewport.height;
 
-                if (keyboardHeight > 100) { // Клавиатура точно открыта
-                    // Добавляем padding-bottom к оверлею равный высоте клавиатуры
-                    popup.style.paddingBottom = `${keyboardHeight}px`;
-
-                    // Немного уменьшаем max-height для надёжности
-                    container.style.maxHeight = `calc(95vh - ${keyboardHeight}px)`;
+                if (keyboardHeight > 100 && window.innerWidth <= 768) {
+                    // Клавиатура открыта на мобильном
+                    // Ограничиваем высоту оверлея: высота экрана минус клавиатура
+                    popup.style.height = `${viewport.height}px`;
+                    popup.style.maxHeight = `${viewport.height}px`;
 
                     // Меняем выравнивание на flex-start чтобы форма была сверху
-                    if (window.innerWidth <= 768) {
-                        popup.style.alignItems = 'flex-start';
-                        // Добавляем небольшой отступ сверху чтобы не прилипало к краю
-                        popup.style.paddingTop = '20px';
-                    }
+                    popup.style.alignItems = 'flex-start';
+                    popup.style.paddingTop = '20px';
+
+                    // Ограничиваем высоту контейнера формы
+                    container.style.maxHeight = `${viewport.height - 40}px`; // 20px сверху + 20px снизу
                 } else {
                     // Клавиатура закрыта — возвращаем всё как было
-                    popup.style.paddingBottom = '';
-                    popup.style.paddingTop = '';
+                    popup.style.height = '';
+                    popup.style.maxHeight = '';
                     popup.style.alignItems = '';
+                    popup.style.paddingTop = '';
                     container.style.maxHeight = '';
                 }
             }
@@ -77,26 +80,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     if (!element) return;
 
-                    // Небольшая задержка чтобы DOM обновился после изменения padding
                     requestAnimationFrame(() => {
                         const containerRect = container.getBoundingClientRect();
                         const elementRect = element.getBoundingClientRect();
 
-                        // Проверяем видимость элемента относительно контейнера
                         const elementRelativeTop = elementRect.top - containerRect.top;
                         const elementRelativeBottom = elementRect.bottom - containerRect.top;
 
                         const visibleTop = container.scrollTop;
                         const visibleBottom = container.scrollTop + container.clientHeight;
 
-                        // Если элемент не полностью виден
-                        if (elementRelativeBottom > visibleBottom) {
-                            // Скроллим так, чтобы элемент оказался вверху видимой области
-                            container.scrollTo({
-                                top: elementRelativeTop - 20,
-                                behavior: 'smooth'
-                            });
-                        } else if (elementRelativeTop < visibleTop) {
+                        // Если элемент не полностью виден в контейнере
+                        if (elementRelativeBottom > visibleBottom || elementRelativeTop < visibleTop) {
+                            // Скроллим так, чтобы элемент был в верхней части видимой области
                             container.scrollTo({
                                 top: elementRelativeTop - 20,
                                 behavior: 'smooth'
@@ -114,8 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.body.style.position = 'fixed';
                     document.body.style.top = `-${scrollY}px`;
                     document.body.style.width = '100%';
+                    document.body.style.overflow = 'hidden';
 
-                    // Обновляем отступы с учётом клавиатуры
+                    // Обновляем высоту оверлея
                     updateForKeyboard();
 
                     // Скроллим к элементу
@@ -123,7 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 input.addEventListener('blur', () => {
-                    // Не сразу убираем отступы, даём время на переключение между полями
                     setTimeout(() => {
                         const activeElement = document.activeElement;
                         // Если фокус не перешёл на другой инпут в этой же форме
@@ -133,15 +129,17 @@ document.addEventListener('DOMContentLoaded', () => {
                             document.body.style.position = '';
                             document.body.style.top = '';
                             document.body.style.width = '';
+                            document.body.style.overflow = '';
 
                             if (scrollY) {
                                 window.scrollTo(0, parseInt(scrollY || '0') * -1);
                             }
 
-                            // Возвращаем оригинальные стили
-                            popup.style.paddingBottom = '';
-                            popup.style.paddingTop = '';
+                            // Возвращаем оригинальные стили оверлея
+                            popup.style.height = '';
+                            popup.style.maxHeight = '';
                             popup.style.alignItems = '';
+                            popup.style.paddingTop = '';
                             container.style.maxHeight = '';
                         }
                     }, 100);
@@ -167,20 +165,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
-            // Восстановление при закрытии
+            // Восстановление при закрытии попапа
             function restoreAll() {
                 const scrollY = document.body.style.top;
                 document.body.style.position = '';
                 document.body.style.top = '';
                 document.body.style.width = '';
+                document.body.style.overflow = '';
 
                 if (scrollY) {
                     window.scrollTo(0, parseInt(scrollY || '0') * -1);
                 }
 
-                popup.style.paddingBottom = '';
-                popup.style.paddingTop = '';
+                popup.style.height = '';
+                popup.style.maxHeight = '';
                 popup.style.alignItems = '';
+                popup.style.paddingTop = '';
                 container.style.maxHeight = '';
             }
 
@@ -189,6 +189,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             closeButtons.forEach(btn => btn.addEventListener('click', restoreAll));
             if (submitBtn) submitBtn.addEventListener('click', restoreAll);
+
+            // Также восстанавливаем при клике на оверлей (если есть такой функционал)
+            popup.addEventListener('click', (e) => {
+                if (e.target === popup) {
+                    restoreAll();
+                }
+            });
         });
     }
 
