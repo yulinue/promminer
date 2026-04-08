@@ -169,7 +169,8 @@ body{
     box-sizing: border-box;
     scroll-behavior: smooth;
 }
-body.lock{
+body.lock,
+body:has(.v-overlay--active){
     overflow: hidden;
     padding-right: var(--scrollbar-width);
 }
