@@ -43,15 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function initMobileFormFixes() {
         if (!isMobileDevice()) return;
 
-        // Ищем попапы с разными классами
-        const popups = document.querySelectorAll('.pm-popup-overlay, .v-overlay');
+        const popups = document.querySelectorAll('.pm-popup-overlay');
 
         popups.forEach(popup => {
-            // Ищем контейнер формы - сначала pm-popup-feedback__container, потом profitability-offer-modal__body
-            let container = popup.querySelector('.pm-popup-feedback__container');
-            if (!container) {
-                container = popup.querySelector('.profitability-offer-modal__body');
-            }
+            const container = popup.querySelector('.pm-popup-feedback__container');
             if (!container) return;
 
             const inputs = container.querySelectorAll('input, textarea, select');
@@ -69,19 +64,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.documentElement.style.overflow = 'hidden';
             }
 
-            // Разблокировка скролла body
+            // Разблокировка скролла body - ИСПРАВЛЕННАЯ ВЕРСИЯ
             function unlockBodyScroll() {
                 const scrollY = document.body.style.top;
 
+                // Полностью очищаем все стили, которые мы добавили
                 document.body.style.position = '';
                 document.body.style.top = '';
                 document.body.style.width = '';
                 document.body.style.overflow = '';
                 document.documentElement.style.overflow = '';
 
+                // Восстанавливаем скролл на позицию
                 if (scrollY && scrollY.startsWith('-')) {
                     const savedPosition = parseInt(scrollY.replace('-', '').replace('px', ''));
                     if (!isNaN(savedPosition)) {
+                        // Небольшая задержка чтобы стили применились
                         setTimeout(() => {
                             window.scrollTo(0, savedPosition);
                         }, 10);
@@ -250,14 +248,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
-            // Проверка, активен ли попап
-            function isPopupActive() {
-                return popup.classList.contains('active') ||
-                    popup.classList.contains('v-overlay--active');
-            }
-
-            // Восстановление при закрытии попапа
+            // Восстановление при закрытии попапа - ИСПРАВЛЕННАЯ ВЕРСИЯ
             function restoreAll() {
+                // Снимаем блокировку с body
                 const scrollY = document.body.style.top;
 
                 document.body.style.position = '';
@@ -266,6 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.body.style.overflow = '';
                 document.documentElement.style.overflow = '';
 
+                // Восстанавливаем позицию скролла
                 if (scrollY && scrollY.startsWith('-')) {
                     const savedPosition = parseInt(scrollY.replace('-', '').replace('px', ''));
                     if (!isNaN(savedPosition)) {
@@ -275,10 +269,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
 
+                // Сбрасываем флаг и удаляем слушатели
                 isKeyboardOpen = false;
                 document.removeEventListener('touchmove', preventTouchMove);
                 document.removeEventListener('wheel', preventWheelScroll);
 
+                // Сбрасываем стили попапа и контейнера
                 popup.style.height = '';
                 popup.style.maxHeight = '';
                 popup.style.alignItems = '';
@@ -290,8 +286,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Ищем кнопки закрытия
-            const closeButtons = popup.querySelectorAll('[class*="close-"], .v-btn--icon, .profitability-offer-modal__close');
-            const submitBtn = container.querySelector('button[type="submit"], .profitability-offer-modal__submit');
+            const closeButtons = popup.querySelectorAll('[class*="close-"]');
+            const submitBtn = container.querySelector('button[type="submit"]');
 
             closeButtons.forEach(btn => {
                 btn.addEventListener('click', restoreAll);
@@ -299,6 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (submitBtn) {
                 submitBtn.addEventListener('click', (e) => {
+                    // Не мешаем отправке формы
                     setTimeout(restoreAll, 100);
                 });
             }
@@ -310,11 +307,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Слушаем закрытие попапа через изменение классов
+            // Дополнительно: слушаем закрытие попапа через класс active
             const observer = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
                     if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                        if (!isPopupActive()) {
+                        if (!popup.classList.contains('active')) {
+                            // Попап закрылся - восстанавливаем всё
                             restoreAll();
                         }
                     }
@@ -332,54 +330,20 @@ document.addEventListener('DOMContentLoaded', () => {
         initMobileFormFixes();
     }
 
-    // Проверка активности попапа
-    function isPopupActive(popup) {
-        return popup.classList.contains('active') ||
-            popup.classList.contains('v-overlay--active');
-    }
-
     // Наблюдатель за открытием попапа
     const observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
             if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
                 const target = mutation.target;
-                if (isPopupActive(target)) {
+                if (target.classList.contains('active')) {
                     setTimeout(initMobileFormFixes, 100);
                 }
             }
         });
     });
 
-    // Наблюдаем за всеми попапами
-    document.querySelectorAll('.pm-popup-overlay, .v-overlay').forEach(popup => {
+    document.querySelectorAll('.pm-popup-overlay').forEach(popup => {
         observer.observe(popup, { attributes: true });
     });
-
-    // Для динамически добавленных попапов
-    const domObserver = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            mutation.addedNodes.forEach((node) => {
-                if (node.nodeType === 1) {
-                    if (node.matches && (node.matches('.pm-popup-overlay') || node.matches('.v-overlay'))) {
-                        observer.observe(node, { attributes: true });
-                        if (isPopupActive(node)) {
-                            setTimeout(initMobileFormFixes, 100);
-                        }
-                    }
-                    if (node.querySelectorAll) {
-                        const popups = node.querySelectorAll('.pm-popup-overlay, .v-overlay');
-                        popups.forEach(popup => {
-                            observer.observe(popup, { attributes: true });
-                            if (isPopupActive(popup)) {
-                                setTimeout(initMobileFormFixes, 100);
-                            }
-                        });
-                    }
-                }
-            });
-        });
-    });
-
-    domObserver.observe(document.body, { childList: true, subtree: true });
 
 })();
