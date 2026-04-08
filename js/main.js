@@ -42,24 +42,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const inputs = container.querySelectorAll('input, textarea, select');
 
-            // Сохраняем оригинальное значение max-height
-            const originalMaxHeight = getComputedStyle(container).maxHeight;
-
-            // Функция для обновления max-height с учётом клавиатуры
-            function updateContainerHeight() {
+            // Функция для обновления отступов с учётом клавиатуры
+            function updateForKeyboard() {
                 if (!window.visualViewport) return;
 
                 const viewport = window.visualViewport;
                 const windowHeight = window.innerHeight;
                 const keyboardHeight = windowHeight - viewport.height;
 
-                if (keyboardHeight > 0) {
-                    // Клавиатура открыта - вычитаем её высоту
-                    const newMaxHeight = `calc(95vh - ${keyboardHeight}px)`;
-                    container.style.maxHeight = newMaxHeight;
+                if (keyboardHeight > 100) { // Клавиатура точно открыта
+                    // Добавляем padding-bottom к оверлею равный высоте клавиатуры
+                    popup.style.paddingBottom = `${keyboardHeight}px`;
+
+                    // Немного уменьшаем max-height для надёжности
+                    container.style.maxHeight = `calc(95vh - ${keyboardHeight}px)`;
+
+                    // Меняем выравнивание на flex-start чтобы форма была сверху
+                    if (window.innerWidth <= 768) {
+                        popup.style.alignItems = 'flex-start';
+                        // Добавляем небольшой отступ сверху чтобы не прилипало к краю
+                        popup.style.paddingTop = '20px';
+                    }
                 } else {
-                    // Клавиатура закрыта - возвращаем оригинал
-                    container.style.maxHeight = originalMaxHeight;
+                    // Клавиатура закрыта — возвращаем всё как было
+                    popup.style.paddingBottom = '';
+                    popup.style.paddingTop = '';
+                    popup.style.alignItems = '';
+                    container.style.maxHeight = '';
                 }
             }
 
@@ -68,28 +77,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     if (!element) return;
 
-                    const containerRect = container.getBoundingClientRect();
-                    const elementRect = element.getBoundingClientRect();
+                    // Небольшая задержка чтобы DOM обновился после изменения padding
+                    requestAnimationFrame(() => {
+                        const containerRect = container.getBoundingClientRect();
+                        const elementRect = element.getBoundingClientRect();
 
-                    // Проверяем, не перекрыт ли элемент клавиатурой
-                    const viewport = window.visualViewport;
-                    if (viewport) {
-                        const elementBottom = elementRect.bottom;
-                        const visibleBottom = viewport.height;
+                        // Проверяем видимость элемента относительно контейнера
+                        const elementRelativeTop = elementRect.top - containerRect.top;
+                        const elementRelativeBottom = elementRect.bottom - containerRect.top;
 
-                        if (elementBottom > visibleBottom - 50) {
-                            // Элемент перекрыт клавиатурой - скроллим к нему
-                            const scrollNeeded = elementBottom - visibleBottom + 70;
+                        const visibleTop = container.scrollTop;
+                        const visibleBottom = container.scrollTop + container.clientHeight;
 
-                            // Скроллим контейнер, а не всю страницу
-                            const currentScroll = container.scrollTop;
+                        // Если элемент не полностью виден
+                        if (elementRelativeBottom > visibleBottom) {
+                            // Скроллим так, чтобы элемент оказался вверху видимой области
                             container.scrollTo({
-                                top: currentScroll + scrollNeeded,
+                                top: elementRelativeTop - 20,
+                                behavior: 'smooth'
+                            });
+                        } else if (elementRelativeTop < visibleTop) {
+                            container.scrollTo({
+                                top: elementRelativeTop - 20,
                                 behavior: 'smooth'
                             });
                         }
-                    }
-                }, 150);
+                    });
+                }, 200);
             }
 
             // Обработчик фокуса
@@ -101,30 +115,40 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.body.style.top = `-${scrollY}px`;
                     document.body.style.width = '100%';
 
-                    // Обновляем высоту контейнера с учётом клавиатуры
-                    updateContainerHeight();
+                    // Обновляем отступы с учётом клавиатуры
+                    updateForKeyboard();
 
                     // Скроллим к элементу
                     scrollToActiveElement(e.target);
                 });
 
                 input.addEventListener('blur', () => {
-                    // Восстанавливаем body
-                    const scrollY = document.body.style.top;
-                    document.body.style.position = '';
-                    document.body.style.top = '';
-                    document.body.style.width = '';
+                    // Не сразу убираем отступы, даём время на переключение между полями
+                    setTimeout(() => {
+                        const activeElement = document.activeElement;
+                        // Если фокус не перешёл на другой инпут в этой же форме
+                        if (!activeElement || !container.contains(activeElement)) {
+                            // Восстанавливаем body
+                            const scrollY = document.body.style.top;
+                            document.body.style.position = '';
+                            document.body.style.top = '';
+                            document.body.style.width = '';
 
-                    if (scrollY) {
-                        window.scrollTo(0, parseInt(scrollY || '0') * -1);
-                    }
+                            if (scrollY) {
+                                window.scrollTo(0, parseInt(scrollY || '0') * -1);
+                            }
 
-                    // Возвращаем оригинальную высоту
-                    container.style.maxHeight = originalMaxHeight;
+                            // Возвращаем оригинальные стили
+                            popup.style.paddingBottom = '';
+                            popup.style.paddingTop = '';
+                            popup.style.alignItems = '';
+                            container.style.maxHeight = '';
+                        }
+                    }, 100);
                 });
             });
 
-            // Следим за изменениями visualViewport (например, при смене ориентации)
+            // Следим за изменениями visualViewport
             if (window.visualViewport) {
                 let ticking = false;
 
@@ -133,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         window.requestAnimationFrame(() => {
                             const activeElement = document.activeElement;
                             if (activeElement && container.contains(activeElement)) {
-                                updateContainerHeight();
+                                updateForKeyboard();
                                 scrollToActiveElement(activeElement);
                             }
                             ticking = false;
@@ -143,11 +167,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
-            // Обработчики для кнопок закрытия и submit
-            const closeButtons = popup.querySelectorAll('.close-feedback-popup');
-            const submitBtn = container.querySelector('button[type="submit"]');
-
-            const restoreBodyAndHeight = () => {
+            // Восстановление при закрытии
+            function restoreAll() {
                 const scrollY = document.body.style.top;
                 document.body.style.position = '';
                 document.body.style.top = '';
@@ -157,11 +178,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.scrollTo(0, parseInt(scrollY || '0') * -1);
                 }
 
-                container.style.maxHeight = originalMaxHeight;
-            };
+                popup.style.paddingBottom = '';
+                popup.style.paddingTop = '';
+                popup.style.alignItems = '';
+                container.style.maxHeight = '';
+            }
 
-            closeButtons.forEach(btn => btn.addEventListener('click', restoreBodyAndHeight));
-            if (submitBtn) submitBtn.addEventListener('click', restoreBodyAndHeight);
+            const closeButtons = popup.querySelectorAll('.close-feedback-popup');
+            const submitBtn = container.querySelector('button[type="submit"]');
+
+            closeButtons.forEach(btn => btn.addEventListener('click', restoreAll));
+            if (submitBtn) submitBtn.addEventListener('click', restoreAll);
         });
     }
 
