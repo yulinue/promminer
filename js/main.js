@@ -53,25 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const selects = popup.querySelectorAll('.pm-custom-select');
 
             let isKeyboardOpen = false;
-            let originalBodyOverflow = '';
-            let originalBodyPosition = '';
-            let originalBodyTop = '';
-            let originalBodyWidth = '';
-            let originalHtmlOverflow = '';
-
-            // Сохраняем оригинальные стили
-            function saveOriginalStyles() {
-                originalBodyOverflow = document.body.style.overflow;
-                originalBodyPosition = document.body.style.position;
-                originalBodyTop = document.body.style.top;
-                originalBodyWidth = document.body.style.width;
-                originalHtmlOverflow = document.documentElement.style.overflow;
-            }
 
             // Блокировка скролла body
             function lockBodyScroll() {
-                saveOriginalStyles();
-
                 const scrollY = window.scrollY;
                 document.body.style.position = 'fixed';
                 document.body.style.top = `-${scrollY}px`;
@@ -80,18 +64,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.documentElement.style.overflow = 'hidden';
             }
 
-            // Разблокировка скролла body
+            // Разблокировка скролла body - ИСПРАВЛЕННАЯ ВЕРСИЯ
             function unlockBodyScroll() {
                 const scrollY = document.body.style.top;
 
-                document.body.style.position = originalBodyPosition;
-                document.body.style.top = originalBodyTop;
-                document.body.style.width = originalBodyWidth;
-                document.body.style.overflow = originalBodyOverflow;
-                document.documentElement.style.overflow = originalHtmlOverflow;
+                // Полностью очищаем все стили, которые мы добавили
+                document.body.style.position = '';
+                document.body.style.top = '';
+                document.body.style.width = '';
+                document.body.style.overflow = '';
+                document.documentElement.style.overflow = '';
 
-                if (scrollY) {
-                    window.scrollTo(0, parseInt(scrollY || '0') * -1);
+                // Восстанавливаем скролл на позицию
+                if (scrollY && scrollY.startsWith('-')) {
+                    const savedPosition = parseInt(scrollY.replace('-', '').replace('px', ''));
+                    if (!isNaN(savedPosition)) {
+                        // Небольшая задержка чтобы стили применились
+                        setTimeout(() => {
+                            window.scrollTo(0, savedPosition);
+                        }, 10);
+                    }
                 }
             }
 
@@ -103,20 +95,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 const isInsideContainer = container.contains(target);
                 const isSelectDropdown = target.closest('.pm-custom-select__dropdown');
 
-                // Разрешаем скролл только внутри контейнера формы
                 if (!isInsideContainer && !isSelectDropdown) {
                     e.preventDefault();
                     return;
                 }
-
-                // Если это сам контейнер - проверяем, можно ли скроллить
-                if (target === container || target.classList.contains('pm-popup-feedback__content')) {
-                    // Разрешаем скролл
-                    return;
-                }
             }
 
-            // Предотвращение скролла колесиком мыши (для устройств с мышкой)
+            // Предотвращение скролла колесиком мыши
             function preventWheelScroll(e) {
                 if (!isKeyboardOpen) return;
 
@@ -235,10 +220,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 input.addEventListener('blur', handleBlur);
             });
 
-            // Для кастомных селектов тоже
+            // Для кастомных селектов
             selects.forEach(select => {
                 select.addEventListener('click', () => {
-                    // При открытии селекта тоже обновляем
                     if (isKeyboardOpen) {
                         updateForKeyboard();
                     }
@@ -264,16 +248,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
-            // Восстановление при закрытии попапа
+            // Восстановление при закрытии попапа - ИСПРАВЛЕННАЯ ВЕРСИЯ
             function restoreAll() {
-                if (isKeyboardOpen) {
-                    isKeyboardOpen = false;
-                    unlockBodyScroll();
+                // Снимаем блокировку с body
+                const scrollY = document.body.style.top;
 
-                    document.removeEventListener('touchmove', preventTouchMove);
-                    document.removeEventListener('wheel', preventWheelScroll);
+                document.body.style.position = '';
+                document.body.style.top = '';
+                document.body.style.width = '';
+                document.body.style.overflow = '';
+                document.documentElement.style.overflow = '';
+
+                // Восстанавливаем позицию скролла
+                if (scrollY && scrollY.startsWith('-')) {
+                    const savedPosition = parseInt(scrollY.replace('-', '').replace('px', ''));
+                    if (!isNaN(savedPosition)) {
+                        setTimeout(() => {
+                            window.scrollTo(0, savedPosition);
+                        }, 10);
+                    }
                 }
 
+                // Сбрасываем флаг и удаляем слушатели
+                isKeyboardOpen = false;
+                document.removeEventListener('touchmove', preventTouchMove);
+                document.removeEventListener('wheel', preventWheelScroll);
+
+                // Сбрасываем стили попапа и контейнера
                 popup.style.height = '';
                 popup.style.maxHeight = '';
                 popup.style.alignItems = '';
@@ -293,7 +294,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (submitBtn) {
-                submitBtn.addEventListener('click', restoreAll);
+                submitBtn.addEventListener('click', (e) => {
+                    // Не мешаем отправке формы
+                    setTimeout(restoreAll, 100);
+                });
             }
 
             // Клик по оверлею
@@ -302,6 +306,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     restoreAll();
                 }
             });
+
+            // Дополнительно: слушаем закрытие попапа через класс active
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        if (!popup.classList.contains('active')) {
+                            // Попап закрылся - восстанавливаем всё
+                            restoreAll();
+                        }
+                    }
+                });
+            });
+
+            observer.observe(popup, { attributes: true });
         });
     }
 
