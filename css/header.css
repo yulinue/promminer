@@ -484,11 +484,9 @@
     pointer-events: none;
     overflow: hidden;
 
-    -webkit-transition: .3s ease-in-out, padding-right 0s;
-
-    -o-transition: .3s ease-in-out, padding-right 0s;
-
-    transition: .3s ease-in-out, padding-right 0s;
+    -webkit-transition: .3s ease-in-out, padding-right 0s, height 0.2s ease-out;
+    -o-transition: .3s ease-in-out, padding-right 0s, height 0.2s ease-out;
+    transition: .3s ease-in-out, padding-right 0s, height 0.2s ease-out;
 }
 .lock .pm-popup-overlay{
     padding: 92px calc(var(--container-padding) + var(--scrollbar-width)) 0 var(--container-padding);

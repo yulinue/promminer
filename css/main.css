@@ -45,12 +45,13 @@
     flex-shrink: 0;
     border-radius: 24px;
     background: var(--bg-base-secondary);
-    -webkit-transition: .2s ease;
-    -o-transition: .2s ease;
-    transition: .2s ease;
+    -webkit-transition: .2s ease, max-height 0.2s ease-out;
+    -o-transition: .2s ease, max-height 0.2s ease-out;
+    transition: .2s ease, max-height 0.2s ease-out;
     max-height: 95%;
     overflow-x: hidden;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 @media (max-width: 768px) {
