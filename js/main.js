@@ -35,20 +35,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Функция для определения мобильного устройства
     function isMobileDevice() {
-        // Проверяем по userAgent
         const userAgentCheck = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-        // Дополнительная проверка через touch points (для некоторых планшетов и гибридных устройств)
         const touchCheck = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-
-        // Проверка по соотношению сторон и размеру экрана (для уверенности)
         const screenCheck = window.innerWidth <= 1024 && touchCheck;
-
         return userAgentCheck || (touchCheck && screenCheck);
     }
 
     function initMobileFormFixes() {
-        // Применяем фиксы только для мобильных устройств
         if (!isMobileDevice()) return;
 
         const popups = document.querySelectorAll('.pm-popup-overlay');
@@ -59,6 +52,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const inputs = container.querySelectorAll('input, textarea, select');
 
+            // Переменная для отслеживания состояния
+            let isKeyboardOpen = false;
+
+            // Функция для блокировки скролла body
+            function lockBodyScroll() {
+                const scrollY = window.scrollY;
+                document.body.style.position = 'fixed';
+                document.body.style.top = `-${scrollY}px`;
+                document.body.style.width = '100%';
+                document.body.style.overflow = 'hidden';
+                document.documentElement.style.overflow = 'hidden';
+
+                // Блокируем touch-события на body
+                document.body.style.touchAction = 'none';
+                document.body.style.webkitOverflowScrolling = 'auto';
+            }
+
+            // Функция для разблокировки скролла body
+            function unlockBodyScroll() {
+                const scrollY = document.body.style.top;
+                document.body.style.position = '';
+                document.body.style.top = '';
+                document.body.style.width = '';
+                document.body.style.overflow = '';
+                document.documentElement.style.overflow = '';
+                document.body.style.touchAction = '';
+                document.body.style.webkitOverflowScrolling = '';
+
+                if (scrollY) {
+                    window.scrollTo(0, parseInt(scrollY || '0') * -1);
+                }
+            }
+
+            // Предотвращаем скролл body при касании вне контейнера
+            function preventBodyTouchMove(e) {
+                if (isKeyboardOpen) {
+                    const target = e.target;
+                    // Если касание не внутри контейнера формы - блокируем
+                    if (!container.contains(target)) {
+                        e.preventDefault();
+                    }
+                }
+            }
+
+            // Предотвращаем скролл оверлея
+            function preventOverlayScroll(e) {
+                if (isKeyboardOpen) {
+                    const target = e.target;
+                    // Если скроллят сам оверлей, а не контейнер формы
+                    if (target === popup || target.classList.contains('pm-popup-overlay')) {
+                        e.preventDefault();
+                    }
+                }
+            }
+
             // Функция для обновления высоты оверлея с учётом клавиатуры
             function updateForKeyboard() {
                 if (!window.visualViewport) return;
@@ -68,26 +116,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 const keyboardHeight = windowHeight - viewport.height;
 
                 if (keyboardHeight > 100) {
-                    // Клавиатура открыта
-                    const topPadding = viewport.height * 0.05; // 5% от высоты экрана
+                    isKeyboardOpen = true;
 
-                    // Ограничиваем высоту оверлея: высота экрана минус клавиатура
+                    // Добавляем класс для CSS
+                    popup.classList.add('keyboard-open');
+                    container.classList.add('keyboard-open');
+
+                    const topPadding = viewport.height * 0.05;
+
                     popup.style.height = `${viewport.height}px`;
                     popup.style.maxHeight = `${viewport.height}px`;
-
-                    // Выравнивание сверху
                     popup.style.alignItems = 'flex-start';
                     popup.style.paddingTop = `${topPadding}px`;
                     popup.style.paddingBottom = '0';
 
-                    // Высота контейнера формы = высота viewport минус верхний отступ
                     container.style.maxHeight = `${viewport.height - topPadding}px`;
-
-                    // Убираем скругления снизу когда клавиатура открыта
                     container.style.borderBottomLeftRadius = '0';
                     container.style.borderBottomRightRadius = '0';
+
+                    // Блокируем скролл body и touch-события
+                    lockBodyScroll();
+
+                    // Добавляем слушатели для предотвращения скролла
+                    document.addEventListener('touchmove', preventBodyTouchMove, { passive: false });
+                    popup.addEventListener('touchmove', preventOverlayScroll, { passive: false });
                 } else {
-                    // Клавиатура закрыта — возвращаем всё как было
+                    isKeyboardOpen = false;
+
+                    popup.classList.remove('keyboard-open');
+                    container.classList.remove('keyboard-open');
+
                     popup.style.height = '';
                     popup.style.maxHeight = '';
                     popup.style.alignItems = '';
@@ -96,6 +154,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     container.style.maxHeight = '';
                     container.style.borderBottomLeftRadius = '';
                     container.style.borderBottomRightRadius = '';
+
+                    // Убираем слушатели
+                    document.removeEventListener('touchmove', preventBodyTouchMove);
+                    popup.removeEventListener('touchmove', preventOverlayScroll);
                 }
             }
 
@@ -114,9 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const visibleTop = container.scrollTop;
                         const visibleBottom = container.scrollTop + container.clientHeight;
 
-                        // Если элемент не полностью виден в контейнере
                         if (elementRelativeBottom > visibleBottom || elementRelativeTop < visibleTop) {
-                            // Скроллим так, чтобы элемент был в верхней части видимой области
                             container.scrollTo({
                                 top: elementRelativeTop - 20,
                                 behavior: 'smooth'
@@ -129,37 +189,21 @@ document.addEventListener('DOMContentLoaded', () => {
             // Обработчик фокуса
             inputs.forEach(input => {
                 input.addEventListener('focus', (e) => {
-                    // Фиксируем body
-                    const scrollY = window.scrollY;
-                    document.body.style.position = 'fixed';
-                    document.body.style.top = `-${scrollY}px`;
-                    document.body.style.width = '100%';
-                    document.body.style.overflow = 'hidden';
-
-                    // Обновляем высоту оверлея
                     updateForKeyboard();
-
-                    // Скроллим к элементу
                     scrollToActiveElement(e.target);
                 });
 
                 input.addEventListener('blur', () => {
                     setTimeout(() => {
                         const activeElement = document.activeElement;
-                        // Если фокус не перешёл на другой инпут в этой же форме
                         if (!activeElement || !container.contains(activeElement)) {
-                            // Восстанавливаем body
-                            const scrollY = document.body.style.top;
-                            document.body.style.position = '';
-                            document.body.style.top = '';
-                            document.body.style.width = '';
-                            document.body.style.overflow = '';
+                            isKeyboardOpen = false;
 
-                            if (scrollY) {
-                                window.scrollTo(0, parseInt(scrollY || '0') * -1);
-                            }
+                            popup.classList.remove('keyboard-open');
+                            container.classList.remove('keyboard-open');
 
-                            // Возвращаем оригинальные стили оверлея
+                            unlockBodyScroll();
+
                             popup.style.height = '';
                             popup.style.maxHeight = '';
                             popup.style.alignItems = '';
@@ -168,6 +212,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             container.style.maxHeight = '';
                             container.style.borderBottomLeftRadius = '';
                             container.style.borderBottomRightRadius = '';
+
+                            document.removeEventListener('touchmove', preventBodyTouchMove);
+                            popup.removeEventListener('touchmove', preventOverlayScroll);
                         }
                     }, 100);
                 });
@@ -194,15 +241,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Восстановление при закрытии попапа
             function restoreAll() {
-                const scrollY = document.body.style.top;
-                document.body.style.position = '';
-                document.body.style.top = '';
-                document.body.style.width = '';
-                document.body.style.overflow = '';
+                isKeyboardOpen = false;
 
-                if (scrollY) {
-                    window.scrollTo(0, parseInt(scrollY || '0') * -1);
-                }
+                popup.classList.remove('keyboard-open');
+                container.classList.remove('keyboard-open');
+
+                unlockBodyScroll();
 
                 popup.style.height = '';
                 popup.style.maxHeight = '';
@@ -212,6 +256,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 container.style.maxHeight = '';
                 container.style.borderBottomLeftRadius = '';
                 container.style.borderBottomRightRadius = '';
+
+                document.removeEventListener('touchmove', preventBodyTouchMove);
+                popup.removeEventListener('touchmove', preventOverlayScroll);
             }
 
             const closeButtons = popup.querySelectorAll('.close-feedback-popup');
@@ -220,7 +267,6 @@ document.addEventListener('DOMContentLoaded', () => {
             closeButtons.forEach(btn => btn.addEventListener('click', restoreAll));
             if (submitBtn) submitBtn.addEventListener('click', restoreAll);
 
-            // Также восстанавливаем при клике на оверлей
             popup.addEventListener('click', (e) => {
                 if (e.target === popup) {
                     restoreAll();
