@@ -47,7 +47,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const popups = document.querySelectorAll('.pm-popup-overlay, .v-overlay');
 
         popups.forEach(popup => {
-            const container = popup.querySelector('.pm-popup-feedback__container');
+            // Ищем контейнер формы - сначала pm-popup-feedback__container, потом profitability-offer-modal__body
+            let container = popup.querySelector('.pm-popup-feedback__container');
+            if (!container) {
+                container = popup.querySelector('.profitability-offer-modal__body');
+            }
             if (!container) return;
 
             const inputs = container.querySelectorAll('input, textarea, select');
@@ -286,8 +290,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Ищем кнопки закрытия
-            const closeButtons = popup.querySelectorAll('[class*="close-"]');
-            const submitBtn = container.querySelector('button[type="submit"]');
+            const closeButtons = popup.querySelectorAll('[class*="close-"], .v-btn--icon, .profitability-offer-modal__close');
+            const submitBtn = container.querySelector('button[type="submit"], .profitability-offer-modal__submit');
 
             closeButtons.forEach(btn => {
                 btn.addEventListener('click', restoreAll);
@@ -311,7 +315,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 mutations.forEach((mutation) => {
                     if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
                         if (!isPopupActive()) {
-                            // Попап закрылся - восстанавливаем всё
                             restoreAll();
                         }
                     }
@@ -329,7 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initMobileFormFixes();
     }
 
-    // Проверка активности попапа для наблюдателя
+    // Проверка активности попапа
     function isPopupActive(popup) {
         return popup.classList.contains('active') ||
             popup.classList.contains('v-overlay--active');
@@ -352,18 +355,17 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(popup, { attributes: true });
     });
 
-    // Дополнительно: если попапы добавляются динамически
+    // Для динамически добавленных попапов
     const domObserver = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
             mutation.addedNodes.forEach((node) => {
-                if (node.nodeType === 1) { // Element node
+                if (node.nodeType === 1) {
                     if (node.matches && (node.matches('.pm-popup-overlay') || node.matches('.v-overlay'))) {
                         observer.observe(node, { attributes: true });
                         if (isPopupActive(node)) {
                             setTimeout(initMobileFormFixes, 100);
                         }
                     }
-                    // Проверяем дочерние элементы
                     if (node.querySelectorAll) {
                         const popups = node.querySelectorAll('.pm-popup-overlay, .v-overlay');
                         popups.forEach(popup => {
