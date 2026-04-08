@@ -5630,6 +5630,10 @@
     .pm-footer-list:nth-child(1) .pm-footer-list--small {
         display: flex;
     }
+
+    .pm-footer__list-icon{
+        transform: translateY(-1px);
+    }
 }
 
 .pm-footer__list-title{
