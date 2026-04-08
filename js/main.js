@@ -33,7 +33,24 @@ document.addEventListener('DOMContentLoaded', () => {
 (function() {
     'use strict';
 
+    // Функция для определения мобильного устройства
+    function isMobileDevice() {
+        // Проверяем по userAgent
+        const userAgentCheck = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+        // Дополнительная проверка через touch points (для некоторых планшетов и гибридных устройств)
+        const touchCheck = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+        // Проверка по соотношению сторон и размеру экрана (для уверенности)
+        const screenCheck = window.innerWidth <= 1024 && touchCheck;
+
+        return userAgentCheck || (touchCheck && screenCheck);
+    }
+
     function initMobileFormFixes() {
+        // Применяем фиксы только для мобильных устройств
+        if (!isMobileDevice()) return;
+
         const popups = document.querySelectorAll('.pm-popup-overlay');
 
         popups.forEach(popup => {
@@ -41,9 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!container) return;
 
             const inputs = container.querySelectorAll('input, textarea, select');
-
-            // Сохраняем оригинальную высоту оверлея
-            const originalHeight = popup.style.height || '100dvh';
 
             // Функция для обновления высоты оверлея с учётом клавиатуры
             function updateForKeyboard() {
@@ -53,25 +67,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 const windowHeight = window.innerHeight;
                 const keyboardHeight = windowHeight - viewport.height;
 
-                if (keyboardHeight > 100 && window.innerWidth <= 768) {
-                    // Клавиатура открыта на мобильном
+                if (keyboardHeight > 100) {
+                    // Клавиатура открыта
+                    const topPadding = viewport.height * 0.05; // 5% от высоты экрана
+
                     // Ограничиваем высоту оверлея: высота экрана минус клавиатура
                     popup.style.height = `${viewport.height}px`;
                     popup.style.maxHeight = `${viewport.height}px`;
 
-                    // Меняем выравнивание на flex-start чтобы форма была сверху
+                    // Выравнивание сверху
                     popup.style.alignItems = 'flex-start';
-                    popup.style.paddingTop = '20px';
+                    popup.style.paddingTop = `${topPadding}px`;
+                    popup.style.paddingBottom = '0';
 
-                    // Ограничиваем высоту контейнера формы
-                    container.style.maxHeight = `${viewport.height - 40}px`; // 20px сверху + 20px снизу
+                    // Высота контейнера формы = высота viewport минус верхний отступ
+                    container.style.maxHeight = `${viewport.height - topPadding}px`;
+
+                    // Убираем скругления снизу когда клавиатура открыта
+                    container.style.borderBottomLeftRadius = '0';
+                    container.style.borderBottomRightRadius = '0';
                 } else {
                     // Клавиатура закрыта — возвращаем всё как было
                     popup.style.height = '';
                     popup.style.maxHeight = '';
                     popup.style.alignItems = '';
                     popup.style.paddingTop = '';
+                    popup.style.paddingBottom = '';
                     container.style.maxHeight = '';
+                    container.style.borderBottomLeftRadius = '';
+                    container.style.borderBottomRightRadius = '';
                 }
             }
 
@@ -140,7 +164,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             popup.style.maxHeight = '';
                             popup.style.alignItems = '';
                             popup.style.paddingTop = '';
+                            popup.style.paddingBottom = '';
                             container.style.maxHeight = '';
+                            container.style.borderBottomLeftRadius = '';
+                            container.style.borderBottomRightRadius = '';
                         }
                     }, 100);
                 });
@@ -181,7 +208,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 popup.style.maxHeight = '';
                 popup.style.alignItems = '';
                 popup.style.paddingTop = '';
+                popup.style.paddingBottom = '';
                 container.style.maxHeight = '';
+                container.style.borderBottomLeftRadius = '';
+                container.style.borderBottomRightRadius = '';
             }
 
             const closeButtons = popup.querySelectorAll('.close-feedback-popup');
@@ -190,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
             closeButtons.forEach(btn => btn.addEventListener('click', restoreAll));
             if (submitBtn) submitBtn.addEventListener('click', restoreAll);
 
-            // Также восстанавливаем при клике на оверлей (если есть такой функционал)
+            // Также восстанавливаем при клике на оверлей
             popup.addEventListener('click', (e) => {
                 if (e.target === popup) {
                     restoreAll();
