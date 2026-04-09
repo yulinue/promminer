@@ -38,95 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
             || (('ontouchstart' in window) && window.innerWidth <= 1024);
     }
 
-    // --- ГЛАВНАЯ ФУНКЦИЯ БЛОКИРОВКИ (как в виджете) ---
-    function createScrollBlocker() {
-        let scrollPosition = 0;
-        let scrollBlocked = false;
-        let touchMoveHandler = null;
-        let wheelHandler = null;
-
-        function block() {
-            if (scrollBlocked) return;
-
-            const docEl = document.documentElement;
-            const body = document.body;
-
-            // Сохраняем позицию
-            scrollPosition = window.scrollY;
-
-            // Метод 1: Фиксируем через position (работает везде)
-            body.style.position = 'fixed';
-            body.style.top = `-${scrollPosition}px`;
-            body.style.left = '0';
-            body.style.right = '0';
-            body.style.bottom = '0';
-            body.style.overflow = 'hidden';
-
-            // Метод 2: Блокируем touchmove (для iOS)
-            touchMoveHandler = (e) => {
-                // Разрешаем скролл только внутри попапа
-                const popup = document.querySelector('.pm-popup-overlay.active');
-                if (popup && !popup.contains(e.target)) {
-                    e.preventDefault();
-                }
-            };
-
-            // Метод 3: Блокируем колесо мыши (для Android с мышкой)
-            wheelHandler = (e) => {
-                const popup = document.querySelector('.pm-popup-overlay.active');
-                if (popup && !popup.contains(e.target)) {
-                    e.preventDefault();
-                }
-            };
-
-            document.addEventListener('touchmove', touchMoveHandler, { passive: false });
-            document.addEventListener('wheel', wheelHandler, { passive: false });
-
-            // Метод 4: Для iOS Safari - блокируем скролл через CSS + preventDefault на touchstart
-            docEl.style.overflow = 'hidden';
-            docEl.style.touchAction = 'none';
-            body.style.touchAction = 'none';
-
-            scrollBlocked = true;
-        }
-
-        function unblock() {
-            if (!scrollBlocked) return;
-
-            const body = document.body;
-            const docEl = document.documentElement;
-
-            // Восстанавливаем стили
-            body.style.position = '';
-            body.style.top = '';
-            body.style.left = '';
-            body.style.right = '';
-            body.style.bottom = '';
-            body.style.overflow = '';
-            body.style.touchAction = '';
-
-            docEl.style.overflow = '';
-            docEl.style.touchAction = '';
-
-            // Удаляем обработчики
-            if (touchMoveHandler) {
-                document.removeEventListener('touchmove', touchMoveHandler);
-                touchMoveHandler = null;
-            }
-            if (wheelHandler) {
-                document.removeEventListener('wheel', wheelHandler);
-                wheelHandler = null;
-            }
-
-            // Восстанавливаем скролл
-            window.scrollTo(0, scrollPosition);
-
-            scrollBlocked = false;
-        }
-
-        return { block, unblock };
-    }
-
     function initMobileFormFixes() {
         if (!isMobileDevice()) return;
 
@@ -135,18 +46,59 @@ document.addEventListener('DOMContentLoaded', () => {
             navigator.virtualKeyboard.overlaysContent = true;
         }
 
+        // Добавляем CSS-правила (как в виджете)
+        const style = document.createElement('style');
+        style.textContent = `
+            html.pm-scroll-blocked {
+                position: fixed !important;
+                top: var(--pm-scroll-y) !important;
+                left: var(--pm-scroll-x) !important;
+                width: 100% !important;
+                height: 100% !important;
+                overflow-x: hidden !important;
+                overflow-y: scroll !important;
+            }
+        `;
+        document.head.appendChild(style);
+
         const popups = document.querySelectorAll('.pm-popup-overlay');
-        const scrollBlocker = createScrollBlocker();
 
         popups.forEach(popup => {
             const container = popup.querySelector('.pm-popup-feedback__container');
             if (!container) return;
 
             const inputs = container.querySelectorAll('input, textarea, select');
+            const html = document.documentElement;
 
             let isKeyboardOpen = false;
+            let savedScrollX = 0;
+            let savedScrollY = 0;
 
-            // Скролл к активному элементу
+            // Функция блокировки скролла (как в виджете)
+            function blockScroll() {
+                if (html.classList.contains('pm-scroll-blocked')) return;
+
+                savedScrollX = window.scrollX;
+                savedScrollY = window.scrollY;
+
+                html.style.setProperty('--pm-scroll-x', `-${savedScrollX}px`);
+                html.style.setProperty('--pm-scroll-y', `-${savedScrollY}px`);
+                html.classList.add('pm-scroll-blocked');
+            }
+
+            // Функция разблокировки скролла
+            function unblockScroll() {
+                if (!html.classList.contains('pm-scroll-blocked')) return;
+
+                html.classList.remove('pm-scroll-blocked');
+                html.style.removeProperty('--pm-scroll-x');
+                html.style.removeProperty('--pm-scroll-y');
+
+                // Восстанавливаем позицию скролла
+                window.scrollTo(savedScrollX, savedScrollY);
+            }
+
+            // Скролл к активному элементу внутри контейнера
             function scrollToActiveElement(element) {
                 if (!element) return;
 
@@ -154,7 +106,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     const elementRect = element.getBoundingClientRect();
                     const containerRect = container.getBoundingClientRect();
 
-                    if (elementRect.bottom > containerRect.bottom || elementRect.top < containerRect.top) {
+                    // Проверяем, не перекрыт ли элемент клавиатурой
+                    if (elementRect.bottom > containerRect.bottom) {
+                        const scrollOffset = elementRect.bottom - containerRect.bottom + 20;
+                        container.scrollBy({ top: scrollOffset, behavior: 'smooth' });
+                    } else if (elementRect.top < containerRect.top) {
                         const scrollOffset = elementRect.top - containerRect.top - 20;
                         container.scrollBy({ top: scrollOffset, behavior: 'smooth' });
                     }
@@ -164,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             function handleFocus(e) {
                 if (!isKeyboardOpen) {
                     isKeyboardOpen = true;
-                    scrollBlocker.block();
+                    blockScroll();
                 }
                 scrollToActiveElement(e.target);
             }
@@ -174,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const activeElement = document.activeElement;
                     if (!activeElement || !container.contains(activeElement)) {
                         if (isKeyboardOpen) {
-                            scrollBlocker.unblock();
+                            unblockScroll();
                             isKeyboardOpen = false;
                         }
                     }
@@ -186,10 +142,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 input.addEventListener('blur', handleBlur);
             });
 
-            // Восстановление при закрытии попапа
+            // Полное восстановление при закрытии попапа
             function restoreAll() {
-                scrollBlocker.unblock();
+                unblockScroll();
                 isKeyboardOpen = false;
+                container.scrollTop = 0;
             }
 
             // Закрытие по кнопкам
@@ -201,11 +158,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (e.target === popup) restoreAll();
             });
 
-            // Отслеживание удаления класса active
+            // Блокируем скролл сразу при открытии попапа
             const observer = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
                     if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                        if (!popup.classList.contains('active')) {
+                        if (popup.classList.contains('active')) {
+                            blockScroll();
+                        } else {
                             restoreAll();
                         }
                     }
