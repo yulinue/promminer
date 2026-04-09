@@ -34,105 +34,109 @@ document.addEventListener('DOMContentLoaded', () => {
     'use strict';
 
     function isMobileDevice() {
-        const userAgentCheck = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        const touchCheck = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-        const screenCheck = window.innerWidth <= 1024 && touchCheck;
-        return userAgentCheck || (touchCheck && screenCheck);
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+            || (('ontouchstart' in window) && window.innerWidth <= 1024);
     }
 
-    // --- НОВАЯ ФУНКЦИЯ: Блокировка скролла через overflow: hidden ---
-    function blockPageScroll(popupContainer) {
-        // 1. Находим все скроллящиеся элементы, которые нужно заблокировать
-        const scrollableElements = [];
+    // --- ГЛАВНАЯ ФУНКЦИЯ БЛОКИРОВКИ (как в виджете) ---
+    function createScrollBlocker() {
+        let scrollPosition = 0;
+        let scrollBlocked = false;
+        let touchMoveHandler = null;
+        let wheelHandler = null;
 
-        // Начинаем с html и body
-        const html = document.documentElement;
-        const body = document.body;
+        function block() {
+            if (scrollBlocked) return;
 
-        if (isElementScrollable(html)) scrollableElements.push(html);
-        if (isElementScrollable(body)) scrollableElements.push(body);
+            const docEl = document.documentElement;
+            const body = document.body;
 
-        // Ищем родителей попапа, которые могут скроллиться
-        let parent = popupContainer.parentElement;
-        while (parent) {
-            if (isElementScrollable(parent) && !scrollableElements.includes(parent)) {
-                scrollableElements.push(parent);
-            }
-            parent = parent.parentElement;
+            // Сохраняем позицию
+            scrollPosition = window.scrollY;
+
+            // Метод 1: Фиксируем через position (работает везде)
+            body.style.position = 'fixed';
+            body.style.top = `-${scrollPosition}px`;
+            body.style.left = '0';
+            body.style.right = '0';
+            body.style.bottom = '0';
+            body.style.overflow = 'hidden';
+
+            // Метод 2: Блокируем touchmove (для iOS)
+            touchMoveHandler = (e) => {
+                // Разрешаем скролл только внутри попапа
+                const popup = document.querySelector('.pm-popup-overlay.active');
+                if (popup && !popup.contains(e.target)) {
+                    e.preventDefault();
+                }
+            };
+
+            // Метод 3: Блокируем колесо мыши (для Android с мышкой)
+            wheelHandler = (e) => {
+                const popup = document.querySelector('.pm-popup-overlay.active');
+                if (popup && !popup.contains(e.target)) {
+                    e.preventDefault();
+                }
+            };
+
+            document.addEventListener('touchmove', touchMoveHandler, { passive: false });
+            document.addEventListener('wheel', wheelHandler, { passive: false });
+
+            // Метод 4: Для iOS Safari - блокируем скролл через CSS + preventDefault на touchstart
+            docEl.style.overflow = 'hidden';
+            docEl.style.touchAction = 'none';
+            body.style.touchAction = 'none';
+
+            scrollBlocked = true;
         }
 
-        // Сохраняем текущие позиции скролла и блокируем
-        scrollableElements.forEach(el => {
-            // Сохраняем позицию в data-атрибутах
-            el.dataset.scrollTop = el.scrollTop;
-            el.dataset.scrollLeft = el.scrollLeft;
+        function unblock() {
+            if (!scrollBlocked) return;
 
-            // Блокируем скролл
-            el.style.overflow = 'hidden';
+            const body = document.body;
+            const docEl = document.documentElement;
 
-            // Для body и html на iOS нужен дополнительный touch-action
-            if (el === body || el === html) {
-                el.style.position = 'relative';
-                el.style.height = '100%';
+            // Восстанавливаем стили
+            body.style.position = '';
+            body.style.top = '';
+            body.style.left = '';
+            body.style.right = '';
+            body.style.bottom = '';
+            body.style.overflow = '';
+            body.style.touchAction = '';
+
+            docEl.style.overflow = '';
+            docEl.style.touchAction = '';
+
+            // Удаляем обработчики
+            if (touchMoveHandler) {
+                document.removeEventListener('touchmove', touchMoveHandler);
+                touchMoveHandler = null;
             }
-        });
-
-        // 2. Предотвращаем touchmove на заблокированных элементах
-        function preventTouchMove(e) {
-            const target = e.target;
-            // Разрешаем скролл только внутри контейнера попапа
-            if (!popupContainer.contains(target)) {
-                e.preventDefault();
+            if (wheelHandler) {
+                document.removeEventListener('wheel', wheelHandler);
+                wheelHandler = null;
             }
+
+            // Восстанавливаем скролл
+            window.scrollTo(0, scrollPosition);
+
+            scrollBlocked = false;
         }
 
-        document.addEventListener('touchmove', preventTouchMove, { passive: false });
-
-        // Возвращаем функцию очистки
-        return function unblockPageScroll() {
-            scrollableElements.forEach(el => {
-                // Восстанавливаем overflow
-                el.style.overflow = '';
-                el.style.position = '';
-                el.style.height = '';
-
-                // Восстанавливаем позицию скролла
-                const savedTop = el.dataset.scrollTop;
-                const savedLeft = el.dataset.scrollLeft;
-
-                if (savedTop !== undefined) {
-                    el.scrollTop = parseInt(savedTop, 10);
-                    delete el.dataset.scrollTop;
-                }
-                if (savedLeft !== undefined) {
-                    el.scrollLeft = parseInt(savedLeft, 10);
-                    delete el.dataset.scrollLeft;
-                }
-            });
-
-            document.removeEventListener('touchmove', preventTouchMove);
-        };
-    }
-
-    // Проверка, скроллится ли элемент
-    function isElementScrollable(el) {
-        const style = window.getComputedStyle(el);
-        const overflowY = style.overflowY;
-        const overflowX = style.overflowX;
-
-        return (overflowY === 'scroll' || overflowY === 'auto' || overflowX === 'scroll' || overflowX === 'auto')
-            && (el.scrollHeight > el.clientHeight || el.scrollWidth > el.clientWidth);
+        return { block, unblock };
     }
 
     function initMobileFormFixes() {
         if (!isMobileDevice()) return;
 
-        // Устанавливаем overlaysContent для виртуальной клавиатуры
+        // Включаем overlaysContent для виртуальной клавиатуры
         if ("virtualKeyboard" in navigator) {
             navigator.virtualKeyboard.overlaysContent = true;
         }
 
         const popups = document.querySelectorAll('.pm-popup-overlay');
+        const scrollBlocker = createScrollBlocker();
 
         popups.forEach(popup => {
             const container = popup.querySelector('.pm-popup-feedback__container');
@@ -141,9 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const inputs = container.querySelectorAll('input, textarea, select');
 
             let isKeyboardOpen = false;
-            let unblockPageScroll = null;
 
-            // Функция для скролла к активному элементу
+            // Скролл к активному элементу
             function scrollToActiveElement(element) {
                 if (!element) return;
 
@@ -161,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
             function handleFocus(e) {
                 if (!isKeyboardOpen) {
                     isKeyboardOpen = true;
-                    unblockPageScroll = blockPageScroll(container);
+                    scrollBlocker.block();
                 }
                 scrollToActiveElement(e.target);
             }
@@ -170,9 +173,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     const activeElement = document.activeElement;
                     if (!activeElement || !container.contains(activeElement)) {
-                        if (isKeyboardOpen && unblockPageScroll) {
-                            unblockPageScroll();
-                            unblockPageScroll = null;
+                        if (isKeyboardOpen) {
+                            scrollBlocker.unblock();
                             isKeyboardOpen = false;
                         }
                     }
@@ -184,22 +186,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 input.addEventListener('blur', handleBlur);
             });
 
-            // Функция полного сброса при закрытии попапа
+            // Восстановление при закрытии попапа
             function restoreAll() {
-                if (unblockPageScroll) {
-                    unblockPageScroll();
-                    unblockPageScroll = null;
-                }
+                scrollBlocker.unblock();
                 isKeyboardOpen = false;
             }
 
-            const closeButtons = popup.querySelectorAll('[class*="close-"]');
+            // Закрытие по кнопкам
+            const closeButtons = popup.querySelectorAll('[class*="close-"], .pm-btn--primary');
             closeButtons.forEach(btn => btn.addEventListener('click', restoreAll));
 
+            // Закрытие по оверлею
             popup.addEventListener('click', (e) => {
                 if (e.target === popup) restoreAll();
             });
 
+            // Отслеживание удаления класса active
             const observer = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
                     if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
