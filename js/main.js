@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             navigator.virtualKeyboard.overlaysContent = true;
         }
 
-        // Добавляем CSS-правила (как в виджете)
+        // Добавляем CSS-правила
         const style = document.createElement('style');
         style.textContent = `
             html.pm-scroll-blocked {
@@ -55,8 +55,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 left: var(--pm-scroll-x) !important;
                 width: 100% !important;
                 height: 100% !important;
-                overflow-x: hidden !important;
-                overflow-y: scroll !important;
+                overflow: hidden !important;
+            }
+            
+            .pm-popup-overlay.pm-keyboard-open {
+                align-items: flex-start !important;
+                transition: padding-top 0.2s ease-out !important;
             }
         `;
         document.head.appendChild(style);
@@ -73,8 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
             let isKeyboardOpen = false;
             let savedScrollX = 0;
             let savedScrollY = 0;
-            let containerScrollBeforeKeyboard = 0;
             let activeElement = null;
+            let originalPaddingTop = null;
 
             // Функция блокировки скролла страницы
             function blockPageScroll() {
@@ -99,42 +103,53 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.scrollTo(savedScrollX, savedScrollY);
             }
 
-            // Скролл к активному элементу (как в виджете)
-            function scrollToActiveElement(element) {
+            // Сдвигаем попап вверх, чтобы активное поле было видно
+            function shiftPopupForKeyboard(element) {
                 if (!element) return;
 
-                // Даем время клавиатуре открыться
-                setTimeout(() => {
-                    const elementRect = element.getBoundingClientRect();
-                    const containerRect = container.getBoundingClientRect();
+                // Сохраняем оригинальный padding-top
+                if (originalPaddingTop === null) {
+                    originalPaddingTop = getComputedStyle(popup).paddingTop;
+                }
 
-                    // Проверяем, не перекрыт ли элемент клавиатурой
-                    if (elementRect.bottom > containerRect.bottom) {
-                        const scrollOffset = elementRect.bottom - containerRect.bottom + 20;
-                        container.scrollBy({ top: scrollOffset, behavior: 'smooth' });
-                    } else if (elementRect.top < containerRect.top) {
-                        const scrollOffset = elementRect.top - containerRect.top - 20;
-                        container.scrollBy({ top: scrollOffset, behavior: 'smooth' });
-                    }
-                }, 100);
+                const elementRect = element.getBoundingClientRect();
+                const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+
+                // Вычисляем, насколько элемент ниже видимой области
+                const elementBottom = elementRect.bottom;
+                const keyboardHeight = window.innerHeight - viewportHeight;
+
+                if (elementBottom > viewportHeight) {
+                    // Элемент перекрыт клавиатурой - сдвигаем попап вверх
+                    const shiftAmount = elementBottom - viewportHeight + 20;
+                    const currentPadding = parseInt(originalPaddingTop) || 92; // 92px - ваш оригинальный padding
+                    const newPadding = Math.max(20, currentPadding - shiftAmount);
+
+                    popup.style.paddingTop = newPadding + 'px';
+                    popup.classList.add('pm-keyboard-open');
+                }
             }
 
-            // Восстановление позиции скролла контейнера
-            function restoreContainerScroll() {
-                if (containerScrollBeforeKeyboard > 0) {
-                    container.scrollTo({ top: 0, behavior: 'smooth' });
+            // Восстанавливаем позицию попапа
+            function resetPopupPosition() {
+                if (originalPaddingTop !== null) {
+                    popup.style.paddingTop = originalPaddingTop;
                 }
+                popup.classList.remove('pm-keyboard-open');
             }
 
             function handleFocus(e) {
                 activeElement = e.target;
-                containerScrollBeforeKeyboard = container.scrollTop;
 
                 if (!isKeyboardOpen) {
                     isKeyboardOpen = true;
                     blockPageScroll();
                 }
-                scrollToActiveElement(e.target);
+
+                // Даем время клавиатуре открыться
+                setTimeout(() => {
+                    shiftPopupForKeyboard(activeElement);
+                }, 100);
             }
 
             function handleBlur() {
@@ -142,8 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const currentActive = document.activeElement;
                     if (!currentActive || !container.contains(currentActive)) {
                         if (isKeyboardOpen) {
-                            // Восстанавливаем позицию контейнера
-                            restoreContainerScroll();
+                            resetPopupPosition();
                             unblockPageScroll();
                             isKeyboardOpen = false;
                             activeElement = null;
@@ -152,20 +166,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 100);
             }
 
-            // Отслеживание изменения размера viewport (для Android)
+            // Отслеживание изменения размера viewport
             if (window.visualViewport) {
-                let initialHeight = window.visualViewport.height;
-
                 window.visualViewport.addEventListener('resize', () => {
-                    const currentHeight = window.visualViewport.height;
-                    const keyboardOpen = currentHeight < initialHeight * 0.85;
-
-                    if (keyboardOpen && activeElement) {
-                        // Клавиатура открылась - скроллим к активному элементу
-                        scrollToActiveElement(activeElement);
-                    } else if (!keyboardOpen && isKeyboardOpen) {
-                        // Клавиатура закрылась - восстанавливаем позицию
-                        restoreContainerScroll();
+                    if (activeElement && isKeyboardOpen) {
+                        shiftPopupForKeyboard(activeElement);
                     }
                 });
             }
@@ -177,11 +182,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Полное восстановление при закрытии попапа
             function restoreAll() {
-                restoreContainerScroll();
+                resetPopupPosition();
                 unblockPageScroll();
                 isKeyboardOpen = false;
                 activeElement = null;
-                container.scrollTop = 0;
+                originalPaddingTop = null;
             }
 
             // Закрытие по кнопкам
@@ -193,13 +198,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (e.target === popup) restoreAll();
             });
 
-            // Блокируем скролл сразу при открытии попапа
+            // При открытии попапа
             const observer = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
                     if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
                         if (popup.classList.contains('active')) {
                             blockPageScroll();
-                            container.scrollTop = 0;
+                            originalPaddingTop = getComputedStyle(popup).paddingTop;
                         } else {
                             restoreAll();
                         }
