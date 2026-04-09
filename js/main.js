@@ -41,12 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function initMobileFormFixes() {
         if (!isMobileDevice()) return;
 
-        // Включаем overlaysContent для виртуальной клавиатуры
         if ("virtualKeyboard" in navigator) {
             navigator.virtualKeyboard.overlaysContent = true;
         }
 
-        // Добавляем CSS-правила
         const style = document.createElement('style');
         style.textContent = `
             html.pm-scroll-blocked {
@@ -80,9 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let activeElement = null;
             let originalPaddingTop = null;
             let scrollBlocked = false;
-            let keyboardCheckInterval = null;
 
-            // Функция блокировки скролла страницы
             function blockPageScroll() {
                 if (scrollBlocked) return;
 
@@ -95,7 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 scrollBlocked = true;
             }
 
-            // Функция разблокировки скролла страницы
             function unblockPageScroll() {
                 if (!scrollBlocked) return;
 
@@ -107,81 +102,47 @@ document.addEventListener('DOMContentLoaded', () => {
                 scrollBlocked = false;
             }
 
-            // Очищаем интервал проверки клавиатуры
-            function clearKeyboardCheck() {
-                if (keyboardCheckInterval) {
-                    clearInterval(keyboardCheckInterval);
-                    keyboardCheckInterval = null;
-                }
-            }
-
-            // Скроллим контейнер к активному элементу
-            function scrollContainerToElement(element) {
+            // ГЛАВНАЯ ФУНКЦИЯ: скролл к элементу (как в виджете)
+            function scrollToElement(element) {
                 if (!element) return;
 
-                const elementRect = element.getBoundingClientRect();
-                const containerRect = container.getBoundingClientRect();
+                // Используем двойной requestAnimationFrame для гарантии
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        const elementRect = element.getBoundingClientRect();
+                        const containerRect = container.getBoundingClientRect();
 
-                const elementTopRelative = elementRect.top - containerRect.top;
-                const elementBottomRelative = elementRect.bottom - containerRect.top;
+                        // Позиция элемента относительно контейнера
+                        const elementTop = elementRect.top - containerRect.top;
+                        const elementBottom = elementRect.bottom - containerRect.top;
 
-                if (elementTopRelative < 0) {
-                    container.scrollTop += elementTopRelative - 20;
-                } else if (elementBottomRelative > containerRect.height) {
-                    container.scrollTop += elementBottomRelative - containerRect.height + 20;
-                }
+                        // Если элемент не виден - скроллим
+                        if (elementTop < 0) {
+                            container.scrollTop += elementTop - 20;
+                        } else if (elementBottom > containerRect.height) {
+                            container.scrollTop += elementBottom - containerRect.height + 20;
+                        }
+
+                        // После скролла проверяем, нужно ли сдвинуть попап
+                        const newElementRect = element.getBoundingClientRect();
+                        const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+
+                        if (newElementRect.bottom > viewportHeight - 20) {
+                            if (originalPaddingTop === null) {
+                                originalPaddingTop = getComputedStyle(popup).paddingTop;
+                            }
+
+                            const shiftAmount = newElementRect.bottom - viewportHeight + 40;
+                            const currentPadding = parseInt(originalPaddingTop) || 92;
+                            const newPadding = Math.max(20, currentPadding - shiftAmount);
+
+                            popup.style.paddingTop = newPadding + 'px';
+                        }
+                    });
+                });
             }
 
-            // Сдвигаем попап вверх
-            function shiftPopupForKeyboard(element) {
-                if (!element) return;
-
-                if (originalPaddingTop === null) {
-                    originalPaddingTop = getComputedStyle(popup).paddingTop;
-                }
-
-                // Сначала скроллим контейнер
-                scrollContainerToElement(element);
-
-                // Затем проверяем, нужно ли сдвигать попап
-                const elementRect = element.getBoundingClientRect();
-                const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-                const elementBottom = elementRect.bottom;
-
-                if (elementBottom > viewportHeight - 20) {
-                    const shiftAmount = elementBottom - viewportHeight + 40;
-                    const currentPadding = parseInt(originalPaddingTop) || 92;
-                    const newPadding = Math.max(20, currentPadding - shiftAmount);
-
-                    popup.style.paddingTop = newPadding + 'px';
-                }
-            }
-
-            // Ждем открытия клавиатуры и применяем сдвиг
-            function waitForKeyboardAndShift(element) {
-                clearKeyboardCheck();
-
-                let attempts = 0;
-                const maxAttempts = 10;
-                let lastHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-
-                keyboardCheckInterval = setInterval(() => {
-                    const currentHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-                    const keyboardVisible = currentHeight < lastHeight - 50;
-
-                    if (keyboardVisible || attempts >= maxAttempts) {
-                        clearKeyboardCheck();
-                        shiftPopupForKeyboard(element);
-                    }
-
-                    lastHeight = currentHeight;
-                    attempts++;
-                }, 50);
-            }
-
-            // Восстанавливаем позицию попапа
             function resetPopupPosition() {
-                clearKeyboardCheck();
                 if (originalPaddingTop !== null) {
                     popup.style.paddingTop = originalPaddingTop;
                 }
@@ -196,25 +157,27 @@ document.addEventListener('DOMContentLoaded', () => {
                     blockPageScroll();
                 }
 
-                // Ждем открытия клавиатуры
-                waitForKeyboardAndShift(activeElement);
+                // Даем клавиатуре время открыться (300ms как в виджете)
+                setTimeout(() => {
+                    scrollToElement(activeElement);
+                }, 300);
             }
 
-            // Отслеживание изменения размера viewport
+            // Отслеживание resize viewport
             if (window.visualViewport) {
-                window.visualViewport.addEventListener('resize', () => {
-                    if (activeElement && isKeyboardOpen) {
-                        const currentHeight = window.visualViewport.height;
-                        const windowHeight = window.innerHeight;
+                let viewportHeight = window.visualViewport.height;
 
-                        if (currentHeight < windowHeight - 50) {
-                            // Клавиатура открыта
-                            shiftPopupForKeyboard(activeElement);
-                        } else {
-                            // Клавиатура закрыта
-                            resetPopupPosition();
-                        }
+                window.visualViewport.addEventListener('resize', () => {
+                    const newHeight = window.visualViewport.height;
+                    const keyboardVisible = newHeight < viewportHeight - 50;
+
+                    if (keyboardVisible && activeElement) {
+                        scrollToElement(activeElement);
+                    } else if (!keyboardVisible && isKeyboardOpen) {
+                        resetPopupPosition();
                     }
+
+                    viewportHeight = newHeight;
                 });
             }
 
@@ -222,30 +185,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 input.addEventListener('focus', handleFocus);
             });
 
-            // Полное восстановление при закрытии попапа
             function restoreAll() {
-                clearKeyboardCheck();
                 resetPopupPosition();
                 unblockPageScroll();
                 isKeyboardOpen = false;
                 activeElement = null;
             }
 
-            // Закрытие по кнопкам
             closeButtons.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    restoreAll();
-                });
+                btn.addEventListener('click', restoreAll);
             });
 
-            // Закрытие по оверлею
             popup.addEventListener('click', (e) => {
-                if (e.target === popup) {
-                    restoreAll();
-                }
+                if (e.target === popup) restoreAll();
             });
 
-            // При открытии попапа
             const observer = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
                     if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
@@ -260,22 +214,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
             observer.observe(popup, { attributes: true });
-
-            // Отслеживаем клик по кнопке отправки
-            const submitBtn = container.querySelector('button[type="submit"]');
-            if (submitBtn) {
-                submitBtn.addEventListener('click', () => {
-                    setTimeout(() => {
-                        if (!popup.classList.contains('active')) {
-                            restoreAll();
-                        }
-                    }, 100);
-                });
-            }
         });
     }
 
-    // Инициализация
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initMobileFormFixes);
     } else {
