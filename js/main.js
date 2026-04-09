@@ -58,9 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 overflow: hidden !important;
             }
             
-            .pm-popup-overlay.pm-keyboard-open {
-                align-items: flex-start !important;
-                transition: padding-top 0.2s ease-out !important;
+            .pm-popup-overlay {
+                transition: padding-top 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
             }
         `;
         document.head.appendChild(style);
@@ -72,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!container) return;
 
             const inputs = container.querySelectorAll('input, textarea, select');
+            const closeButtons = popup.querySelectorAll('[class*="close-"], .pm-btn--primary');
             const html = document.documentElement;
 
             let isKeyboardOpen = false;
@@ -79,10 +79,11 @@ document.addEventListener('DOMContentLoaded', () => {
             let savedScrollY = 0;
             let activeElement = null;
             let originalPaddingTop = null;
+            let scrollBlocked = false;
 
             // Функция блокировки скролла страницы
             function blockPageScroll() {
-                if (html.classList.contains('pm-scroll-blocked')) return;
+                if (scrollBlocked) return;
 
                 savedScrollX = window.scrollX;
                 savedScrollY = window.scrollY;
@@ -90,24 +91,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 html.style.setProperty('--pm-scroll-x', `-${savedScrollX}px`);
                 html.style.setProperty('--pm-scroll-y', `-${savedScrollY}px`);
                 html.classList.add('pm-scroll-blocked');
+                scrollBlocked = true;
             }
 
             // Функция разблокировки скролла страницы
             function unblockPageScroll() {
-                if (!html.classList.contains('pm-scroll-blocked')) return;
+                if (!scrollBlocked) return;
 
                 html.classList.remove('pm-scroll-blocked');
                 html.style.removeProperty('--pm-scroll-x');
                 html.style.removeProperty('--pm-scroll-y');
 
                 window.scrollTo(savedScrollX, savedScrollY);
+                scrollBlocked = false;
             }
 
-            // Сдвигаем попап вверх, чтобы активное поле было видно
+            // Сдвигаем попап вверх
             function shiftPopupForKeyboard(element) {
                 if (!element) return;
 
-                // Сохраняем оригинальный padding-top
                 if (originalPaddingTop === null) {
                     originalPaddingTop = getComputedStyle(popup).paddingTop;
                 }
@@ -115,18 +117,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const elementRect = element.getBoundingClientRect();
                 const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
 
-                // Вычисляем, насколько элемент ниже видимой области
                 const elementBottom = elementRect.bottom;
-                const keyboardHeight = window.innerHeight - viewportHeight;
 
-                if (elementBottom > viewportHeight) {
-                    // Элемент перекрыт клавиатурой - сдвигаем попап вверх
-                    const shiftAmount = elementBottom - viewportHeight + 20;
-                    const currentPadding = parseInt(originalPaddingTop) || 92; // 92px - ваш оригинальный padding
+                if (elementBottom > viewportHeight - 20) {
+                    const shiftAmount = elementBottom - viewportHeight + 40;
+                    const currentPadding = parseInt(originalPaddingTop) || 92;
                     const newPadding = Math.max(20, currentPadding - shiftAmount);
 
                     popup.style.paddingTop = newPadding + 'px';
-                    popup.classList.add('pm-keyboard-open');
                 }
             }
 
@@ -135,7 +133,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (originalPaddingTop !== null) {
                     popup.style.paddingTop = originalPaddingTop;
                 }
-                popup.classList.remove('pm-keyboard-open');
             }
 
             function handleFocus(e) {
@@ -146,24 +143,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     blockPageScroll();
                 }
 
-                // Даем время клавиатуре открыться
+                // Плавно сдвигаем после открытия клавиатуры
                 setTimeout(() => {
                     shiftPopupForKeyboard(activeElement);
-                }, 100);
-            }
-
-            function handleBlur() {
-                setTimeout(() => {
-                    const currentActive = document.activeElement;
-                    if (!currentActive || !container.contains(currentActive)) {
-                        if (isKeyboardOpen) {
-                            resetPopupPosition();
-                            unblockPageScroll();
-                            isKeyboardOpen = false;
-                            activeElement = null;
-                        }
-                    }
-                }, 100);
+                }, 150);
             }
 
             // Отслеживание изменения размера viewport
@@ -177,7 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             inputs.forEach(input => {
                 input.addEventListener('focus', handleFocus);
-                input.addEventListener('blur', handleBlur);
             });
 
             // Полное восстановление при закрытии попапа
@@ -186,16 +168,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 unblockPageScroll();
                 isKeyboardOpen = false;
                 activeElement = null;
-                originalPaddingTop = null;
             }
 
             // Закрытие по кнопкам
-            const closeButtons = popup.querySelectorAll('[class*="close-"], .pm-btn--primary');
-            closeButtons.forEach(btn => btn.addEventListener('click', restoreAll));
+            closeButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    restoreAll();
+                });
+            });
 
             // Закрытие по оверлею
             popup.addEventListener('click', (e) => {
-                if (e.target === popup) restoreAll();
+                if (e.target === popup) {
+                    restoreAll();
+                }
             });
 
             // При открытии попапа
@@ -212,6 +198,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
             observer.observe(popup, { attributes: true });
+
+            // Дополнительно: отслеживаем клик по кнопке отправки
+            const submitBtn = container.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.addEventListener('click', () => {
+                    setTimeout(() => {
+                        if (!popup.classList.contains('active')) {
+                            restoreAll();
+                        }
+                    }, 100);
+                });
+            }
         });
     }
 
