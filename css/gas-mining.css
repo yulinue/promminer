@@ -679,7 +679,7 @@
 
 @media (any-hover: hover) {
     .pm-gas-hero__buttons .pm-btn--secondary:hover {
-        background: rgba(83, 105, 224, 0.8);
+        background: #4C60C8;
     }
 }
 @media (max-width: 768px) {
@@ -1253,6 +1253,7 @@
     font-size: 18px;
     line-height: 22px;
     color: rgba(255, 255, 255, 0.48);
+    font-weight: 500;
 }
 .pm-gas-comparison__card--electric .pm-gas-comparison__row-label {
     color: var(--content-base-secondary);
@@ -1467,7 +1468,7 @@
 .pm-gas-gpu__label-dot {
     width: 8px;
     height: 8px;
-    background: #6366F1;
+    background: #5369E0;
 }
 
 .pm-gas-gpu__desc {
@@ -1567,7 +1568,7 @@
     height: 32px;
     padding: var(--spacing-4, 4px);
     border-radius: var(--radius-full, 999px);
-    background: var(--Background-Base-Secondary, #111827);
+    background: #262626;
     color: #5369E0;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1887,7 +1888,7 @@
 }
 
 .pm-gas-solutions__card-bars i.active {
-    background: var(--content-sentiment-accent, #5369E0);
+    background: #5369E0;
 }
 
 .pm-gas-solutions__card-income {
@@ -2092,7 +2093,7 @@
 .pm-gas-advantages__label-dot {
     width: 8px;
     height: 8px;
-    background: #6366F1;
+    background: #5369E0;
 }
 
 .pm-gas-advantages .pm-gas-advantages__title {
@@ -2188,6 +2189,10 @@
     height: 24px;
 }
 
+.pm-gas-advantages__card-badge--blue svg path{
+    fill:  #5369E0;
+}
+
 .pm-gas-advantages__card-title {
     color: var(--content-base-primary);
     font-size: var(--Typography-Headline-H4-fontSize, 24px);
@@ -2237,7 +2242,7 @@
 .pm-gas-cases__label-dot {
     width: 8px;
     height: 8px;
-    background: #6366F1;
+    background: #5369E0;
 }
 
 .pm-gas-cases .pm-gas-cases__title {
@@ -2383,7 +2388,7 @@
 }
 
 .pm-gas-cases__slide-info-bars i.active {
-    background: var(--content-sentiment-accent, #5369E0);
+    background: #5369E0;
 }
 
 /* Навигация */
@@ -2512,7 +2517,7 @@
 .pm-gas-stages__label-dot {
     width: 8px;
     height: 8px;
-    background: #6366F1;
+    background: #5369E0;
 }
 
 .pm-gas-stages .pm-gas-stages__title {
@@ -2658,7 +2663,7 @@
     height: var(--Size-Base-Size-2xl, 56px);
     border-radius: 12px;
     border: none;
-    background: #6366F1;
+    background: #5369E0;
     color: #FFF;
     font-size: var(--Typography-Body-L-fontSize, 18px);
     font-weight: 600;
@@ -2676,7 +2681,7 @@
 }
 
 .pm-gas-stages__btn:hover {
-    background: #4F46E5;
+    background: #4C60C8;
 }
 
 .pm-gas-stages__term {
@@ -2803,7 +2808,7 @@
 }
 
 .pm-gas-stages__step-icon i.active {
-    background: var(--content-sentiment-accent, #5369E0);
+    background: #5369E0;
 }
 
 h3.pm-gas-stages__step-title {
@@ -2915,7 +2920,7 @@ p.pm-gas-stages__step-text {
 .pm-gas-about__label-dot {
     width: 8px;
     height: 8px;
-    background: #6366F1;
+    background: #5369E0;
 }
 
 .pm-gas-about .pm-gas-about__title {
@@ -3122,6 +3127,7 @@ p.pm-gas-stages__step-text {
     .pm-gas-about__label,
     .pm-gas-about__stat-label {
         font-size: var(--Typography-Body-S-fontSize, 14px);
+        line-height: 18px;
     }
     .pm-gas-about__stat-label{
         font-size: 14px;
@@ -3181,6 +3187,7 @@ p.pm-gas-stages__step-text {
 
     p.pm-gas-stages__step-text{
         font-size: var(--Typography-Caption-M-fontSize, 12px);
+        line-height: 16px;
     }
 
     .pm-gas-about__stat{
@@ -3411,7 +3418,8 @@ p.pm-gas-stages__step-text {
     }
 
     .pm-page-dark .pm-section.pm-gas-gpu-select,
-    .pm-page-dark .pm-section.pm-gas-stages {
+    .pm-page-dark .pm-section.pm-gas-stages,
+    .pm-section.pm-gas-catalog.pm-object-about{
         padding: 48px 0;
     }
 

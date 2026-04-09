@@ -3268,7 +3268,50 @@
             const popularSliders = document.querySelectorAll('.pm-popular-slider');
             const swipers = [];
 
-            if (popularSliders){
+// Функция для проверки видимости навигации
+            function updateNavigationVisibility(swiperInstance, sliderElement) {
+                const nextBtn = sliderElement.querySelector('.pm-popular__next-btn');
+                const prevBtn = sliderElement.querySelector('.pm-popular__prev-btn');
+
+                if (!nextBtn || !prevBtn) return;
+
+                // Получаем текущее количество слайдов (без учета дубликатов для loop)
+                const totalSlides = swiperInstance.slides.length;
+
+                // Получаем количество видимых слайдов в зависимости от ширины экрана
+                let slidesPerView = swiperInstance.params.slidesPerView;
+                if (typeof slidesPerView === 'object') {
+                    // Если slidesPerView задан через breakpoints
+                    const breakpoints = swiperInstance.params.breakpoints;
+                    const windowWidth = window.innerWidth;
+
+                    // Находим подходящий брейкпоинт
+                    const sortedBreakpoints = Object.keys(breakpoints)
+                        .map(Number)
+                        .sort((a, b) => b - a);
+
+                    for (let bp of sortedBreakpoints) {
+                        if (windowWidth >= bp) {
+                            const bpSettings = breakpoints[bp];
+                            if (bpSettings.slidesPerView !== undefined) {
+                                slidesPerView = bpSettings.slidesPerView;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                // Если слайдов меньше или равно количеству видимых - скрываем навигацию
+                if (totalSlides <= slidesPerView) {
+                    nextBtn.style.display = 'none';
+                    prevBtn.style.display = 'none';
+                } else {
+                    nextBtn.style.display = '';
+                    prevBtn.style.display = '';
+                }
+            }
+
+            if (popularSliders) {
                 // инициализация свайперов
                 popularSliders.forEach(slider => {
                     const instance = new Swiper(slider, {
@@ -3295,15 +3338,27 @@
                                 slidesPerGroup: 5,
                             }
                         },
+                        on: {
+                            init: function() {
+                                updateNavigationVisibility(this, slider);
+                            },
+                            resize: function() {
+                                updateNavigationVisibility(this, slider);
+                            }
+                        }
                     });
 
                     swipers.push({
                         el: slider,
                         instance
                     });
+
+                    // Проверяем видимость при инициализации
+                    if (slider.closest('[data-tab-content].active')) {
+                        setTimeout(() => updateNavigationVisibility(instance, slider), 100);
+                    }
                 });
             }
-
 
             if (tabs) {
                 // табы
@@ -3326,13 +3381,24 @@
                         activeContent.classList.add('active');
 
                         // обновление нужного swiper
-                        const current = swipers.find(s => s.el === activeContent);
+                        const current = swipers.find(s => s.el.closest('[data-tab-content]') === activeContent);
                         if (current) {
                             current.instance.update();
+                            // Небольшая задержка для корректного обновления после update
+                            setTimeout(() => {
+                                updateNavigationVisibility(current.instance, current.el);
+                            }, 50);
                         }
                     });
                 });
             }
+
+            // Обновляем при ресайзе окна
+            window.addEventListener('resize', () => {
+                swipers.forEach(({ instance, el }) => {
+                    updateNavigationVisibility(instance, el);
+                });
+            });
 
             document.querySelectorAll('.pm-card-images').forEach(container => {
                 const images = container.querySelectorAll('img');
