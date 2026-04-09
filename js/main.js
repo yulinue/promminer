@@ -38,68 +38,93 @@ document.addEventListener('DOMContentLoaded', () => {
             || (('ontouchstart' in window) && window.innerWidth <= 1024);
     }
 
-    // --- Функция принудительной блокировки скролла страницы (как в виджете) ---
-    function createPageScrollLocker() {
-        let isLocked = false;
-        let savedScrollTop = 0;
-        let scrollingElement = null;
+    // --- ГЛАВНАЯ ФУНКЦИЯ БЛОКИРОВКИ (как в виджете) ---
+    function createScrollBlocker() {
+        let scrollPosition = 0;
+        let scrollBlocked = false;
+        let touchMoveHandler = null;
+        let wheelHandler = null;
 
-        function lock() {
-            if (isLocked) return;
+        function block() {
+            if (scrollBlocked) return;
 
-            // Находим элемент, который реально скроллит страницу
-            scrollingElement = document.scrollingElement || document.documentElement;
+            const docEl = document.documentElement;
+            const body = document.body;
 
-            // Сохраняем текущую позицию скролла
-            savedScrollTop = scrollingElement.scrollTop;
+            // Сохраняем позицию
+            scrollPosition = window.scrollY;
 
-            // ПРИНУДИТЕЛЬНО ФИКСИРУЕМ СТРАНИЦУ
-            scrollingElement.style.position = 'fixed';
-            scrollingElement.style.top = `-${savedScrollTop}px`;
-            scrollingElement.style.left = '0';
-            scrollingElement.style.right = '0';
-            scrollingElement.style.width = '100%';
-            scrollingElement.style.overflow = 'hidden';
+            // Метод 1: Фиксируем через position (работает везде)
+            body.style.position = 'fixed';
+            body.style.top = `-${scrollPosition}px`;
+            body.style.left = '0';
+            body.style.right = '0';
+            body.style.bottom = '0';
+            body.style.overflow = 'hidden';
 
-            // Дополнительно для body (на всякий случай)
-            document.body.style.position = 'fixed';
-            document.body.style.top = `-${savedScrollTop}px`;
-            document.body.style.left = '0';
-            document.body.style.right = '0';
-            document.body.style.width = '100%';
-            document.body.style.overflow = 'hidden';
+            // Метод 2: Блокируем touchmove (для iOS)
+            touchMoveHandler = (e) => {
+                // Разрешаем скролл только внутри попапа
+                const popup = document.querySelector('.pm-popup-overlay.active');
+                if (popup && !popup.contains(e.target)) {
+                    e.preventDefault();
+                }
+            };
 
-            isLocked = true;
+            // Метод 3: Блокируем колесо мыши (для Android с мышкой)
+            wheelHandler = (e) => {
+                const popup = document.querySelector('.pm-popup-overlay.active');
+                if (popup && !popup.contains(e.target)) {
+                    e.preventDefault();
+                }
+            };
+
+            document.addEventListener('touchmove', touchMoveHandler, { passive: false });
+            document.addEventListener('wheel', wheelHandler, { passive: false });
+
+            // Метод 4: Для iOS Safari - блокируем скролл через CSS + preventDefault на touchstart
+            docEl.style.overflow = 'hidden';
+            docEl.style.touchAction = 'none';
+            body.style.touchAction = 'none';
+
+            scrollBlocked = true;
         }
 
-        function unlock() {
-            if (!isLocked || !scrollingElement) return;
+        function unblock() {
+            if (!scrollBlocked) return;
+
+            const body = document.body;
+            const docEl = document.documentElement;
 
             // Восстанавливаем стили
-            scrollingElement.style.position = '';
-            scrollingElement.style.top = '';
-            scrollingElement.style.left = '';
-            scrollingElement.style.right = '';
-            scrollingElement.style.width = '';
-            scrollingElement.style.overflow = '';
+            body.style.position = '';
+            body.style.top = '';
+            body.style.left = '';
+            body.style.right = '';
+            body.style.bottom = '';
+            body.style.overflow = '';
+            body.style.touchAction = '';
 
-            document.body.style.position = '';
-            document.body.style.top = '';
-            document.body.style.left = '';
-            document.body.style.right = '';
-            document.body.style.width = '';
-            document.body.style.overflow = '';
+            docEl.style.overflow = '';
+            docEl.style.touchAction = '';
+
+            // Удаляем обработчики
+            if (touchMoveHandler) {
+                document.removeEventListener('touchmove', touchMoveHandler);
+                touchMoveHandler = null;
+            }
+            if (wheelHandler) {
+                document.removeEventListener('wheel', wheelHandler);
+                wheelHandler = null;
+            }
 
             // Восстанавливаем скролл
-            scrollingElement.scrollTop = savedScrollTop;
-            document.body.scrollTop = savedScrollTop;
-            window.scrollTo(0, savedScrollTop);
+            window.scrollTo(0, scrollPosition);
 
-            isLocked = false;
-            scrollingElement = null;
+            scrollBlocked = false;
         }
 
-        return { lock, unlock };
+        return { block, unblock };
     }
 
     function initMobileFormFixes() {
@@ -111,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const popups = document.querySelectorAll('.pm-popup-overlay');
-        const pageLocker = createPageScrollLocker();
+        const scrollBlocker = createScrollBlocker();
 
         popups.forEach(popup => {
             const container = popup.querySelector('.pm-popup-feedback__container');
@@ -121,20 +146,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let isKeyboardOpen = false;
 
-            // Функция для скролла КОНТЕЙНЕРА к активному элементу (не страницы!)
-            function scrollContainerToElement(element) {
+            // Скролл к активному элементу
+            function scrollToActiveElement(element) {
                 if (!element) return;
 
                 setTimeout(() => {
                     const elementRect = element.getBoundingClientRect();
                     const containerRect = container.getBoundingClientRect();
 
-                    // Проверяем, не перекрыт ли элемент клавиатурой
-                    if (elementRect.bottom > containerRect.bottom) {
-                        // Скроллим только контейнер, не страницу!
-                        const scrollOffset = elementRect.bottom - containerRect.bottom + 20;
-                        container.scrollBy({ top: scrollOffset, behavior: 'smooth' });
-                    } else if (elementRect.top < containerRect.top) {
+                    if (elementRect.bottom > containerRect.bottom || elementRect.top < containerRect.top) {
                         const scrollOffset = elementRect.top - containerRect.top - 20;
                         container.scrollBy({ top: scrollOffset, behavior: 'smooth' });
                     }
@@ -144,10 +164,9 @@ document.addEventListener('DOMContentLoaded', () => {
             function handleFocus(e) {
                 if (!isKeyboardOpen) {
                     isKeyboardOpen = true;
-                    // ПРИ ОТКРЫТИИ КЛАВИАТУРЫ БЛОКИРУЕМ СТРАНИЦУ
-                    pageLocker.lock();
+                    scrollBlocker.block();
                 }
-                scrollContainerToElement(e.target);
+                scrollToActiveElement(e.target);
             }
 
             function handleBlur() {
@@ -155,8 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const activeElement = document.activeElement;
                     if (!activeElement || !container.contains(activeElement)) {
                         if (isKeyboardOpen) {
-                            // При закрытии клавиатуры разблокируем страницу
-                            pageLocker.unlock();
+                            scrollBlocker.unblock();
                             isKeyboardOpen = false;
                         }
                     }
@@ -168,15 +186,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 input.addEventListener('blur', handleBlur);
             });
 
-            // Функция полного сброса при закрытии попапа
+            // Восстановление при закрытии попапа
             function restoreAll() {
-                pageLocker.unlock();
+                scrollBlocker.unblock();
                 isKeyboardOpen = false;
-
-                // Сбрасываем скролл контейнера
-                if (container) {
-                    container.scrollTop = 0;
-                }
             }
 
             // Закрытие по кнопкам
@@ -199,19 +212,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
             observer.observe(popup, { attributes: true });
-
-            // Также при открытии попапа (если клавиатура ещё не открыта) блокируем страницу
-            const popupObserver = new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => {
-                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                        if (popup.classList.contains('active')) {
-                            // Попап открыт - блокируем страницу сразу
-                            pageLocker.lock();
-                        }
-                    }
-                });
-            });
-            popupObserver.observe(popup, { attributes: true });
         });
     }
 
