@@ -61,10 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .pm-popup-overlay {
                 transition: padding-top 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
             }
-            
-            .pm-popup-feedback__container {
-                scroll-behavior: smooth;
-            }
         `;
         document.head.appendChild(style);
 
@@ -84,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
             let activeElement = null;
             let originalPaddingTop = null;
             let scrollBlocked = false;
-            let containerScrollBefore = 0;
 
             // Функция блокировки скролла страницы
             function blockPageScroll() {
@@ -111,29 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 scrollBlocked = false;
             }
 
-            // Скроллим контейнер к активному элементу
-            function scrollContainerToElement(element) {
-                if (!element) return;
-
-                const elementRect = element.getBoundingClientRect();
-                const containerRect = container.getBoundingClientRect();
-
-                // Проверяем, виден ли элемент в контейнере
-                const elementTopRelative = elementRect.top - containerRect.top;
-                const elementBottomRelative = elementRect.bottom - containerRect.top;
-
-                // Если элемент не полностью виден - скроллим
-                if (elementTopRelative < 0) {
-                    // Элемент выше видимой области
-                    container.scrollTop += elementTopRelative - 20;
-                } else if (elementBottomRelative > containerRect.height) {
-                    // Элемент ниже видимой области
-                    container.scrollTop += elementBottomRelative - containerRect.height + 20;
-                }
-            }
-
-            // Сдвигаем попап и скроллим к элементу
-            function adjustForKeyboard(element) {
+            // Сдвигаем попап вверх
+            function shiftPopupForKeyboard(element) {
                 if (!element) return;
 
                 if (originalPaddingTop === null) {
@@ -143,54 +117,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 const elementRect = element.getBoundingClientRect();
                 const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
 
-                // Сначала скроллим контейнер
-                scrollContainerToElement(element);
+                const elementBottom = elementRect.bottom;
 
-                // Затем, если нужно, сдвигаем весь попап
-                setTimeout(() => {
-                    const newElementRect = element.getBoundingClientRect();
-                    const elementBottom = newElementRect.bottom;
+                if (elementBottom > viewportHeight - 20) {
+                    const shiftAmount = elementBottom - viewportHeight + 40;
+                    const currentPadding = parseInt(originalPaddingTop) || 92;
+                    const newPadding = Math.max(20, currentPadding - shiftAmount);
 
-                    if (elementBottom > viewportHeight - 20) {
-                        const shiftAmount = elementBottom - viewportHeight + 40;
-                        const currentPadding = parseInt(originalPaddingTop) || 92;
-                        const newPadding = Math.max(20, currentPadding - shiftAmount);
-
-                        popup.style.paddingTop = newPadding + 'px';
-                    }
-                }, 50);
+                    popup.style.paddingTop = newPadding + 'px';
+                }
             }
 
-            // Восстанавливаем позицию попапа и скролл контейнера
-            function resetPosition() {
+            // Восстанавливаем позицию попапа
+            function resetPopupPosition() {
                 if (originalPaddingTop !== null) {
                     popup.style.paddingTop = originalPaddingTop;
-                }
-                if (containerScrollBefore > 0) {
-                    container.scrollTop = 0;
                 }
             }
 
             function handleFocus(e) {
                 activeElement = e.target;
-                containerScrollBefore = container.scrollTop;
 
                 if (!isKeyboardOpen) {
                     isKeyboardOpen = true;
                     blockPageScroll();
                 }
 
-                // Даем время клавиатуре открыться
+                // Плавно сдвигаем после открытия клавиатуры
                 setTimeout(() => {
-                    adjustForKeyboard(activeElement);
-                }, 200);
+                    shiftPopupForKeyboard(activeElement);
+                }, 150);
             }
 
             // Отслеживание изменения размера viewport
             if (window.visualViewport) {
                 window.visualViewport.addEventListener('resize', () => {
                     if (activeElement && isKeyboardOpen) {
-                        adjustForKeyboard(activeElement);
+                        shiftPopupForKeyboard(activeElement);
                     }
                 });
             }
@@ -201,11 +164,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Полное восстановление при закрытии попапа
             function restoreAll() {
-                resetPosition();
+                resetPopupPosition();
                 unblockPageScroll();
                 isKeyboardOpen = false;
                 activeElement = null;
-                containerScrollBefore = 0;
             }
 
             // Закрытие по кнопкам
@@ -229,7 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (popup.classList.contains('active')) {
                             blockPageScroll();
                             originalPaddingTop = getComputedStyle(popup).paddingTop;
-                            container.scrollTop = 0;
                         } else {
                             restoreAll();
                         }
@@ -238,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             observer.observe(popup, { attributes: true });
 
-            // Отслеживаем клик по кнопке отправки
+            // Дополнительно: отслеживаем клик по кнопке отправки
             const submitBtn = container.querySelector('button[type="submit"]');
             if (submitBtn) {
                 submitBtn.addEventListener('click', () => {
