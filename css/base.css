@@ -175,6 +175,10 @@ body:has(.v-overlay--active){
     padding-right: var(--scrollbar-width);
 }
 
+html:has(body.lock){
+    overflow: hidden;
+}
+
 /* box model внутри твоей зоны */
 .pm-main * {
     -webkit-box-sizing: border-box;
