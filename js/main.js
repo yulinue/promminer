@@ -63,11 +63,13 @@ document.addEventListener('DOMContentLoaded', () => {
             let originalPaddingBottom = null;
             let savedScrollY = 0;
 
+            let isBodyLocked = false;
+
             function lockBodyScroll() {
-                // Сохраняем позицию ДО того как пофиксили
+                if (isBodyLocked) return; // Уже зафиксирован, не трогаем
+
                 savedScrollY = window.scrollY;
 
-                // Фиксируем body и html
                 html.style.position = 'fixed';
                 html.style.top = `-${savedScrollY}px`;
                 html.style.width = '100%';
@@ -80,11 +82,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 body.style.touchAction = 'none';
 
                 body.classList.add('lock');
+
+                isBodyLocked = true;
             }
 
             function unlockBodyScroll() {
-                // Сохраняем позицию до снятия стилей
-                const scrollY = savedScrollY;
+                if (!isBodyLocked) return;
+
+                body.classList.remove('lock');
 
                 html.style.position = '';
                 html.style.top = '';
@@ -97,10 +102,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 body.style.overflow = '';
                 body.style.touchAction = '';
 
-                // Восстанавливаем скролл с небольшой задержкой
-                setTimeout(() => {
-                    window.scrollTo(0, scrollY);
-                }, 10);
+                const scrollY = savedScrollY;
+
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        window.scrollTo(0, scrollY);
+                    });
+                });
+
+                isBodyLocked = false;
             }
 
             function isElementFullyVisible(element) {
@@ -177,6 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 container.style.paddingBottom = originalPaddingBottom || '';
 
                 unlockBodyScroll();
+                isBodyLocked = false;
 
                 activeElement = null;
                 isUserScrolling = false;
