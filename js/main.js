@@ -64,9 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
             let savedScrollY = 0;
 
             function lockBodyScroll() {
+                // Сохраняем позицию ДО того как пофиксили
                 savedScrollY = window.scrollY;
 
-                // Фиксируем body и html для полной блокировки скролла
+                // Фиксируем body и html
                 html.style.position = 'fixed';
                 html.style.top = `-${savedScrollY}px`;
                 html.style.width = '100%';
@@ -82,7 +83,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             function unlockBodyScroll() {
-                body.classList.remove('lock');
+                // Сохраняем позицию до снятия стилей
+                const scrollY = savedScrollY;
 
                 html.style.position = '';
                 html.style.top = '';
@@ -95,7 +97,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 body.style.overflow = '';
                 body.style.touchAction = '';
 
-                window.scrollTo(0, savedScrollY);
+                // Восстанавливаем скролл с небольшой задержкой
+                setTimeout(() => {
+                    window.scrollTo(0, scrollY);
+                }, 10);
             }
 
             function isElementFullyVisible(element) {
