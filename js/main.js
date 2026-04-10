@@ -46,38 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
             navigator.virtualKeyboard.overlaysContent = true;
         }
 
-        const style = document.createElement('style');
-        style.textContent = `
-            html.pm-scroll-blocked {
-                position: fixed !important;
-                top: var(--pm-scroll-y) !important;
-                left: var(--pm-scroll-x) !important;
-                width: 100% !important;
-                height: 100% !important;
-                overflow: hidden !important;
-            }
-            
-            html.pm-scroll-blocked body {
-                position: fixed !important;
-                width: 100% !important;
-                height: 100% !important;
-                overflow: hidden !important;
-                touch-action: none !important;
-            }
-            
-            /* Предотвращаем скролл фона на модалке */
-            .pm-popup-overlay.active {
-                touch-action: none !important;
-            }
-            
-            /* Разрешаем скролл только внутри контейнера */
-            .pm-popup-overlay.active .pm-popup-feedback__container {
-                touch-action: pan-y !important;
-                overscroll-behavior: contain !important;
-            }
-        `;
-        document.head.appendChild(style);
-
         const popups = document.querySelectorAll('.pm-popup-overlay');
 
         popups.forEach(popup => {
@@ -85,60 +53,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!container) return;
 
             const inputs = container.querySelectorAll('input, textarea, select');
-            const closeButtons = popup.querySelectorAll('[class*="close-"], .pm-btn--primary');
-            const html = document.documentElement;
-            const body = document.body;
 
-            let savedScrollX = 0;
-            let savedScrollY = 0;
             let activeElement = null;
-            let scrollBlocked = false;
             let scrollAnimationFrame = null;
             let isUserScrolling = false;
             let userScrollTimeout = null;
-
-            function blockPageScroll() {
-                if (scrollBlocked) return;
-
-                savedScrollX = window.scrollX;
-                savedScrollY = window.scrollY;
-
-                html.style.setProperty('--pm-scroll-x', `-${savedScrollX}px`);
-                html.style.setProperty('--pm-scroll-y', `-${savedScrollY}px`);
-                html.classList.add('pm-scroll-blocked');
-
-                // Дополнительно предотвращаем скролл на body
-                body.style.overflow = 'hidden';
-                body.style.position = 'fixed';
-                body.style.width = '100%';
-                body.style.height = '100%';
-                body.style.top = `-${savedScrollY}px`;
-
-                scrollBlocked = true;
-            }
-
-            function unblockPageScroll() {
-                if (!scrollBlocked) return;
-
-                html.classList.remove('pm-scroll-blocked');
-                html.style.removeProperty('--pm-scroll-x');
-                html.style.removeProperty('--pm-scroll-y');
-
-                // Восстанавливаем body
-                body.style.overflow = '';
-                body.style.position = '';
-                body.style.width = '';
-                body.style.height = '';
-                body.style.top = '';
-
-                window.scrollTo(savedScrollX, savedScrollY);
-                scrollBlocked = false;
-            }
+            let originalPaddingBottom = null;
 
             function isElementFullyVisible(element) {
                 const rect = element.getBoundingClientRect();
                 const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-
                 return rect.top >= 20 && rect.bottom <= vh - 20;
             }
 
@@ -153,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const containerRect = container.getBoundingClientRect();
 
                 const elementTopRelative = elementRect.top - containerRect.top;
-                const targetScrollTop = container.scrollTop + elementTopRelative - 80;
+                const targetScrollTop = container.scrollTop + elementTopRelative - 60;
 
                 const startScrollTop = container.scrollTop;
                 const distance = targetScrollTop - startScrollTop;
@@ -183,26 +107,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 const keyboardHeight = fullHeight - viewportHeight;
 
                 if (keyboardHeight > 0) {
+                    if (originalPaddingBottom === null) {
+                        originalPaddingBottom = getComputedStyle(container).paddingBottom;
+                    }
                     container.style.transition = 'padding-bottom 0.2s ease-out';
                     container.style.paddingBottom = keyboardHeight + 'px';
                 } else {
                     container.style.transition = 'padding-bottom 0.2s ease-out';
-                    container.style.paddingBottom = '';
+                    container.style.paddingBottom = originalPaddingBottom || '';
                 }
             }
 
-            function reset() {
+            function resetKeyboardState() {
                 if (scrollAnimationFrame) {
                     cancelAnimationFrame(scrollAnimationFrame);
                     scrollAnimationFrame = null;
                 }
 
                 container.style.transition = '';
-                container.scrollTop = 0;
-                container.style.paddingBottom = '';
-                unblockPageScroll();
+                container.style.paddingBottom = originalPaddingBottom || '';
+
                 activeElement = null;
                 isUserScrolling = false;
+                originalPaddingBottom = null;
 
                 if (userScrollTimeout) {
                     clearTimeout(userScrollTimeout);
@@ -212,25 +139,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             function handleFocus(e) {
                 activeElement = e.target;
-                blockPageScroll();
             }
 
-            // Предотвращаем скролл фона на контейнере
-            container.addEventListener('touchstart', (e) => {
-                // Ничего не делаем, просто предотвращаем всплытие к фону
-            }, { passive: true });
-
-            container.addEventListener('touchmove', (e) => {
-                // Предотвращаем скролл фона при достижении границ контейнера
-                const scrollTop = container.scrollTop;
-                const scrollHeight = container.scrollHeight;
-                const clientHeight = container.clientHeight;
-
-                if ((scrollTop === 0 && e.touches[0].clientY > e.touches[0].startY) ||
-                    (scrollTop + clientHeight >= scrollHeight && e.touches[0].clientY < e.touches[0].startY)) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
+            function handleBlur() {
+                // Не сбрасываем сразу, ждем закрытия клавиатуры
+            }
 
             container.addEventListener('scroll', () => {
                 isUserScrolling = true;
@@ -246,6 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             inputs.forEach(input => {
                 input.addEventListener('focus', handleFocus);
+                input.addEventListener('blur', handleBlur);
             });
 
             if (window.visualViewport) {
@@ -269,24 +183,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
-            closeButtons.forEach(btn => {
-                btn.addEventListener('click', reset);
-            });
-
-            popup.addEventListener('click', (e) => {
-                if (e.target === popup) reset();
-            });
-
+            // Следим за закрытием попапа через класс active
             const observer = new MutationObserver(() => {
-                if (popup.classList.contains('active')) {
+                if (!popup.classList.contains('active')) {
+                    // Попап закрыт - сбрасываем состояние клавиатуры
+                    resetKeyboardState();
                     container.scrollTop = 0;
-                    blockPageScroll();
-                } else {
-                    reset();
                 }
             });
 
-            observer.observe(popup, { attributes: true });
+            observer.observe(popup, { attributes: true, attributeFilter: ['class'] });
         });
     }
 
