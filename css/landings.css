@@ -379,6 +379,10 @@
     line-height: 22px;
 }
 
+.pm-gas-cases.pm-benefit .pm-gas-gpu__item-badge{
+    background: #262626;
+}
+
 @media(max-width: 1666px){
     .pm-benefit__card{
         height: 360px;
