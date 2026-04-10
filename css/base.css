@@ -170,7 +170,8 @@ body{
     scroll-behavior: smooth;
 }
 body.lock,
-body:has(.v-overlay--active){
+body:has(.v-overlay--active),
+body:has(.pm-popup-overlay.active){
     overflow: hidden;
     padding-right: var(--scrollbar-width);
 }
