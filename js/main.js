@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'use strict';
 
     function isMobileDevice() {
-        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+        return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
             || (('ontouchstart' in window) && window.innerWidth <= 1024);
     }
 
@@ -55,9 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 height: 100% !important;
                 overflow: hidden !important;
             }
-            
+
             .pm-popup-feedback__container {
                 scroll-behavior: smooth;
+                overscroll-behavior: contain;
             }
         `;
         document.head.appendChild(style);
@@ -72,13 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const closeButtons = popup.querySelectorAll('[class*="close-"], .pm-btn--primary');
             const html = document.documentElement;
 
-            let isKeyboardOpen = false;
             let savedScrollX = 0;
             let savedScrollY = 0;
             let activeElement = null;
-            let originalPaddingTop = null;
             let scrollBlocked = false;
-            let scrollTimer = null;
 
             function blockPageScroll() {
                 if (scrollBlocked) return;
@@ -89,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 html.style.setProperty('--pm-scroll-x', `-${savedScrollX}px`);
                 html.style.setProperty('--pm-scroll-y', `-${savedScrollY}px`);
                 html.classList.add('pm-scroll-blocked');
+
                 scrollBlocked = true;
             }
 
@@ -103,138 +102,96 @@ document.addEventListener('DOMContentLoaded', () => {
                 scrollBlocked = false;
             }
 
-            // Улучшенная функция скролла (как в виджете)
+            function isElementVisible(element) {
+                const rect = element.getBoundingClientRect();
+                const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+
+                return rect.top >= 0 && rect.bottom <= vh - 10;
+            }
+
             function scrollToElement(element) {
                 if (!element) return;
 
-                // Очищаем предыдущий таймер
-                if (scrollTimer) {
-                    clearTimeout(scrollTimer);
-                }
+                // если iOS уже сам прокрутил — не мешаем
+                if (isElementVisible(element)) return;
 
-                // Используем несколько RAF для гарантии отрисовки
-                function performScroll() {
-                    requestAnimationFrame(() => {
-                        requestAnimationFrame(() => {
-                            const elementRect = element.getBoundingClientRect();
-                            const containerRect = container.getBoundingClientRect();
+                const elementRect = element.getBoundingClientRect();
+                const containerRect = container.getBoundingClientRect();
 
-                            // Позиция элемента относительно контейнера
-                            const elementTop = elementRect.top - containerRect.top;
-                            const elementBottom = elementRect.bottom - containerRect.top;
+                const offset = elementRect.top - containerRect.top - 80;
 
-                            // Скроллим, если элемент не виден
-                            if (elementTop < 0) {
-                                container.scrollTop += elementTop - 20;
-                            } else if (elementBottom > containerRect.height) {
-                                container.scrollTop += elementBottom - containerRect.height + 20;
-                            }
-
-                            // После скролла проверяем, нужно ли сдвинуть попап
-                            const newElementRect = element.getBoundingClientRect();
-                            const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-
-                            const fullHeight = window.innerHeight;
-
-                            // высота клавиатуры
-                            const keyboardHeight = fullHeight - viewportHeight;
-
-                            if (keyboardHeight > 0) {
-                                container.style.paddingBottom = keyboardHeight + 40 + 'px';
-                            } else {
-                                container.style.paddingBottom = '';
-                            }
-                        });
-                    });
-                }
-
-                // Даем время на открытие клавиатуры и выполняем скролл
-                scrollTimer = setTimeout(() => {
-                    performScroll();
-                    scrollTimer = null;
-                }, 300);
+                container.scrollTo({
+                    top: container.scrollTop + offset,
+                    behavior: 'smooth'
+                });
             }
 
-            function resetPopupPosition() {
-                if (scrollTimer) {
-                    clearTimeout(scrollTimer);
-                    scrollTimer = null;
-                }
+            function updateKeyboardSpace() {
+                const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+                const fullHeight = window.innerHeight;
 
-                if (originalPaddingTop !== null) {
-                    popup.style.paddingTop = originalPaddingTop;
+                const keyboardHeight = fullHeight - viewportHeight;
+
+                if (keyboardHeight > 0) {
+                    container.style.paddingBottom = keyboardHeight + 40 + 'px';
+                } else {
+                    container.style.paddingBottom = '';
                 }
+            }
+
+            function reset() {
                 container.scrollTop = 0;
                 container.style.paddingBottom = '';
+                unblockPageScroll();
+                activeElement = null;
             }
 
             function handleFocus(e) {
                 activeElement = e.target;
-
-                if (!isKeyboardOpen) {
-                    isKeyboardOpen = true;
-                    blockPageScroll();
-                }
-
-                // НЕМЕДЛЕННО запускаем скролл (не ждем клавиатуру)
-                scrollToElement(activeElement);
-            }
-
-            // Отслеживание resize viewport
-            if (window.visualViewport) {
-                let viewportHeight = window.visualViewport.height;
-
-                window.visualViewport.addEventListener('resize', () => {
-                    const newHeight = window.visualViewport.height;
-                    const keyboardVisible = newHeight < viewportHeight - 50;
-
-                    if (keyboardVisible && activeElement) {
-                        // Повторный скролл при изменении размера клавиатуры
-                        scrollToElement(activeElement);
-                    } else if (!keyboardVisible && isKeyboardOpen) {
-                        resetPopupPosition();
-                    }
-
-                    viewportHeight = newHeight;
-                });
+                blockPageScroll();
+                // ❌ не скроллим тут — ждём клавиатуру
             }
 
             inputs.forEach(input => {
                 input.addEventListener('focus', handleFocus);
             });
 
-            function restoreAll() {
-                if (scrollTimer) {
-                    clearTimeout(scrollTimer);
-                    scrollTimer = null;
-                }
-                resetPopupPosition();
-                unblockPageScroll();
-                isKeyboardOpen = false;
-                activeElement = null;
+            // 💥 главный момент — реагируем на появление клавиатуры
+            if (window.visualViewport) {
+                let prevHeight = window.visualViewport.height;
+
+                window.visualViewport.addEventListener('resize', () => {
+                    const newHeight = window.visualViewport.height;
+                    const keyboardVisible = newHeight < prevHeight - 50;
+
+                    updateKeyboardSpace();
+
+                    if (keyboardVisible && activeElement) {
+                        requestAnimationFrame(() => {
+                            scrollToElement(activeElement);
+                        });
+                    }
+
+                    prevHeight = newHeight;
+                });
             }
 
             closeButtons.forEach(btn => {
-                btn.addEventListener('click', restoreAll);
+                btn.addEventListener('click', reset);
             });
 
             popup.addEventListener('click', (e) => {
-                if (e.target === popup) restoreAll();
+                if (e.target === popup) reset();
             });
 
-            const observer = new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => {
-                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                        if (popup.classList.contains('active')) {
-                            blockPageScroll();
-                            originalPaddingTop = getComputedStyle(popup).paddingTop;
-                            container.scrollTop = 0;
-                        } else {
-                            restoreAll();
-                        }
-                    }
-                });
+            const observer = new MutationObserver(() => {
+                if (popup.classList.contains('active')) {
+                    container.scrollTop = 0;
+                } else {
+                    reset();
+                }
             });
+
             observer.observe(popup, { attributes: true });
         });
     }
@@ -244,4 +201,5 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         initMobileFormFixes();
     }
+
 })();
