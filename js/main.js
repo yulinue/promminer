@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const inputs = container.querySelectorAll('input, textarea, select');
             const closeButtons = popup.querySelectorAll('[class*="close-"], .pm-btn--primary');
+            const submitBtn = container.querySelector('button[type="submit"]');
             const body = document.body;
             const html = document.documentElement;
 
@@ -62,11 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
             let userScrollTimeout = null;
             let originalPaddingBottom = null;
             let savedScrollY = 0;
-
             let isBodyLocked = false;
+            let isSuccessState = false;
 
             function lockBodyScroll() {
-                if (isBodyLocked) return; // Уже зафиксирован, не трогаем
+                if (isBodyLocked) return;
 
                 savedScrollY = window.scrollY;
 
@@ -88,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             function unlockBodyScroll() {
                 if (!isBodyLocked) return;
+                if (isSuccessState) return;
 
                 body.classList.remove('lock');
 
@@ -122,7 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
             function smoothScrollToElement(element) {
                 if (!element) return;
 
-                // Пропускаем если поле уже заполнено (iOS сам скроллит)
                 if (element.value && element.value.length > 0) {
                     return;
                 }
@@ -186,8 +187,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 container.scrollTop = 0;
                 container.style.paddingBottom = originalPaddingBottom || '';
 
-                unlockBodyScroll();
-                isBodyLocked = false;
+                const successContainer = popup.querySelector('#feedbackSuccess');
+                isSuccessState = successContainer && window.getComputedStyle(successContainer).display !== 'none';
+
+                if (!popup.classList.contains('active')) {
+                    unlockBodyScroll();
+                    isBodyLocked = false;
+                    isSuccessState = false;
+                }
 
                 activeElement = null;
                 isUserScrolling = false;
@@ -204,7 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 lockBodyScroll();
             }
 
-            // Предотвращаем скролл фона при таче на контейнере
             container.addEventListener('touchstart', (e) => {
                 container.dataset.touchStartY = e.touches[0].clientY;
             }, { passive: true });
@@ -217,7 +223,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const startY = parseFloat(container.dataset.touchStartY) || currentY;
                 const deltaY = currentY - startY;
 
-                // Блокируем скролл фона при достижении границ
                 if (scrollTop <= 0 && deltaY > 0) {
                     e.preventDefault();
                 } else if (scrollTop + clientHeight >= scrollHeight && deltaY < 0) {
@@ -263,17 +268,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             closeButtons.forEach(btn => {
-                btn.addEventListener('click', reset);
+                btn.addEventListener('click', () => {
+                    isSuccessState = false;
+                    reset();
+                });
             });
 
+            if (submitBtn) {
+                submitBtn.addEventListener('click', () => {
+                    isSuccessState = true;
+                });
+            }
+
             popup.addEventListener('click', (e) => {
-                if (e.target === popup) reset();
+                if (e.target === popup) {
+                    isSuccessState = false;
+                    reset();
+                }
             });
 
             const observer = new MutationObserver(() => {
                 if (popup.classList.contains('active')) {
                     lockBodyScroll();
                     container.scrollTop = 0;
+                    isSuccessState = false;
                 } else {
                     reset();
                 }
