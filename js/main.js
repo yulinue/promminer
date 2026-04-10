@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (keyboardHeight > 0) {
                     container.style.transition = 'padding-bottom 0.2s ease-out';
-                    container.style.paddingBottom = keyboardHeight + 40 + 'px';
+                    container.style.paddingBottom = keyboardHeight + 'px';
                 } else {
                     container.style.transition = 'padding-bottom 0.2s ease-out';
                     container.style.paddingBottom = '';
