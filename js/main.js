@@ -54,22 +54,63 @@ document.addEventListener('DOMContentLoaded', () => {
             const inputs = container.querySelectorAll('input, textarea, select');
             const closeButtons = popup.querySelectorAll('[class*="close-"], .pm-btn--primary');
             const body = document.body;
+            const html = document.documentElement;
 
             let activeElement = null;
             let scrollAnimationFrame = null;
             let isUserScrolling = false;
             let userScrollTimeout = null;
             let originalPaddingBottom = null;
+            let savedScrollY = 0;
+
+            function lockBodyScroll() {
+                savedScrollY = window.scrollY;
+
+                // Фиксируем body и html для полной блокировки скролла
+                html.style.position = 'fixed';
+                html.style.top = `-${savedScrollY}px`;
+                html.style.width = '100%';
+                html.style.overflow = 'hidden';
+
+                body.style.position = 'fixed';
+                body.style.top = `-${savedScrollY}px`;
+                body.style.width = '100%';
+                body.style.overflow = 'hidden';
+                body.style.touchAction = 'none';
+
+                body.classList.add('lock');
+            }
+
+            function unlockBodyScroll() {
+                body.classList.remove('lock');
+
+                html.style.position = '';
+                html.style.top = '';
+                html.style.width = '';
+                html.style.overflow = '';
+
+                body.style.position = '';
+                body.style.top = '';
+                body.style.width = '';
+                body.style.overflow = '';
+                body.style.touchAction = '';
+
+                window.scrollTo(0, savedScrollY);
+            }
 
             function isElementFullyVisible(element) {
                 const rect = element.getBoundingClientRect();
                 const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-
                 return rect.top >= 20 && rect.bottom <= vh - 20;
             }
 
             function smoothScrollToElement(element) {
                 if (!element) return;
+
+                // Пропускаем если поле уже заполнено (iOS сам скроллит)
+                if (element.value && element.value.length > 0) {
+                    return;
+                }
 
                 if (scrollAnimationFrame) {
                     cancelAnimationFrame(scrollAnimationFrame);
@@ -109,12 +150,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const keyboardHeight = fullHeight - viewportHeight;
 
                 if (keyboardHeight > 0) {
-                    // Сохраняем оригинальный padding
                     if (originalPaddingBottom === null) {
                         originalPaddingBottom = getComputedStyle(container).paddingBottom;
                     }
                     container.style.transition = 'padding-bottom 0.2s ease-out';
-                    container.style.paddingBottom = keyboardHeight + 40 + 'px';
+                    container.style.paddingBottom = keyboardHeight + 'px';
                 } else {
                     container.style.transition = 'padding-bottom 0.2s ease-out';
                     container.style.paddingBottom = originalPaddingBottom || '';
@@ -131,8 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 container.scrollTop = 0;
                 container.style.paddingBottom = originalPaddingBottom || '';
 
-                // Убираем класс lock с body
-                body.classList.remove('lock');
+                unlockBodyScroll();
 
                 activeElement = null;
                 isUserScrolling = false;
@@ -146,11 +185,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
             function handleFocus(e) {
                 activeElement = e.target;
-                // Используем существующий класс lock
-                body.classList.add('lock');
+                lockBodyScroll();
             }
 
-            // Отслеживаем ручной скролл пользователя
+            // Предотвращаем скролл фона при таче на контейнере
+            container.addEventListener('touchstart', (e) => {
+                container.dataset.touchStartY = e.touches[0].clientY;
+            }, { passive: true });
+
+            container.addEventListener('touchmove', (e) => {
+                const scrollTop = container.scrollTop;
+                const scrollHeight = container.scrollHeight;
+                const clientHeight = container.clientHeight;
+                const currentY = e.touches[0].clientY;
+                const startY = parseFloat(container.dataset.touchStartY) || currentY;
+                const deltaY = currentY - startY;
+
+                // Блокируем скролл фона при достижении границ
+                if (scrollTop <= 0 && deltaY > 0) {
+                    e.preventDefault();
+                } else if (scrollTop + clientHeight >= scrollHeight && deltaY < 0) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+
             container.addEventListener('scroll', () => {
                 isUserScrolling = true;
 
@@ -167,7 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 input.addEventListener('focus', handleFocus);
             });
 
-            // Главный момент — реагируем на появление клавиатуры
             if (window.visualViewport) {
                 let prevHeight = window.visualViewport.height;
 
@@ -177,11 +234,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     updateKeyboardSpace();
 
-                    // Скроллим только если:
-                    // 1. Клавиатура открыта
-                    // 2. Есть активный элемент
-                    // 3. Элемент ПУСТОЙ (iOS сам не скроллит)
-                    // 4. Пользователь не скроллит вручную
                     if (keyboardVisible && activeElement && !activeElement.value && !isUserScrolling) {
                         requestAnimationFrame(() => {
                             if (!isElementFullyVisible(activeElement)) {
@@ -202,9 +254,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (e.target === popup) reset();
             });
 
-            // Сбрасываем при закрытии попапа (если класс active убирается)
             const observer = new MutationObserver(() => {
-                if (!popup.classList.contains('active')) {
+                if (popup.classList.contains('active')) {
+                    lockBodyScroll();
+                    container.scrollTop = 0;
+                } else {
                     reset();
                 }
             });
