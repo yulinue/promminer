@@ -68,14 +68,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const closeButtons = popup.querySelectorAll('[class*="close-"], .pm-btn--primary');
             const html = document.documentElement;
 
-            let isKeyboardOpen = false;
             let savedScrollX = 0;
             let savedScrollY = 0;
             let activeElement = null;
             let originalPaddingTop = null;
             let scrollBlocked = false;
-            let scrollTimer = null;
             let scrollAnimationFrame = null;
+            let isScrolling = false;
 
             function blockPageScroll() {
                 if (scrollBlocked) return;
@@ -109,53 +108,64 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
+                // Если уже скроллим - не мешаем
+                if (isScrolling) return;
+
                 // Отменяем предыдущую анимацию
                 if (scrollAnimationFrame) {
                     cancelAnimationFrame(scrollAnimationFrame);
                     scrollAnimationFrame = null;
                 }
 
-                const elementRect = element.getBoundingClientRect();
-                const containerRect = container.getBoundingClientRect();
+                // Ждём перерисовки лейаута после открытия клавиатуры
+                setTimeout(() => {
+                    const elementRect = element.getBoundingClientRect();
+                    const containerRect = container.getBoundingClientRect();
 
-                // Позиция элемента относительно контейнера
-                const elementTop = elementRect.top - containerRect.top;
-                const elementBottom = elementRect.bottom - containerRect.top;
+                    // Позиция элемента относительно контейнера
+                    const elementTop = elementRect.top - containerRect.top;
+                    const elementBottom = elementRect.bottom - containerRect.top;
 
-                let targetScrollTop = container.scrollTop;
+                    let targetScrollTop = container.scrollTop;
 
-                // Вычисляем целевой скролл
-                if (elementTop < 0) {
-                    targetScrollTop = container.scrollTop + elementTop - 20;
-                } else if (elementBottom > containerRect.height) {
-                    targetScrollTop = container.scrollTop + elementBottom - containerRect.height + 20;
-                } else {
-                    return; // Элемент уже виден
-                }
-
-                // Плавная анимация
-                const startScrollTop = container.scrollTop;
-                const distance = targetScrollTop - startScrollTop;
-                const duration = 250; // мс
-                const startTime = performance.now();
-
-                function animateScroll(currentTime) {
-                    const elapsed = currentTime - startTime;
-                    const progress = Math.min(elapsed / duration, 1);
-
-                    // Ease-out функция для плавности
-                    const easeOut = 1 - Math.pow(1 - progress, 3);
-
-                    container.scrollTop = startScrollTop + distance * easeOut;
-
-                    if (progress < 1) {
-                        scrollAnimationFrame = requestAnimationFrame(animateScroll);
+                    // Вычисляем целевой скролл
+                    if (elementTop < 0) {
+                        targetScrollTop = container.scrollTop + elementTop - 20;
+                    } else if (elementBottom > containerRect.height) {
+                        targetScrollTop = container.scrollTop + elementBottom - containerRect.height + 20;
                     } else {
-                        scrollAnimationFrame = null;
+                        return; // Элемент уже виден
                     }
-                }
 
-                scrollAnimationFrame = requestAnimationFrame(animateScroll);
+                    // Плавная анимация
+                    const startScrollTop = container.scrollTop;
+                    const distance = targetScrollTop - startScrollTop;
+                    const duration = 400; // Увеличил для плавности
+                    const startTime = performance.now();
+
+                    isScrolling = true;
+
+                    function animateScroll(currentTime) {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+
+                        // Более плавная ease-out функция
+                        const easeOut = progress < 0.5
+                            ? 4 * progress * progress * progress
+                            : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+                        container.scrollTop = startScrollTop + distance * easeOut;
+
+                        if (progress < 1) {
+                            scrollAnimationFrame = requestAnimationFrame(animateScroll);
+                        } else {
+                            scrollAnimationFrame = null;
+                            isScrolling = false;
+                        }
+                    }
+
+                    scrollAnimationFrame = requestAnimationFrame(animateScroll);
+                }, 200); // Ждём 200ms для полного открытия клавиатуры
             }
 
             function updateKeyboardPadding() {
@@ -164,22 +174,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 const keyboardHeight = fullHeight - viewportHeight;
 
                 if (keyboardHeight > 0) {
+                    container.style.transition = 'padding-bottom 0.3s ease-out';
                     container.style.paddingBottom = keyboardHeight + 'px';
                 } else {
+                    container.style.transition = 'padding-bottom 0.3s ease-out';
                     container.style.paddingBottom = '';
                 }
             }
 
             function resetPopupPosition() {
-                if (scrollTimer) {
-                    clearTimeout(scrollTimer);
-                    scrollTimer = null;
-                }
-
                 if (scrollAnimationFrame) {
                     cancelAnimationFrame(scrollAnimationFrame);
                     scrollAnimationFrame = null;
                 }
+
+                isScrolling = false;
 
                 if (originalPaddingTop !== null) {
                     popup.style.paddingTop = originalPaddingTop;
@@ -190,22 +199,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             function handleFocus(e) {
                 activeElement = e.target;
+                blockPageScroll();
 
-                if (!isKeyboardOpen) {
-                    isKeyboardOpen = true;
-                    blockPageScroll();
-                }
-
-                // Очищаем предыдущий таймер
-                if (scrollTimer) {
-                    clearTimeout(scrollTimer);
-                }
-
-                // Даем клавиатуре время открыться, потом скроллим
-                scrollTimer = setTimeout(() => {
-                    smoothScrollToElement(activeElement);
-                    scrollTimer = null;
-                }, 150); // Уменьшил задержку с 300 до 150ms
+                // Скроллим к элементу
+                smoothScrollToElement(activeElement);
             }
 
             // Отслеживание resize viewport
@@ -219,17 +216,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     updateKeyboardPadding();
 
                     if (keyboardVisible && activeElement) {
-                        // Очищаем предыдущий таймер
-                        if (scrollTimer) {
-                            clearTimeout(scrollTimer);
-                        }
-
-                        // Повторный скролл при изменении размера клавиатуры
-                        scrollTimer = setTimeout(() => {
+                        // При ресайзе скроллим с небольшой задержкой
+                        setTimeout(() => {
                             smoothScrollToElement(activeElement);
-                            scrollTimer = null;
-                        }, 50);
-                    } else if (!keyboardVisible && isKeyboardOpen) {
+                        }, 100);
+                    } else if (!keyboardVisible) {
                         resetPopupPosition();
                     }
 
@@ -242,17 +233,13 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             function restoreAll() {
-                if (scrollTimer) {
-                    clearTimeout(scrollTimer);
-                    scrollTimer = null;
-                }
                 if (scrollAnimationFrame) {
                     cancelAnimationFrame(scrollAnimationFrame);
                     scrollAnimationFrame = null;
                 }
+                isScrolling = false;
                 resetPopupPosition();
                 unblockPageScroll();
-                isKeyboardOpen = false;
                 activeElement = null;
             }
 
