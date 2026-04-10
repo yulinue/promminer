@@ -55,9 +55,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 height: 100% !important;
                 overflow: hidden !important;
             }
-
-            .pm-popup-feedback__container {
-                overscroll-behavior: contain;
+            
+            html.pm-scroll-blocked body {
+                position: fixed !important;
+                width: 100% !important;
+                height: 100% !important;
+                overflow: hidden !important;
+                touch-action: none !important;
+            }
+            
+            /* Предотвращаем скролл фона на модалке */
+            .pm-popup-overlay.active {
+                touch-action: none !important;
+            }
+            
+            /* Разрешаем скролл только внутри контейнера */
+            .pm-popup-overlay.active .pm-popup-feedback__container {
+                touch-action: pan-y !important;
+                overscroll-behavior: contain !important;
             }
         `;
         document.head.appendChild(style);
@@ -71,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const inputs = container.querySelectorAll('input, textarea, select');
             const closeButtons = popup.querySelectorAll('[class*="close-"], .pm-btn--primary');
             const html = document.documentElement;
+            const body = document.body;
 
             let savedScrollX = 0;
             let savedScrollY = 0;
@@ -90,6 +106,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 html.style.setProperty('--pm-scroll-y', `-${savedScrollY}px`);
                 html.classList.add('pm-scroll-blocked');
 
+                // Дополнительно предотвращаем скролл на body
+                body.style.overflow = 'hidden';
+                body.style.position = 'fixed';
+                body.style.width = '100%';
+                body.style.height = '100%';
+                body.style.top = `-${savedScrollY}px`;
+
                 scrollBlocked = true;
             }
 
@@ -100,6 +123,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 html.style.removeProperty('--pm-scroll-x');
                 html.style.removeProperty('--pm-scroll-y');
 
+                // Восстанавливаем body
+                body.style.overflow = '';
+                body.style.position = '';
+                body.style.width = '';
+                body.style.height = '';
+                body.style.top = '';
+
                 window.scrollTo(savedScrollX, savedScrollY);
                 scrollBlocked = false;
             }
@@ -108,14 +138,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const rect = element.getBoundingClientRect();
                 const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
 
-                // Проверяем, что элемент полностью виден с небольшим отступом
                 return rect.top >= 20 && rect.bottom <= vh - 20;
             }
 
             function smoothScrollToElement(element) {
                 if (!element) return;
 
-                // Отменяем предыдущую анимацию
                 if (scrollAnimationFrame) {
                     cancelAnimationFrame(scrollAnimationFrame);
                 }
@@ -123,21 +151,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 const elementRect = element.getBoundingClientRect();
                 const containerRect = container.getBoundingClientRect();
 
-                // Вычисляем целевую позицию
                 const elementTopRelative = elementRect.top - containerRect.top;
                 const targetScrollTop = container.scrollTop + elementTopRelative - 80;
 
-                // Плавная анимация скролла
                 const startScrollTop = container.scrollTop;
                 const distance = targetScrollTop - startScrollTop;
-                const duration = 300; // мс
+                const duration = 300;
                 const startTime = performance.now();
 
                 function animateScroll(currentTime) {
                     const elapsed = currentTime - startTime;
                     const progress = Math.min(elapsed / duration, 1);
-
-                    // Easing функция для плавности (ease-out)
                     const easeOut = 1 - Math.pow(1 - progress, 3);
 
                     container.scrollTop = startScrollTop + distance * easeOut;
@@ -158,7 +182,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const keyboardHeight = fullHeight - viewportHeight;
 
                 if (keyboardHeight > 0) {
-                    // Плавное добавление padding
                     container.style.transition = 'padding-bottom 0.2s ease-out';
                     container.style.paddingBottom = keyboardHeight + 40 + 'px';
                 } else {
@@ -191,7 +214,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 blockPageScroll();
             }
 
-            // Отслеживаем ручной скролл пользователя
+            // Предотвращаем скролл фона на контейнере
+            container.addEventListener('touchstart', (e) => {
+                // Ничего не делаем, просто предотвращаем всплытие к фону
+            }, { passive: true });
+
+            container.addEventListener('touchmove', (e) => {
+                // Предотвращаем скролл фона при достижении границ контейнера
+                const scrollTop = container.scrollTop;
+                const scrollHeight = container.scrollHeight;
+                const clientHeight = container.clientHeight;
+
+                if ((scrollTop === 0 && e.touches[0].clientY > e.touches[0].startY) ||
+                    (scrollTop + clientHeight >= scrollHeight && e.touches[0].clientY < e.touches[0].startY)) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+
             container.addEventListener('scroll', () => {
                 isUserScrolling = true;
 
@@ -208,7 +247,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 input.addEventListener('focus', handleFocus);
             });
 
-            // Главный момент — реагируем на появление клавиатуры
             if (window.visualViewport) {
                 let prevHeight = window.visualViewport.height;
 
@@ -218,11 +256,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     updateKeyboardSpace();
 
-                    // Скроллим только если:
-                    // 1. Клавиатура открыта
-                    // 2. Есть активный элемент
-                    // 3. Элемент ПУСТОЙ (iOS сам не скроллит)
-                    // 4. Пользователь не скроллит вручную
                     if (keyboardVisible && activeElement && !activeElement.value && !isUserScrolling) {
                         requestAnimationFrame(() => {
                             if (!isElementFullyVisible(activeElement)) {
@@ -246,6 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const observer = new MutationObserver(() => {
                 if (popup.classList.contains('active')) {
                     container.scrollTop = 0;
+                    blockPageScroll();
                 } else {
                     reset();
                 }
