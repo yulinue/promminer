@@ -2349,6 +2349,11 @@
     -ms-flex-align: center;
     align-items: center;
 }
+@media(max-width: 1024px){
+    .pm-gas-cases__slide-info-label {
+        width: 122px;
+    }
+}
 
 .pm-gas-cases__slide-info-value {
     padding: 12px var(--Spacing-Base-Spacing-16, 16px);
