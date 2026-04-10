@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const containerRect = container.getBoundingClientRect();
 
                 const elementTopRelative = elementRect.top - containerRect.top;
-                const targetScrollTop = container.scrollTop + elementTopRelative - 60;
+                const targetScrollTop = container.scrollTop + elementTopRelative - 80;
 
                 const startScrollTop = container.scrollTop;
                 const distance = targetScrollTop - startScrollTop;
@@ -114,8 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         originalPaddingBottom = getComputedStyle(container).paddingBottom;
                     }
                     container.style.transition = 'padding-bottom 0.2s ease-out';
-                    // Минимальный отступ — только чтобы клавиатура не перекрывала
-                    container.style.paddingBottom = '20px';
+                    container.style.paddingBottom = keyboardHeight + 40 + 'px';
                 } else {
                     container.style.transition = 'padding-bottom 0.2s ease-out';
                     container.style.paddingBottom = originalPaddingBottom || '';
@@ -132,6 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 container.scrollTop = 0;
                 container.style.paddingBottom = originalPaddingBottom || '';
 
+                // Убираем класс lock с body
                 body.classList.remove('lock');
 
                 activeElement = null;
@@ -146,9 +146,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             function handleFocus(e) {
                 activeElement = e.target;
+                // Используем существующий класс lock
                 body.classList.add('lock');
             }
 
+            // Отслеживаем ручной скролл пользователя
             container.addEventListener('scroll', () => {
                 isUserScrolling = true;
 
@@ -165,6 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 input.addEventListener('focus', handleFocus);
             });
 
+            // Главный момент — реагируем на появление клавиатуры
             if (window.visualViewport) {
                 let prevHeight = window.visualViewport.height;
 
@@ -174,6 +177,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     updateKeyboardSpace();
 
+                    // Скроллим только если:
+                    // 1. Клавиатура открыта
+                    // 2. Есть активный элемент
+                    // 3. Элемент ПУСТОЙ (iOS сам не скроллит)
+                    // 4. Пользователь не скроллит вручную
                     if (keyboardVisible && activeElement && !activeElement.value && !isUserScrolling) {
                         requestAnimationFrame(() => {
                             if (!isElementFullyVisible(activeElement)) {
@@ -194,6 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (e.target === popup) reset();
             });
 
+            // Сбрасываем при закрытии попапа (если класс active убирается)
             const observer = new MutationObserver(() => {
                 if (!popup.classList.contains('active')) {
                     reset();
