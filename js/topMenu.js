@@ -299,7 +299,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* ---------------- CLICK OUTSIDE ---------------- */
     document.addEventListener('click', (e) => {
-        if (!catalogPopup.classList.contains('active')) return;
         if (!catalogContainer.contains(e.target)) {
             closePopup();
         }
