@@ -52,8 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!container) return;
 
             const inputs = container.querySelectorAll('input, textarea, select');
-            const closeButtons = popup.querySelectorAll('[class*="close-"], .pm-btn--primary');
-            const submitBtn = container.querySelector('button[type="submit"]');
             const body = document.body;
             const html = document.documentElement;
 
@@ -64,53 +62,34 @@ document.addEventListener('DOMContentLoaded', () => {
             let originalPaddingBottom = null;
             let savedScrollY = 0;
             let isBodyLocked = false;
-            let isSuccessState = false;
 
             function lockBodyScroll() {
                 if (isBodyLocked) return;
 
                 savedScrollY = window.scrollY;
 
-                html.style.position = 'fixed';
-                html.style.top = `-${savedScrollY}px`;
-                html.style.width = '100%';
-                html.style.overflow = 'hidden';
-
-                body.style.position = 'fixed';
-                body.style.top = `-${savedScrollY}px`;
-                body.style.width = '100%';
-                body.style.overflow = 'hidden';
+                // Только класс и touch-action, без position: fixed
+                body.classList.add('lock');
                 body.style.touchAction = 'none';
 
-                body.classList.add('lock');
+                // Сохраняем позицию через CSS-переменную
+                body.style.setProperty('--scroll-y', `-${savedScrollY}px`);
 
                 isBodyLocked = true;
             }
 
             function unlockBodyScroll() {
                 if (!isBodyLocked) return;
-                if (isSuccessState) return;
+
+                const activePopups = document.querySelectorAll('.pm-popup-overlay.active, .v-overlay--active');
+                if (activePopups.length > 0) return;
 
                 body.classList.remove('lock');
-
-                html.style.position = '';
-                html.style.top = '';
-                html.style.width = '';
-                html.style.overflow = '';
-
-                body.style.position = '';
-                body.style.top = '';
-                body.style.width = '';
-                body.style.overflow = '';
                 body.style.touchAction = '';
+                body.style.removeProperty('--scroll-y');
 
-                const scrollY = savedScrollY;
-
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        window.scrollTo(0, scrollY);
-                    });
-                });
+                // Скроллим обратно
+                window.scrollTo(0, savedScrollY);
 
                 isBodyLocked = false;
             }
@@ -187,15 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 container.scrollTop = 0;
                 container.style.paddingBottom = originalPaddingBottom || '';
 
-                const successContainer = popup.querySelector('#feedbackSuccess');
-                isSuccessState = successContainer && window.getComputedStyle(successContainer).display !== 'none';
-
-                if (!popup.classList.contains('active')) {
-                    unlockBodyScroll();
-                    isBodyLocked = false;
-                    isSuccessState = false;
-                }
-
                 activeElement = null;
                 isUserScrolling = false;
                 originalPaddingBottom = null;
@@ -267,33 +237,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
-            closeButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    isSuccessState = false;
-                    reset();
-                });
-            });
-
-            if (submitBtn) {
-                submitBtn.addEventListener('click', () => {
-                    isSuccessState = true;
-                });
-            }
-
-            popup.addEventListener('click', (e) => {
-                if (e.target === popup) {
-                    isSuccessState = false;
-                    reset();
-                }
-            });
-
+            // Следим только за классом active
             const observer = new MutationObserver(() => {
                 if (popup.classList.contains('active')) {
                     lockBodyScroll();
                     container.scrollTop = 0;
-                    isSuccessState = false;
                 } else {
                     reset();
+                    unlockBodyScroll();
                 }
             });
 
