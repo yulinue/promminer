@@ -57,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             .pm-popup-feedback__container {
-                scroll-behavior: smooth;
                 overscroll-behavior: contain;
             }
         `;
@@ -77,6 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
             let savedScrollY = 0;
             let activeElement = null;
             let scrollBlocked = false;
+            let scrollAnimationFrame = null;
+            let isUserScrolling = false;
+            let userScrollTimeout = null;
 
             function blockPageScroll() {
                 if (scrollBlocked) return;
@@ -102,61 +104,111 @@ document.addEventListener('DOMContentLoaded', () => {
                 scrollBlocked = false;
             }
 
-            function isElementVisible(element) {
+            function isElementFullyVisible(element) {
                 const rect = element.getBoundingClientRect();
                 const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
 
-                return rect.top >= 0 && rect.bottom <= vh - 10;
+                // Проверяем, что элемент полностью виден с небольшим отступом
+                return rect.top >= 20 && rect.bottom <= vh - 20;
             }
 
-            function scrollToElement(element) {
+            function smoothScrollToElement(element) {
                 if (!element) return;
 
-                // если iOS уже сам прокрутил — не мешаем
-                if (isElementVisible(element)) return;
+                // Отменяем предыдущую анимацию
+                if (scrollAnimationFrame) {
+                    cancelAnimationFrame(scrollAnimationFrame);
+                }
 
                 const elementRect = element.getBoundingClientRect();
                 const containerRect = container.getBoundingClientRect();
 
-                const offset = elementRect.top - containerRect.top - 80;
+                // Вычисляем целевую позицию
+                const elementTopRelative = elementRect.top - containerRect.top;
+                const targetScrollTop = container.scrollTop + elementTopRelative - 80;
 
-                container.scrollTo({
-                    top: container.scrollTop + offset,
-                    behavior: 'smooth'
-                });
+                // Плавная анимация скролла
+                const startScrollTop = container.scrollTop;
+                const distance = targetScrollTop - startScrollTop;
+                const duration = 300; // мс
+                const startTime = performance.now();
+
+                function animateScroll(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+
+                    // Easing функция для плавности (ease-out)
+                    const easeOut = 1 - Math.pow(1 - progress, 3);
+
+                    container.scrollTop = startScrollTop + distance * easeOut;
+
+                    if (progress < 1) {
+                        scrollAnimationFrame = requestAnimationFrame(animateScroll);
+                    } else {
+                        scrollAnimationFrame = null;
+                    }
+                }
+
+                scrollAnimationFrame = requestAnimationFrame(animateScroll);
             }
 
             function updateKeyboardSpace() {
                 const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
                 const fullHeight = window.innerHeight;
-
                 const keyboardHeight = fullHeight - viewportHeight;
 
                 if (keyboardHeight > 0) {
+                    // Плавное добавление padding
+                    container.style.transition = 'padding-bottom 0.2s ease-out';
                     container.style.paddingBottom = keyboardHeight + 40 + 'px';
                 } else {
+                    container.style.transition = 'padding-bottom 0.2s ease-out';
                     container.style.paddingBottom = '';
                 }
             }
 
             function reset() {
+                if (scrollAnimationFrame) {
+                    cancelAnimationFrame(scrollAnimationFrame);
+                    scrollAnimationFrame = null;
+                }
+
+                container.style.transition = '';
                 container.scrollTop = 0;
                 container.style.paddingBottom = '';
                 unblockPageScroll();
                 activeElement = null;
+                isUserScrolling = false;
+
+                if (userScrollTimeout) {
+                    clearTimeout(userScrollTimeout);
+                    userScrollTimeout = null;
+                }
             }
 
             function handleFocus(e) {
                 activeElement = e.target;
                 blockPageScroll();
-                // ❌ не скроллим тут — ждём клавиатуру
             }
+
+            // Отслеживаем ручной скролл пользователя
+            container.addEventListener('scroll', () => {
+                isUserScrolling = true;
+
+                if (userScrollTimeout) {
+                    clearTimeout(userScrollTimeout);
+                }
+
+                userScrollTimeout = setTimeout(() => {
+                    isUserScrolling = false;
+                }, 150);
+            }, { passive: true });
 
             inputs.forEach(input => {
                 input.addEventListener('focus', handleFocus);
             });
 
-            // 💥 главный момент — реагируем на появление клавиатуры
+            // Главный момент — реагируем на появление клавиатуры
             if (window.visualViewport) {
                 let prevHeight = window.visualViewport.height;
 
@@ -166,9 +218,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     updateKeyboardSpace();
 
-                    if (keyboardVisible && activeElement) {
+                    // Скроллим только если:
+                    // 1. Клавиатура открыта
+                    // 2. Есть активный элемент
+                    // 3. Элемент ПУСТОЙ (iOS сам не скроллит)
+                    // 4. Пользователь не скроллит вручную
+                    if (keyboardVisible && activeElement && !activeElement.value && !isUserScrolling) {
                         requestAnimationFrame(() => {
-                            scrollToElement(activeElement);
+                            if (!isElementFullyVisible(activeElement)) {
+                                smoothScrollToElement(activeElement);
+                            }
                         });
                     }
 
