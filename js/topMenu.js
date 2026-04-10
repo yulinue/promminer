@@ -298,11 +298,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /* ---------------- CLICK OUTSIDE ---------------- */
-    document.addEventListener('click', (e) => {
-        if (!catalogContainer.contains(e.target)) {
+    // document.addEventListener('click', (e) => {
+    //     if (!catalogPopup.classList.contains('active')) return;
+    //     if (!catalogContainer.contains(e.target)) {
+    //         closePopup();
+    //     }
+    // });
+
+    catalogPopup.addEventListener('click', (e) => {
+        // если клик именно по оверлею
+        if (e.target === catalogPopup) {
             closePopup();
         }
-
     });
 
 
